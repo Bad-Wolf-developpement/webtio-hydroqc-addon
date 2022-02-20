@@ -8,7 +8,7 @@ webtio-hydroqc-addon
 
 This is an adaptation of the hydro2mqtt addon.
 
-Source: [hydro2mqtt][https://gitlab.com/hydroqc/hydroqc2mqtt/]
+Source: 'hydro2mqtt <https://gitlab.com/hydroqc/hydroqc2mqtt/>'
 
 
 .. |GitHub| image:: https://img.shields.io/github/forks/rzr/awox-mesh-light-webthing.svg?style=social&label=Fork&maxAge=2592000
