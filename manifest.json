@@ -1,0 +1,53 @@
+{
+    "manifest_version": 1,
+    "id": "hydroQcWinterCredit",
+    "name": "Hydro Quebec Winter Credit",
+    "short_name": "HydroQc Event",
+    "version" : "0.0",
+    "description": "Thing for the credit event of Hydro Quebec",
+    "homepage_url": "https://github.com/arist0v/hydroQcWinterCredit",
+    "license": "GPL-3.0",
+    "author": "Arist0v",
+    "gateway_specific_settings": {
+        "webthings":{
+            "exec": "python3 {path}/main.py",
+            "primary_type": "adapter"
+        }
+    },
+    "options":{
+        "default":{
+            "preHeatDelay":[30],
+            "postHeatDelay":[30]
+        },
+        "schema":{
+            "type": "object",
+            "required":[
+                "hydroQcUsername",
+                "hydroQcPassword"
+            ],
+        
+            "properties":{
+
+                "hydroQcUsername":{
+                    "type" : "string",
+                    "title": "Hydro Quebec profile username"
+                },
+
+                "hydroQcPassword":{
+                    "type" : "string",
+                    "title": "Hydro Quebec profile password"
+                },
+
+                "preHeatDelay":{
+                    "type": "number",
+                    "title": "Delay in minute for to heat before event"
+                },
+
+                "postHeatDelay":{
+                    "type":"number",
+                    "title":"Delay in minute for to heat after event"
+                }
+            }
+        }
+    }
+}
