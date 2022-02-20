@@ -1,12 +1,12 @@
 {
     "manifest_version": 1,
-    "id": "hydroQcWinterCredit",
-    "name": "Hydro Quebec Winter Credit",
-    "short_name": "HydroQc Event",
+    "id": "webtio-hydroqc-addon",
+    "name": "Hydro Quebec Winter Credit program",
+    "short_name": "webtio-hydroqc-addon",
     "version" : "0.0",
-    "description": "Thing for the credit event of Hydro Quebec",
-    "homepage_url": "https://github.com/arist0v/hydroQcWinterCredit",
-    "license": "GPL-3.0",
+    "description": "Port of the hydro2mqtt software to be able to create ruiles for Hydro-Quebec Winter credit program TEST",
+    "homepage_url": "https://github.com/Bad-Wolf-developpement/webtio-hydroqc-addon",
+    "license": "MIT",
     "author": "Arist0v",
     "gateway_specific_settings": {
         "webthings":{
