@@ -4,7 +4,7 @@
     "name": "Hydro Quebec Winter Credit program",
     "short_name": "webtio-hydroqc-addon",
     "version" : "0.0",
-    "description": "Port of the hydro2mqtt software to be able to create ruiles for Hydro-Quebec Winter credit program TEST",
+    "description": "Port of the hydro2mqtt software to be able to create ruiles for Hydro-Quebec Winter credit program",
     "homepage_url": "https://github.com/Bad-Wolf-developpement/webtio-hydroqc-addon",
     "license": "MIT",
     "author": "Arist0v",
