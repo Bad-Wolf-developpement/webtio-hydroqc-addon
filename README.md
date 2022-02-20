@@ -1,12 +1,11 @@
-# webtio-hydroqc-addon
 ========================
-AWOX-MESH-LIGHT-WEBTHING
+webtio-hydroqc-addon
 ========================
 
 |GitHub|
 |License|
 |Release|
 
-webthings port of the hydro2mqtt tools
+This is an adaptation of the hydro2mqtt addon.
 
- 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
+Source: https://gitlab.com/hydroqc/hydroqc2mqtt
