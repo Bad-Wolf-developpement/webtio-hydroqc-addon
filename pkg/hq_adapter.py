@@ -15,9 +15,9 @@ class hq_Adapter(Adapter):
         package_name = _id
         super().__init__(_id, package_name, verbose)
 
-        self.config = self.load_db_config(_id)
-        print(self.config)
-        
+        self.config = self.load_db_config(_id)#load config from DB
+        print(self.name)
+                
     def load_db_config(self, package_name):
         """
         Load configuration from DB
