@@ -3,6 +3,7 @@
 from os import path
 import signal
 import sys
+import time
 
 from pkg import hq_adapter
 
