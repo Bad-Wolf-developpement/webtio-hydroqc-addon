@@ -129,4 +129,5 @@ dmypy.json
 .pyre/
 
 #vscode workspace
-.code-workspace
+*.code-workspace
+.vscode/
