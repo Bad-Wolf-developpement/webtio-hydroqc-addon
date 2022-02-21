@@ -8,9 +8,6 @@ import time
 
 sys.path.append(path.join(path.dirname(path.abspath(__file__)), 'lib'))
 
-from pkg.hq_Adapter import hqAdapter
-
-
 _DEBUG = False
 _ADAPTER = None
 
