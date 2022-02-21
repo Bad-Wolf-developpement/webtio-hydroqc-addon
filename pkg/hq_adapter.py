@@ -1,5 +1,6 @@
 """hq2mqtt adapter for webthings gateway"""
 from gateway_addon import Adapter, Database
+from hq_mqtt_deamon import hq_mqtt_deamon
 import os
 import sys
 
@@ -21,7 +22,7 @@ class hq_Adapter(Adapter):
         super().__init__(_id, package_name, verbose)
 
         self.config = self.load_db_config(_id)#load config from DB
-        print(self.name)
+        #now load thew mqtt deamon
                 
     def load_db_config(self, package_name):
         """
