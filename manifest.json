@@ -56,7 +56,7 @@
                     
                             "siteName":{
                                 "type":"string",
-                                "title": "Friendly name for the contract"
+                                "title": "Friendly name for the site"
                             },
                             "hqUsername":{
                                 "type" : "string",
