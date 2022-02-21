@@ -1,5 +1,10 @@
 """hq2mqtt adapter for webthings gateway"""
 from gateway_addon import Adapter, Database
+import os
+import sys
+
+root_folder = os.path.abspath(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+sys.path.append(root_folder)#get access to import from parent folder
 
 _TIMEOUT = 3   
 
