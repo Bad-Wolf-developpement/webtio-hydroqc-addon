@@ -60,7 +60,7 @@
                             },
                             "hqUsername":{
                                 "type" : "string",
-                                "title": "Hydro Quebec profile username(usually e-mail address"
+                                "title": "Hydro Quebec profile username(usually e-mail address)"
                             },
 
                             "hqPassword":{
