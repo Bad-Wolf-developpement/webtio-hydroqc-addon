@@ -16,8 +16,8 @@
     },
     "options":{
         "default":{
-            "preHeatDelay":[30],
-            "postHeatDelay":[30],
+            "preHeatDelay": 30,
+            "postHeatDelay": 30,
             "contracts": []
         },
         "schema":{
@@ -30,12 +30,12 @@
 
                 "preHeatDelay":{
                     "type": "number",
-                    "title": "Delay in minute for to heat before event"
+                    "title": "Delay in minute for the pre-heat, 0 to disable"
                 },
 
                 "postHeatDelay":{
                     "type":"number",
-                    "title":"Delay in minute for to heat after event"
+                    "title":"Delay in minute for the post-heat, 0 to disable"
                 },
 
                 "contracts":{
@@ -60,7 +60,7 @@
                             },
                             "hqUsername":{
                                 "type" : "string",
-                                "title": "Hydro Quebec profile username"
+                                "title": "Hydro Quebec profile username(usually e-mail address"
                             },
 
                             "hqPassword":{
