@@ -22,21 +22,10 @@
         "schema":{
             "type": "object",
             "required":[
-                "hydroQcUsername",
-                "hydroQcPassword"
+                "contracts"
             ],
         
             "properties":{
-
-                "hydroQcUsername":{
-                    "type" : "string",
-                    "title": "Hydro Quebec profile username"
-                },
-
-                "hydroQcPassword":{
-                    "type" : "string",
-                    "title": "Hydro Quebec profile password"
-                },
 
                 "preHeatDelay":{
                     "type": "number",
@@ -46,7 +35,40 @@
                 "postHeatDelay":{
                     "type":"number",
                     "title":"Delay in minute for to heat after event"
+                },
+
+                "contracts":{
+                    "type": "array",
+                    "items":{
+                    
+                        "siteName":{
+                            "type":"string",
+                            "title": "Friendly name for the contract"
+                        },
+                        "hqUsername":{
+                            "type" : "string",
+                            "title": "Hydro Quebec profile username"
+                        },
+
+                        "hqPassword":{
+                            "type" : "string",
+                            "title": "Hydro Quebec profile password"
+                        },
+                        "hqCustomerNb":{
+                            "type": "number",
+                            "title": "Hydro Quebec Customer Number (10 digits)"
+                        },
+                        "hqAccountNb":{
+                            "type": "number",
+                            "title": "Hydro Quebec Account Number"
+                        },
+                        "hqContractNb":{
+                            "type": "number",
+                            "title": "Hydro Quebec Contract Number(10 digits)"
+                        }
+                    }
                 }
+                
             }
         }
     }
