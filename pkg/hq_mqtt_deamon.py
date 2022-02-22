@@ -62,9 +62,5 @@ if __name__ == '__main__':
     customerid = ''
     accountid = ''
     contractid = ''
-<<<<<<< HEAD
-    dev = hq_mqtt_deamon("test.mosquitto.org", 1883, '', '', 'hydroqc', 'hydroqc', False, 'INFO', username, password, 'maison', customerid, accountid, contractid)
-=======
     dev = hq_mqtt_deamon("localhost", 1883, '', '', 'hydroqc', 'hydroqc', False, 'INFO', username, password, 'maison', customerid, accountid, contractid)
->>>>>>> 0ec92e5 (dasfkhask)
     asyncio.run(dev.async_run())
