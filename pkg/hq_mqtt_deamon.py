@@ -3,10 +3,10 @@
 import asyncio
 import os
 import logging
-from res.hydroqc2mqtt.daemon import MAIN_LOOP_WAIT_TIME
+from hydroqc2mqtt.daemon import MAIN_LOOP_WAIT_TIME
 
-from res.hydroqc2mqtt.daemon import Hydroqc2Mqtt
-from res.hydroqc2mqtt.contract_device import HydroqcContractDevice
+from hydroqc2mqtt.daemon import Hydroqc2Mqtt
+from hydroqc2mqtt.contract_device import HydroqcContractDevice
 
 _SYNC_FREQUENCY = 600
 _UNREGISTER_ON_STOP = False
