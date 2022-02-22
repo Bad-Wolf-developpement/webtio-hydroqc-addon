@@ -22,7 +22,6 @@ class hq_Adapter(Adapter):
         super().__init__(_id, package_name, verbose)
 
         self.config = self.load_db_config(_id)#load config from DB
-        contracts = self.config['contracts']#get contracts from config
         #now load thew mqtt deamon
                 
     def load_db_config(self, package_name):
