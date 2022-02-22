@@ -1,7 +1,7 @@
 ========================
 webtio-hydroqc-addon
 ========================
-[![GitHub](https://img.shields.io/github/forks/Bad-Wolf-developpement/webtio-hydroqc-addon.svg?style=social&label=Fork&maxAge=2592000)]homie-adapter)
+[![GitHub(https://img.shields.io/github/forks/Bad-Wolf-developpement/webtio-hydroqc-addon.svg?style=social&label=Fork&maxAge=2592000)]homie-adapter)
 |GitHub|
 |License|
 |Release|
