@@ -11,9 +11,10 @@ from hydroqc2mqtt.sensors import SENSORS, BINARY_SENSORS
 
 
 class HydroqcContractDevice(MqttDevice):
-    def __init__(self, name: str, logger: logging.Logger, config: Dict):
+    def __init__(self, name: str, logger: logging.Logger, config: Dict,
+                 mqtt_discovery_root_topic=None, mqtt_data_root_topic=None):
         """Create a new MQTT Sensor Facebook object."""
-        MqttDevice.__init__(self, name, logger)
+        MqttDevice.__init__(self, name, logger, mqtt_discovery_root_topic, mqtt_data_root_topic)
         self._config = config
         self._webuser = WebUser(
             config["username"],
@@ -31,22 +32,24 @@ class HydroqcContractDevice(MqttDevice):
         # By default we load all sensors
         self._sensor_list = SENSORS
         if "sensors" in self._config:
+            self._sensor_list = {}
             # If sensors key is in the config file, we load only the ones listed there
             # Check if sensor exists
             for sensor_key in self._config["sensors"]:
                 if sensor_key not in SENSORS:
                     raise Exception(f"Sensor {sensor_key} doesn't exist. Fix your config.")
-            self._sensor_list = self._config["sensors"]
+                self._sensor_list[sensor_key] = SENSORS[sensor_key]
 
         # By default we load all binary sensors
         self._binary_sensor_list = BINARY_SENSORS
         if "binary_sensors" in self._config:
+            self._binary_sensor_list = {}
             # If binary_sensors key is in the config file, we load only the ones listed there
             # Check if sensor exists
             for sensor_key in self._config["binary_sensors"]:
                 if sensor_key not in BINARY_SENSORS:
                     raise Exception(f"Binary sensor {sensor_key} doesn't exist. Fix your config.")
-            self._binary_sensor_list = self._config["binary_sensors"]
+                self._binary_sensor_list[sensor_key] = BINARY_SENSORS[sensor_key]
 
         connections = [
             ["customer", self._customer_id],

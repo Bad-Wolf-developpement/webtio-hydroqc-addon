@@ -18,6 +18,8 @@
         "default":{
             "preHeatDelay": 30,
             "postHeatDelay": 30,
+            "sync_frequency": 600,
+            "unregister_on_stop": "false",
             "contracts": []
         },
         "schema":{
@@ -38,6 +40,16 @@
                     "title":"Delay in minute for the post-heat, 0 to disable"
                 },
 
+                "sync_frequency": {
+                    "type": "number",
+                    "title": "Sync Frequency"
+                },
+                
+                "unregister_on_stop":{
+                    "type": "string",
+                    "title": "unregister on stop"
+                },
+
                 "contracts":{
                     "type": "array",
                     "title": "List of contract to monitor",
@@ -54,28 +66,28 @@
                         ],
                         "properties":{
                     
-                            "siteName":{
+                            "name":{
                                 "type":"string",
                                 "title": "Friendly name for the site"
                             },
-                            "hqUsername":{
+                            "username":{
                                 "type" : "string",
                                 "title": "Hydro Quebec profile username(usually e-mail address)"
                             },
 
-                            "hqPassword":{
+                            "password":{
                                 "type" : "string",
                                 "title": "Hydro Quebec profile password"
                             },
-                            "hqCustomerNb":{
+                            "customer":{
                                 "type": "number",
                                 "title": "Hydro Quebec Customer Number (10 digits)"
                             },
-                            "hqAccountNb":{
+                            "account":{
                                 "type": "number",
                                 "title": "Hydro Quebec Account Number"
                             },
-                            "hqContractNb":{
+                            "contract":{
                                 "type": "number",
                                 "title": "Hydro Quebec Contract Number(10 digits)"
                             }
