@@ -6,29 +6,30 @@ from hydroqc2mqtt.daemon import MAIN_LOOP_WAIT_TIME
 from hydroqc2mqtt.daemon import Hydroqc2Mqtt
 from hydroqc2mqtt.contract_device import HydroqcContractDevice
 
-_SYNC_FREQUENCY = 600
-_UNREGISTER_ON_STOP = False
-
 class hq_mqtt_deamon(Hydroqc2Mqtt):
     """mqtt daemon class"""
     #TODO: load config from db instead of yaml
 
-    def __init__(self, mqtt_host, mqtt_port, mqtt_username, mqtt_password, mqtt_discovery_root_topic, mqtt_data_root_topic, run_once, log_level, hq_username, hq_password, hq_name, hq_customer_id, hq_account_id, hq_contract_id):
+    def __init__(self, configs, mqtt_host = 'localhost', mqtt_port = 1883, mqtt_username = '', mqtt_password = '', run_once = False, log_level = 'INFO'):
         """Initialize the class
         
-         adapter -- webthings.io adapter who own the daemon
+         configs -- configs dictionnary: {'sync_frequency': int, 'unregister_on_stop': bool, 'contracts': [{'name': str, 'username': str , 'password': str, 'customer': str, 'account': str, 'contract': str}]}
+         mqtt_host -- mqtt broker, default localhost
+         mqtt_port -- mqtt broker port, default 1883
+         mqtt_username -- mqtt broker username if needed, empty if none, Default Empty
+         mqtt_password -- mqtt roker passwor if needed, empty if none, Default Empty
+         run_once -- set to True if you only want to run process once Default False
+         log_level -- log_level, Default INFO
          """
-        self.config = self.config = {'sync_frequency': _SYNC_FREQUENCY, 'unregister_on_stop': _UNREGISTER_ON_STOP, 'contracts': []}
-        #TODO use data from DB to file this
-        self.sync_frequency = _SYNC_FREQUENCY
-        self.unregister_on_stop = _UNREGISTER_ON_STOP
-        super().__init__(mqtt_host, mqtt_port, mqtt_username, mqtt_password, mqtt_discovery_root_topic, mqtt_data_root_topic, None, run_once, log_level, hq_username, hq_password, hq_name, hq_customer_id, hq_account_id, hq_contract_id)
+        mqtt_discovery_root_topic = 'webtio-hydroqc-addon'
+        mqtt_data_root_topic = 'webtio-hydroqc-addon'
+        self.config = configs
+        self.sync_frequency = configs['sync_frequency']
+        self.unregister_on_stop = configs['unregister_on_stop']
+        super().__init__(mqtt_host, mqtt_port, mqtt_username, mqtt_password, mqtt_discovery_root_topic, mqtt_data_root_topic, None, run_once, log_level, None, None, None, None, None, None)
 
     def read_config(self):
-        """Read env vars."""
-
-        self.config = {'sync_frequency': 600, 'unregister_on_stop': False, 'contracts': [{'name': self.name, 'username': self._hq_username , 'password': self._hq_password, 'customer': self._hq_customer_id, 'account': self._hq_account_id, 'contract': self._hq_contract_id}]}
-        
+        """Read env vars."""        
         self.sync_frequency = int(
             self.config.get("sync_frequency", MAIN_LOOP_WAIT_TIME)
         )
@@ -53,10 +54,12 @@ if __name__ == '__main__':
     """
     this part is for test purpose or for calling it externally
     """
+    name = ''
     username = ''
     password = ''
     customerid = ''
     accountid = ''
     contractid = ''
-    dev = hq_mqtt_deamon("localhost", 1883, '', '', 'hydroqc', 'hydroqc', False, 'INFO', username, password, 'maison', customerid, accountid, contractid)
+    config = {'sync_frequency': 600, 'unregister_on_stop': False, 'contracts': [{'name': name, 'username': username , 'password': password, 'customer': customerid, 'account': accountid, 'contract': contractid}]}
+    dev = hq_mqtt_deamon(config)
     asyncio.run(dev.async_run())
