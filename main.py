@@ -5,9 +5,11 @@ import signal
 import sys
 import time
 
+sys.path.append(path.join(path.dirname(path.abspath(__file__)), 'lib'))#adding lib folder to path
+
 from pkg import hq_adapter
 
-sys.path.append(path.join(path.dirname(path.abspath(__file__)), 'lib'))
+
 
 _DEBUG = False
 _ADAPTER = None
