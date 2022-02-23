@@ -57,12 +57,12 @@
                         "type": "object",
                         "title": "contract",
                         "required": [
-                            "siteName",
-                            "hqUsername",
-                            "hqPassword",
-                            "hqCustomerNb",
-                            "hqAccountNb",
-                            "hqContractNb"
+                            "name",
+                            "username",
+                            "password",
+                            "customer",
+                            "account",
+                            "contract"
                         ],
                         "properties":{
                     
