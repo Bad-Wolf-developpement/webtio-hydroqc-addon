@@ -1,1 +1,0 @@
-"""MQTT Hass base."""

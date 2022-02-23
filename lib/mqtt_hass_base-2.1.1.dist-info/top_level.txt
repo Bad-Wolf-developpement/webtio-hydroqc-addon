@@ -1,2 +1,0 @@
-mqtt_hass_base
-mqtt_hass_base/entity

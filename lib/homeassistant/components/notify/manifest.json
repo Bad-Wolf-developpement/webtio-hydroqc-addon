@@ -1,7 +1,0 @@
-{
-  "domain": "notify",
-  "name": "Notifications",
-  "documentation": "https://www.home-assistant.io/integrations/notify",
-  "codeowners": ["@home-assistant/core"],
-  "quality_scale": "internal"
-}
