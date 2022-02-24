@@ -26,7 +26,7 @@ class hq_Device(Device):
         Device.__init__(self, adapter, _id,)
 
         self._type.append('BinarySensor')
-        #self.description = 'Hydro Quebec Winter Credit Event 1'#not sure where it'S used
+        self.description = 'Hydro Quebec Winter Credit Event 1'#not sure where it'S used
         self.title = _id#This appear in the text bar when adding the device and is the default name of the device
         #self.name = 'Hydro Quebec Winter Credit Event 3'#not sure where it's used
         
