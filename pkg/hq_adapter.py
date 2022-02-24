@@ -1,4 +1,5 @@
 """hq2mqtt adapter for webthings gateway"""
+from asyncio.log import logger
 from gateway_addon import Adapter, Database
 import os
 import sys
@@ -23,7 +24,8 @@ class hq_Adapter(Adapter):
 
         self.config = self.load_db_config(_id)#load config from DB
         #now load thew mqtt deamon
-        logging.info(self.config)
+        logger.info(self.config)
+        
 
     def load_db_config(self, package_name):
         """
