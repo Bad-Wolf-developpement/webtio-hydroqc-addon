@@ -25,8 +25,11 @@ class hq_Adapter(Adapter):
         super().__init__(_id, package_name, verbose)
 
         self.config = self.load_db_config(_id)#load config from DB
-        #now load thew mqtt deamon
-        print(len(self.config['contracts']))     
+        
+        #create a device for each contract in config
+        for contract in self.config['contracts']:
+            print(contract)
+           
 
     def load_db_config(self, package_name):
         """
