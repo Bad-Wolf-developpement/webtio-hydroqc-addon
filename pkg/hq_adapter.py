@@ -23,10 +23,14 @@ class hq_Adapter(Adapter):
         _id = 'webtio-hydroqc-addon'
         package_name = _id
         super().__init__(_id, package_name, verbose)
+        self.logger = logging.getLogger(__name__)
+        self.logger.addHandler(logging.StreamHandler(sys.stdout))
 
+        logging.basicConfig(stream=sys.stdout)
         self.config = self.load_db_config(_id)#load config from DB
         #now load thew mqtt deamon
-        print(self.config)
+        self.logger.info(self.config)
+        
         
 
     def load_db_config(self, package_name):
