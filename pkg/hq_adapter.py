@@ -8,7 +8,7 @@ import logging
 
 #root_folder = os.path.abspath(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 #sys.path.append(root_folder)#get access to import from parent folder
-print = functools.partial(print, flush=True)
+print = functools.partial(print, flush=True)#allow direct print to log of gateway
 
 _TIMEOUT = 3   
 
@@ -23,13 +23,10 @@ class hq_Adapter(Adapter):
         _id = 'webtio-hydroqc-addon'
         package_name = _id
         super().__init__(_id, package_name, verbose)
-        self.logger = logging.getLogger(__name__)
-        self.logger.addHandler(logging.StreamHandler(sys.stdout))
+
         self.config = self.load_db_config(_id)#load config from DB
         #now load thew mqtt deamon
-        self.logger.info(self.config)
-        
-        
+        print(self.config)       
 
     def load_db_config(self, package_name):
         """
