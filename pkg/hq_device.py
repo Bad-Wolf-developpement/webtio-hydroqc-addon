@@ -39,6 +39,7 @@ class hq_Device(Device):
         #self.name = 'Hydro Quebec Winter Credit Event 3'#not sure where it's used
         self.init_session()
         self.get_user_info()
+        print(config)
         print(self._webuser.customers)
         self.close()
 
@@ -60,6 +61,7 @@ class hq_Device(Device):
         
     async def get_user_info(self):
         await self._webuser.get_info()
+        #self._webuser.get_customer()
 
     async def close(self):
         await self._webuser.close_session()
