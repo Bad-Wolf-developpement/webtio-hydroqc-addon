@@ -1,10 +1,10 @@
-"""hq2mqtt adapter for webthings gateway"""
-from asyncio.log import logger
+"""adapter for webthings gateway"""
+
 import functools
 from gateway_addon import Adapter, Database
-import os
-import sys
-import logging
+import time
+
+from pkg.hq_device import hq_Device
 
 #root_folder = os.path.abspath(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 #sys.path.append(root_folder)#get access to import from parent folder
@@ -25,10 +25,33 @@ class hq_Adapter(Adapter):
         super().__init__(_id, package_name, verbose)
 
         self.config = self.load_db_config(_id)#load config from DB
-        
+
+        if not self.config:
+            print("Can't load config from Database")
+            return        
+
+        self.pairing=False
+        self.start_pairing(_TIMEOUT)
+
+    def start_pairing(self, timeout):
+        """Start pairing process"""
+        if self.pairing:
+            return
+
+        self.pairing = True
         #create a device for each contract in config
         for contract in self.config['contracts']:
-            print(contract)
+            device = hq_Device.hq_Device(self, "hydroqc-{0}".format(contract['name']), contract)
+            self.handle_device_added(device)
+        print("Start Pairing")#DEBUG
+
+        time.sleep(timeout)
+
+        self.pairing = False
+
+    def cancel_pairing(self):
+        """Cancel the pairing process"""
+        self.pairing = False
            
 
     def load_db_config(self, package_name):
