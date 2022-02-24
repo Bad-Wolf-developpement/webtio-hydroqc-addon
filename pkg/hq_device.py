@@ -1,6 +1,9 @@
 """Device for hqWinterCreditAdapter"""
 import functools
+from tempfile import TemporaryFile
 from gateway_addon import Device
+from hydroqc.webuser import WebUser
+import hydroqc.error as HQerror
 
 #from pkg.hq_Property import hq_bool_ro_property, hq_datetime_ro_property
 #from pkg.hq_DataClass import hq_config_data
@@ -30,7 +33,32 @@ class hq_Device(Device):
         self._type.append('BinarySensor')
         self.description = 'Hydro Quebec Winter Credit Event 1'#not sure where it'S used
         self.title = _id#This appear in the text bar when adding the device and is the default name of the device
+        self._webuser = WebUser(config['username'], config['password', False])
         #self.name = 'Hydro Quebec Winter Credit Event 3'#not sure where it's used
+        self.init_session()
+        self._webuser.get_info()
+        print(self.customer)
+
+    def init_session(self):
+        """
+        initialize hq websession
+        """
+        if self._webuser.session_expired:
+            print("Login")
+            self._webuser.login()
+        else:
+            try:
+                self._webuser.refresh_session()
+                print("Refreshing session")
+            except HQerror.HydroQcHTTPError:
+                #if refresh didn'T work, try to login
+                print("Refreshing session failed, try to login")
+                self._webuser.login()
+        
+    
+
+
+        
         
 
        
