@@ -41,7 +41,7 @@ class hq_Adapter(Adapter):
         self.pairing = True
         #create a device for each contract in config
         for contract in self.config['contracts']:
-            device = hq_Device.hq_Device(self, "hydroqc-{0}".format(contract['name']), contract)
+            device = hq_Device(self, "hydroqc-{0}".format(contract['name']), contract)
             self.handle_device_added(device)
         print("Start Pairing")#DEBUG
 
