@@ -35,7 +35,7 @@ class hq_Device(Device):
         self._type.append('BinarySensor')
         self.description = 'Hydro Quebec Winter Credit Event 1'#not sure where it'S used
         self.title = _id#This appear in the text bar when adding the device and is the default name of the device
-        self._webuser = WebUser(config['username'], config['password'],False, log_level=DEBUG,  http_log_level=DEBUG)
+        self._webuser = WebUser(config['username'], config['password'],False, log_level="DEBUG",  http_log_level="DEBUG")
         #self.name = 'Hydro Quebec Winter Credit Event 3'#not sure where it's used
         self.init_session()
         self.get_user_info()
