@@ -26,7 +26,7 @@ class hq_Adapter(Adapter):
 
         self.config = self.load_db_config(_id)#load config from DB
         #now load thew mqtt deamon
-        print(self.config)       
+        print(len(self.config['contracts']))     
 
     def load_db_config(self, package_name):
         """
