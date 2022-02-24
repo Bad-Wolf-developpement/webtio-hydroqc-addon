@@ -25,8 +25,6 @@ class hq_Adapter(Adapter):
         super().__init__(_id, package_name, verbose)
         self.logger = logging.getLogger(__name__)
         self.logger.addHandler(logging.StreamHandler(sys.stdout))
-
-        logging.basicConfig(stream=sys.stdout)
         self.config = self.load_db_config(_id)#load config from DB
         #now load thew mqtt deamon
         self.logger.info(self.config)
