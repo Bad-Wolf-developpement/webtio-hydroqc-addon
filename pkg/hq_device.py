@@ -40,6 +40,7 @@ class hq_Device(Device):
         self.init_session()
         self.get_user_info()
         print(self._webuser.customers)
+        self.close()
 
     def init_session(self):
         """
@@ -59,6 +60,9 @@ class hq_Device(Device):
         
     async def get_user_info(self):
         await self._webuser.get_info()
+
+    async def close(self):
+        await self._webuser.close_session()
     
 
 
