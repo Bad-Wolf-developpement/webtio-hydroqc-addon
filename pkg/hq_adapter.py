@@ -3,7 +3,7 @@ from gateway_addon import Adapter, Database
 from pkg.hq_mqtt_deamon import hq_mqtt_deamon
 import os
 import sys
-import asyncio
+import logging
 
 root_folder = os.path.abspath(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 sys.path.append(root_folder)#get access to import from parent folder
@@ -24,9 +24,8 @@ class hq_Adapter(Adapter):
 
         self.config = self.load_db_config(_id)#load config from DB
         #now load thew mqtt deamon
-        daemon = hq_mqtt_deamon(self.config)
-        asyncio.run(daemon.async_run())
-                
+        logging.info(self.config)
+
     def load_db_config(self, package_name):
         """
         Load configuration from DB
@@ -37,7 +36,7 @@ class hq_Adapter(Adapter):
         if not database.open():
             print("Can't open database for package: {0}".format(package_name))
             return
-        config = database.load_config()
+        configs = database.load_config()
         database.close()
 
-        return config
+        return configs
