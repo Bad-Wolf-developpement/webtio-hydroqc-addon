@@ -4,6 +4,7 @@ from tempfile import TemporaryFile
 from gateway_addon import Device
 from hydroqc.webuser import WebUser
 import hydroqc.error as HQerror
+import asyncio
 
 #from pkg.hq_Property import hq_bool_ro_property, hq_datetime_ro_property
 #from pkg.hq_DataClass import hq_config_data
@@ -36,7 +37,7 @@ class hq_Device(Device):
         self._webuser = WebUser(config['username'], config['password'], False)
         #self.name = 'Hydro Quebec Winter Credit Event 3'#not sure where it's used
         self.init_session()
-        self._webuser.get_info()
+        self.get_user_info
         print(self._webuser.customers)
 
     def init_session(self):
@@ -55,6 +56,8 @@ class hq_Device(Device):
                 print("Refreshing session failed, try to login")
                 self._webuser.login()
         
+    async def get_user_info(self):
+        await self._webuser.get_info()
     
 
 
