@@ -19,7 +19,6 @@
             "preHeatDelay": 30,
             "postHeatDelay": 30,
             "sync_frequency": 600,
-            "unregister_on_stop": "false",
             "contracts": []
         },
         "schema":{
@@ -32,22 +31,20 @@
 
                 "preHeatDelay":{
                     "type": "number",
-                    "title": "Delay in minute for the pre-heat, 0 to disable"
+                    "title": "Pre Heat session delay",
+                    "description": "Delay in minute for the pre heat, 0 to disable"
                 },
 
                 "postHeatDelay":{
                     "type":"number",
-                    "title":"Delay in minute for the post-heat, 0 to disable"
+                    "title":"Post Heat session delay",
+                    "description":"Delay in minute for the post heat, 0 to disable"
                 },
 
                 "sync_frequency": {
                     "type": "number",
-                    "title": "Sync Frequency"
-                },
-                
-                "unregister_on_stop":{
-                    "type": "string",
-                    "title": "unregister on stop"
+                    "title": "Sync Frequency",
+                    "description": "Frequency to fetch data from Hydro Quebec website"
                 },
 
                 "contracts":{
@@ -68,28 +65,34 @@
                     
                             "name":{
                                 "type":"string",
-                                "title": "Friendly name for the site"
+                                "title": "Name",
+                                "description": "Friendly name for the site"
                             },
                             "username":{
                                 "type" : "string",
-                                "title": "Hydro Quebec profile username(usually e-mail address)"
+                                "title": "Username",
+                                "description": "Hydro Quebec profile username(usually e-mail address)"
                             },
 
                             "password":{
                                 "type" : "string",
-                                "title": "Hydro Quebec profile password"
+                                "title": "Password",
+                                "description": "Hydro Quebec profile password"
                             },
                             "customer":{
-                                "type": "number",
-                                "title": "Hydro Quebec Customer Number (10 digits)"
+                                "type": "string",
+                                "title": "Customer number",
+                                "description": "Hydro Quebec Customer Number (10 digits)"
                             },
                             "account":{
-                                "type": "number",
-                                "title": "Hydro Quebec Account Number"
+                                "type": "string",
+                                "title": "Account number",
+                                "description": "Hydro Quebec Account Number"
                             },
                             "contract":{
-                                "type": "number",
-                                "title": "Hydro Quebec Contract Number(10 digits)"
+                                "type": "string",
+                                "title": "Contract number",
+                                "description": "Hydro Quebec Contract Number(10 digits)"
                             }
                         }
                     }
