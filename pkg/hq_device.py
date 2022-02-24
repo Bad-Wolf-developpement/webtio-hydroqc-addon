@@ -43,13 +43,13 @@ class hq_Device(Device):
         print(self._webuser.customers)
         self.close()
 
-    def init_session(self):
+    async def init_session(self):
         """
         initialize hq websession
         """
         if self._webuser.session_expired:
             print("Login")
-            self._webuser.login()
+            await self._webuser.login()
         else:
             try:
                 self._webuser.refresh_session()
