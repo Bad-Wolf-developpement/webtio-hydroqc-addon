@@ -37,7 +37,7 @@ class hq_Device(Device):
         self._webuser = WebUser(config['username'], config['password'], False)
         #self.name = 'Hydro Quebec Winter Credit Event 3'#not sure where it's used
         self.init_session()
-        self.get_user_info
+        self.get_user_info()
         print(self._webuser.first_name)
 
     def init_session(self):
