@@ -1,5 +1,6 @@
 """hq2mqtt adapter for webthings gateway"""
 from asyncio.log import logger
+import functools
 from gateway_addon import Adapter, Database
 import os
 import sys
@@ -7,6 +8,7 @@ import logging
 
 #root_folder = os.path.abspath(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 #sys.path.append(root_folder)#get access to import from parent folder
+print = functools.partial(print, flush=True)
 
 _TIMEOUT = 3   
 
@@ -24,7 +26,7 @@ class hq_Adapter(Adapter):
 
         self.config = self.load_db_config(_id)#load config from DB
         #now load thew mqtt deamon
-        logger.info(self.config)
+        print(self.config)
         
 
     def load_db_config(self, package_name):
