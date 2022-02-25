@@ -35,7 +35,7 @@ class hq_Device(Device):
         #-fix error: 2022-02-24 18:47:22.972 ERROR  : Error getting thing description for thing with id hydroqc-garage: Error: Unable to find thing with id: hydroqc-garage
         #at /home/node/webthings/gateway/build/webpack:/src/models/things.js:268:1
         #-pass debug leve as argument
-        if not self.adapter.verbose:
+        if self.adapter.verbose:
             log_level = "DEBUG"
         else:
             log_level = None
