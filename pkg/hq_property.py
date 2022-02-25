@@ -44,7 +44,7 @@ class hq_bool_ro_property(hqProperty):
        name -- name of the property
        """
        self.description={'@type': 'BooleanProperty', 'title': name, 'type': 'boolean', 'readOnly' : True,}#description of the property
-       super().__init__(device)
+       super().__init__(device, name, self.description)
 
    def set_RO_Value(self, propName, value: bool):
         super().set_RO_Value(propName, value)
