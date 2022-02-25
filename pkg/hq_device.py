@@ -8,12 +8,7 @@ import hydroqc.error as HQerror
 from pkg.hq_data_class import hq_Datas
 import asyncio
 from datetime import datetime
-
-#from pkg.hq_Property import hq_bool_ro_property, hq_datetime_ro_property
-#from pkg.hq_DataClass import hq_config_data
-#from pkg.hq_webuser import hq_webuser
-
-#from datetime import datetime, time
+from pkg.hq_property import *
 
 #TODO: work with loop asyncio
 
@@ -52,13 +47,41 @@ class hq_Device(Device):
         #self.name = 'Hydro Quebec Winter Credit Event 3'#not sure where it's used
 
         self.init_data()
-        print(self.datas.credit)
-        print(self.datas.lastSync)
-        print(self.datas.nextEvent)
-
+        
     def init_data(self):
         asyncio.run(self.async_run([self._webuser.get_info, self.get_data]))
         self.new_datas = self.datas
+
+    def init_propertys(self):
+        """intialize device property"""
+        #active event property
+        activeEvent = hq_bool_ro_property(self, 'Active Event')
+        self.properties['ActiveEvent'] = activeEvent
+        #activeEvent.set_RO_Value(self, 'ActiveEvent', False)
+
+        #pre-heat property
+        preHeatEvent = hq_bool_ro_property(self, 'Pre-Heat Event')
+        self.properties['PreHeatEvent'] = preHeatEvent
+        #preHeatEvent.set_RO_Value(self, 'PreHeatEvent', False)
+
+        #post-heat property
+        postHeatEvent = hq_bool_ro_property(self, 'Post-Heat Event')
+        self.properties['PostHeatEvent'] = postHeatEvent
+        #postHeatEvent.set_RO_Value(self, 'PostHeatEvent', False)
+
+        #next event property
+        nextEvent = hq_datetime_ro_property(self, 'Next Event')
+        self.properties['NextEvent'] = nextEvent
+       #nextEvent.set_RO_Value(self, 'NextEvent', datetime.now())
+
+        #last sync property
+        lastSync = hq_datetime_ro_property(self, 'Last Sync')
+        self.properties['LastSync'] = lastSync
+        #lastSync.set_RO_Value(self, 'LastSync', datetime.now())
+
+        #credit total property
+        credit = hq_float_ro_property(self, 'Credit Earned')
+        self.properties['creditEarned'] = credit
 
     async def async_run(self, functions):
         await self.init_session()
