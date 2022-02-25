@@ -43,7 +43,7 @@ class hq_Device(Device):
         self._type.append('BinarySensor')
         self.description = 'Hydro Quebec Winter Credit Event 1'#not sure where it'S used
         self.title = _id#This appear in the text bar when adding the device and is the default name of the device
-        self._webuser = WebUser(config['username'], config['password'],False, log_level=log_level,  http_log_level=log_level)
+        self._webuser = WebUser(config['username'], config['password'],False, log_level=None,  http_log_level=None)
         #self.name = 'Hydro Quebec Winter Credit Event 3'#not sure where it's used
 
         self.init_data()#get initial data
@@ -78,12 +78,12 @@ class hq_Device(Device):
         #last sync property
         lastSync = hq_datetime_ro_property(self, 'Last Sync')
         self.properties['LastSync'] = lastSync
-        lastSync.set_RO_Value(self, 'LastSync', self.datas.lastSync)
+        lastSync.set_RO_Value('LastSync', self.datas.lastSync)
 
         #credit total property
         credit = hq_float_ro_property(self, 'Credit Earned')
         self.properties['creditEarned'] = credit
-        credit.set_RO_Value(self, 'creditEarned', self.datas.credit)
+        credit.set_RO_Value('creditEarned', self.datas.credit)
 
     async def async_run(self, functions):
         await self.init_session()
