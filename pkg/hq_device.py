@@ -88,7 +88,7 @@ class hq_Device(Device):
         contract = account.get_contract(self.config['contract'])
         wc = contract.winter_credit
         await wc.refresh_data()
-        self.datas.credit = wc.raw_data['montantEffaceProjete']   
+        self.datas.credit = float(wc.raw_data['montantEffaceProjete'])
 
         print(self.datas.credit)
 
