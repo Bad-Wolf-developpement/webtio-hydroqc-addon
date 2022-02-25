@@ -40,7 +40,7 @@ class hq_Device(Device):
             log_level = "DEBUG"
         else:
             log_level = None
-
+        self.config = config
         self._type.append('BinarySensor')
         self.description = 'Hydro Quebec Winter Credit Event 1'#not sure where it'S used
         self.title = _id#This appear in the text bar when adding the device and is the default name of the device
