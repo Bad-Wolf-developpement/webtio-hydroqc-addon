@@ -86,8 +86,9 @@ class hq_Device(Device):
         contract = account.get_contract(self.config['contract'])
         wc = contract.winter_credit
         await wc.refresh_data()
+        credit = wc.raw_data['montantEffaceProjete']
         
-        print(wc.raw_data)
+        print(credit)
 
     async def close(self):
         await self._webuser.close_session()
