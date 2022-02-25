@@ -50,7 +50,6 @@ class hq_Device(Device):
         #asyncio.run(self.async_run([self.init_session]))#initialising web session
         asyncio.run(self.async_run([self._webuser.get_info]))#get user info
         
-        print(self._webuser.customers[0])
         #asyncio.run(self.async_run([self.close]))#close session
 
     async def async_run(self, functions):
@@ -76,7 +75,18 @@ class hq_Device(Device):
                 self._webuser.login()
         
     async def get_user_info(self):
-        await self._webuser.get_info()        
+        await self._webuser.get_info()
+
+    async def get_data(self):
+        await self._webuser.get_info()
+        customer = self._webuser.get_customer(self.config['customer'])
+        account = customer.get_account(self.config['account'])
+        contract = account.get_contract(self.config['contract'])
+        print(customer.names)
+        print(await account.get_info())
+        print(await contract.get_info())
+
+
 
     async def close(self):
         await self._webuser.close_session()
