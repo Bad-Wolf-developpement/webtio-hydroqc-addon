@@ -78,8 +78,11 @@ class hq_datetime_ro_property(hqProperty):
 
         value -- value of the property, must be datetime
         """
-
-        value = value.strftime("%Y/%m/%d\n %H:%M:%S")#TODO:Verify if isoformat could replace strftime
+        #if datetime is none enter an empty date and time
+        if value is None:
+            value = "0000/00/00\n00:00:00"
+        else:
+            value = value.strftime("%Y/%m/%d\n %H:%M:%S")#TODO:Verify if isoformat could replace strftime
         super().set_RO_Value(propName, value)
 """
 #Those class will be disabled since property will only be keep in add-on settings page for now
