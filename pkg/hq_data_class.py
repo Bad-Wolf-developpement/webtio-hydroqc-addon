@@ -12,4 +12,4 @@ class hq_Datas:
 
     @property
     def print_data(self):
-        return "{0}\r\n{1}\r\n{2}"
+        return "last sync: {0}\r\next event{1}\r\ncredit: {2}".format(self.lastSync, self.nextEvent, self.credit)
