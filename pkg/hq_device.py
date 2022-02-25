@@ -49,6 +49,8 @@ class hq_Device(Device):
 
         #asyncio.run(self.async_run([self.init_session]))#initialising web session
         asyncio.run(self.async_run([self._webuser.get_info]))#get user info
+
+        asyncio.run(self.async_run([self.get_data]))
         
         #asyncio.run(self.async_run([self.close]))#close session
 
