@@ -44,18 +44,19 @@ class hq_Device(Device):
             log_level = None
         self.config = config
         self.datas = hq_Datas
+        self.new_datas = hq_Datas
         self._type.append('BinarySensor')
         self.description = 'Hydro Quebec Winter Credit Event 1'#not sure where it'S used
         self.title = _id#This appear in the text bar when adding the device and is the default name of the device
         self._webuser = WebUser(config['username'], config['password'],False, log_level=log_level,  http_log_level=log_level)
         #self.name = 'Hydro Quebec Winter Credit Event 3'#not sure where it's used
 
-        #asyncio.run(self.async_run([self.init_session]))#initialising web session
-        asyncio.run(self.async_run([self._webuser.get_info, self.get_data]))#get user info
+        self.init_data()
+        print(self.datas)
 
-        #asyncio.run(self.async_run([self.get_data]))
-        
-        #asyncio.run(self.async_run([self.close]))#close session
+    def init_data(self):
+        asyncio.run(self.async_run([self._webuser.get_info, self.get_data]))
+        self.new_datas = self.datas
 
     async def async_run(self, functions):
         await self.init_session()
@@ -95,6 +96,7 @@ class hq_Device(Device):
         datas.credit = float(wc.raw_data['montantEffaceProjete'])
         if not wc.current_state is "critical_peak":
             datas.nextEvent = wc.next_critical_peak
+        self.new_datas = datas
         
     async def close(self):
         await self._webuser.close_session()
