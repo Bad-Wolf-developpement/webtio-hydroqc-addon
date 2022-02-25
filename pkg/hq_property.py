@@ -80,7 +80,7 @@ class hq_datetime_ro_property(hqProperty):
         """
 
         value = value.strftime("%Y/%m/%d\n %H:%M:%S")#TODO:Verify if isoformat could replace strftime
-        super().set_RO_Value(self.device, propName, value)
+        super().set_RO_Value(propName, value)
 """
 #Those class will be disabled since property will only be keep in add-on settings page for now
 class hq_minute_rw_property(hqProperty):
