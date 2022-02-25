@@ -73,16 +73,17 @@ class hq_Device(Device):
         #next event property
         nextEvent = hq_datetime_ro_property(self, 'Next Event')
         self.properties['NextEvent'] = nextEvent
-       #nextEvent.set_RO_Value(self, 'NextEvent', datetime.now())
+        #nextEvent.set_RO_Value(self, 'NextEvent', datetime.now())
 
         #last sync property
         lastSync = hq_datetime_ro_property(self, 'Last Sync')
         self.properties['LastSync'] = lastSync
-        #lastSync.set_RO_Value(self, 'LastSync', datetime.now())
+        lastSync.set_RO_Value(self, 'LastSync', self.datas.lastSync)
 
         #credit total property
         credit = hq_float_ro_property(self, 'Credit Earned')
         self.properties['creditEarned'] = credit
+        credit.set_RO_Value(self, 'creditEarned', self.datas.credit)
 
     async def async_run(self, functions):
         await self.init_session()
@@ -120,8 +121,7 @@ class hq_Device(Device):
         wc = contract.winter_credit
         await wc.refresh_data()
         datas.credit = float(wc.raw_data['montantEffaceProjete'])
-        if not wc.current_state is "critical_peak":
-            datas.nextEvent = wc.next_critical_peak
+        datas.nextEvent = wc.next_critical_peak
         self.new_datas = datas
         
     async def close(self):
