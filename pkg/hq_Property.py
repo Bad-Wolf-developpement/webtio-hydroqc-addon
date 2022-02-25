@@ -3,6 +3,7 @@
 from gateway_addon import Property
 from datetime import datetime
 
+
 class hqProperty(Property):
     """Property type for HQdata"""
     description = None
