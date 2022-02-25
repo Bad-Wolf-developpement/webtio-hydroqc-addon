@@ -44,7 +44,7 @@ class hq_Device(Device):
         self.description = 'Hydro Quebec Winter Credit Event 1'#not sure where it'S used
         self.title = _id#This appear in the text bar when adding the device and is the default name of the device
         self._webuser = WebUser(config['username'], config['password'],False, log_level=None,  http_log_level=None)
-        #self.name = 'Hydro Quebec Winter Credit Event 3'#not sure where it's used
+        self.name = _id
 
         self.init_data()#get initial data
         self.init_propertys()#initialize property
