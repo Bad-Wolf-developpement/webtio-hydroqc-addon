@@ -32,14 +32,16 @@ class hq_Device(Device):
 
         Device.__init__(self, adapter, _id,)
         #TODO:
-        #fix error: 2022-02-24 18:47:22.972 ERROR  : Error getting thing description for thing with id hydroqc-garage: Error: Unable to find thing with id: hydroqc-garage
+        #-fix error: 2022-02-24 18:47:22.972 ERROR  : Error getting thing description for thing with id hydroqc-garage: Error: Unable to find thing with id: hydroqc-garage
         #at /home/node/webthings/gateway/build/webpack:/src/models/things.js:268:1
+        #-pass debug leve as argument
+
         self._type.append('BinarySensor')
         self.description = 'Hydro Quebec Winter Credit Event 1'#not sure where it'S used
         self.title = _id#This appear in the text bar when adding the device and is the default name of the device
         self._webuser = WebUser(config['username'], config['password'],False, log_level="DEBUG",  http_log_level="DEBUG")
         #self.name = 'Hydro Quebec Winter Credit Event 3'#not sure where it's used
-        asyncio.run(self.async_run())
+        asyncio.run(self.async_run(self.init_session))
         print(config)
         print(self._webuser.customers)
         self.close()
