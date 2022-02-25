@@ -90,7 +90,7 @@ class hq_Device(Device):
         await wc.refresh_data()
         self.datas.credit = float(wc.raw_data['montantEffaceProjete'])
 
-        print(wc.next_peak)
+        print(wc.next_critical_peak)
 
     async def close(self):
         await self._webuser.close_session()
