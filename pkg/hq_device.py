@@ -58,7 +58,7 @@ class hq_Device(Device):
         await self.init_session()
         for function in functions:
             await function()
-        await self.close()
+        #await self.close()
 
     async def init_session(self):
         """
