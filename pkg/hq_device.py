@@ -44,8 +44,8 @@ class hq_Device(Device):
         print(self._webuser.customers)
         self.close()
 
-    async def async_run(self):
-        await self.init_session()
+    async def async_run(self, function):
+        await function()
         await self.get_user_info()
 
     async def init_session(self):
