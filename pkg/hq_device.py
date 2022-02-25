@@ -5,6 +5,7 @@ from tempfile import TemporaryFile
 from gateway_addon import Device
 from hydroqc.webuser import WebUser
 import hydroqc.error as HQerror
+from pkg.hq_data_class import hq_Datas
 import asyncio
 
 #from pkg.hq_Property import hq_bool_ro_property, hq_datetime_ro_property
@@ -41,6 +42,7 @@ class hq_Device(Device):
         else:
             log_level = None
         self.config = config
+        self.datas = hq_Datas
         self._type.append('BinarySensor')
         self.description = 'Hydro Quebec Winter Credit Event 1'#not sure where it'S used
         self.title = _id#This appear in the text bar when adding the device and is the default name of the device
@@ -86,9 +88,9 @@ class hq_Device(Device):
         contract = account.get_contract(self.config['contract'])
         wc = contract.winter_credit
         await wc.refresh_data()
-        credit = wc.raw_data['montantEffaceProjete']
-        
-        print(credit)
+        self.datas.credit = wc.raw_data['montantEffaceProjete']   
+
+        print(self.datas.credit)
 
     async def close(self):
         await self._webuser.close_session()
