@@ -46,7 +46,8 @@ class hq_Device(Device):
         self._webuser = WebUser(config['username'], config['password'],False, log_level=log_level,  http_log_level=log_level)
         #self.name = 'Hydro Quebec Winter Credit Event 3'#not sure where it's used
 
-        self.init_data()
+        self.init_data()#get initial data
+        self.init_propertys()#initialize property
         
     def init_data(self):
         asyncio.run(self.async_run([self._webuser.get_info, self.get_data]))
