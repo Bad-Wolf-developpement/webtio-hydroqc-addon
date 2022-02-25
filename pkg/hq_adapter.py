@@ -21,6 +21,7 @@ class hq_Adapter(Adapter):
     def __init__(self, verbose=False):
         """Initialize the object"""
         self.name = self.__class__.__name__
+        self.verbose = verbose
         _id = 'webtio-hydroqc-addon'
         package_name = _id
         super().__init__(_id, package_name, verbose)
