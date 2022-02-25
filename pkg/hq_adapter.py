@@ -3,6 +3,7 @@
 import functools
 from gateway_addon import Adapter, Database
 import time
+import asyncio
 
 from pkg.hq_device import hq_Device
 
