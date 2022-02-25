@@ -7,6 +7,7 @@ from hydroqc.webuser import WebUser
 import hydroqc.error as HQerror
 from pkg.hq_data_class import hq_Datas
 import asyncio
+from datetime import datetime
 
 #from pkg.hq_Property import hq_bool_ro_property, hq_datetime_ro_property
 #from pkg.hq_DataClass import hq_config_data
@@ -82,6 +83,8 @@ class hq_Device(Device):
         await self._webuser.get_info()
 
     async def get_data(self):
+        if self._webuser._hydro_client._session:
+            self.datas.lastSync = datetime.now()
         await self._webuser.get_info()
         customer = self._webuser.get_customer(self.config['customer'])
         account = customer.get_account(self.config['account'])
@@ -89,9 +92,9 @@ class hq_Device(Device):
         wc = contract.winter_credit
         await wc.refresh_data()
         self.datas.credit = float(wc.raw_data['montantEffaceProjete'])
-
-        print(wc.next_critical_peak)
-
+        self.datas.nextEvent = wc.next_critical_peak
+        print(wc.current_state)
+        
     async def close(self):
         await self._webuser.close_session()
     
