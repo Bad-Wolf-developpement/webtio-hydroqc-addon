@@ -52,7 +52,7 @@ class hq_Device(Device):
         #self.name = 'Hydro Quebec Winter Credit Event 3'#not sure where it's used
 
         self.init_data()
-        print(self.datas)
+        print(self.datas.print_data)
 
     def init_data(self):
         asyncio.run(self.async_run([self._webuser.get_info, self.get_data]))

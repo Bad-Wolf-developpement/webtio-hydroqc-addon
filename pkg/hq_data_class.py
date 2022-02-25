@@ -9,3 +9,7 @@ class hq_Datas:
     nextEvent: datetime
     credit: float
     #eventTable#TODO: create a table to store multiple next event and not just one
+
+    @property
+    def print_data(self):
+        return "{0}\r\n{1}\r\n{2}"
