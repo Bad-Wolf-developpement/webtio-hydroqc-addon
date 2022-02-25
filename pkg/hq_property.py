@@ -54,7 +54,7 @@ class hq_float_ro_property(hqProperty):
 
     def __init__(self, device, name):
         
-        self.description={'title': name, 'type': 'number', 'readOnly' : True,}
+        self.description={'title': name, 'type': 'number', 'unit' : "$", 'readOnly' : True,}
         super().__init__(device, name)
 
     def set_RO_Value(self, propName, value: float):
