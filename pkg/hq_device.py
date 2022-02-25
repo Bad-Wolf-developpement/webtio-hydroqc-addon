@@ -52,6 +52,7 @@ class hq_Device(Device):
         
     def init_data(self):
         asyncio.run(self.async_run([self._webuser.get_info, self.get_data]))
+        #TODO: Before initializing data, checking if property already have date if yes do nothing
         self.new_datas = self.datas
 
     def init_propertys(self):
@@ -64,7 +65,7 @@ class hq_Device(Device):
         #pre-heat property
         preHeatEvent = hq_bool_ro_property(self, 'Pre-Heat Event')
         self.properties['PreHeatEvent'] = preHeatEvent
-        preHeatEvent.set_RO_Value('PreHeatEvent', True)
+        preHeatEvent.set_RO_Value('PreHeatEvent', False)
 
         #post-heat property
         postHeatEvent = hq_bool_ro_property(self, 'Post-Heat Event')
