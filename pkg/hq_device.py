@@ -84,8 +84,10 @@ class hq_Device(Device):
         customer = self._webuser.get_customer(self.config['customer'])
         account = customer.get_account(self.config['account'])
         contract = account.get_contract(self.config['contract'])
+        wc = contract.winter_credit
+        await wc.refresh_data()
         
-        print(await contract.get_periods_info())
+        print(wc.raw_data)
 
     async def close(self):
         await self._webuser.close_session()
