@@ -33,22 +33,25 @@ class hq_Device(Device):
         Device.__init__(self, adapter, _id,)
         #TODO:
         #-fix error: 2022-02-24 18:47:22.972 ERROR  : Error getting thing description for thing with id hydroqc-garage: Error: Unable to find thing with id: hydroqc-garage
-        #at /home/node/webthings/gateway/build/webpack:/src/models/things.js:268:1
-        #-pass debug leve as argument
-        print(self.adapter.verbose)
+        #at /home/node/webthings/gateway/build/webpack:/src/models/things.js:268:1 when we delete the device
+        
+        #setting the log level
         if self.adapter.verbose:
             log_level = "DEBUG"
         else:
             log_level = None
+
         self._type.append('BinarySensor')
         self.description = 'Hydro Quebec Winter Credit Event 1'#not sure where it'S used
         self.title = _id#This appear in the text bar when adding the device and is the default name of the device
         self._webuser = WebUser(config['username'], config['password'],False, log_level=log_level,  http_log_level=log_level)
         #self.name = 'Hydro Quebec Winter Credit Event 3'#not sure where it's used
-        asyncio.run(self.async_run([self.init_session, self.get_user_info]))
-        print(config)
-        print(self._webuser.customers)
-        asyncio.run(self.async_run([self.close]))
+
+        asyncio.run(self.async_run([self.init_session]))#initialising web session
+        asyncio.run(self.async_run([self._webuser.get_info]))#get user info
+        
+        print(self._webuser.customers[0])
+        asyncio.run(self.async_run([self.close]))#close session
 
     async def async_run(self, functions):
         for function in functions:
@@ -71,8 +74,7 @@ class hq_Device(Device):
                 self._webuser.login()
         
     async def get_user_info(self):
-        await self._webuser.get_info()
-        #self._webuser.get_customer()
+        await self._webuser.get_info()        
 
     async def close(self):
         await self._webuser.close_session()
