@@ -18,7 +18,7 @@ class hq_Adapter(Adapter):
     Adapter for the HQ program
     """
 
-    def __init__(self, verbose=False):
+    def __init__(self, verbose):
         """Initialize the object"""
         self.name = self.__class__.__name__
         self.verbose = verbose
