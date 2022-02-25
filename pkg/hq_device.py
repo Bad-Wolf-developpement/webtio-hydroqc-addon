@@ -48,9 +48,9 @@ class hq_Device(Device):
         #self.name = 'Hydro Quebec Winter Credit Event 3'#not sure where it's used
 
         #asyncio.run(self.async_run([self.init_session]))#initialising web session
-        asyncio.run(self.async_run([self._webuser.get_info]))#get user info
+        asyncio.run(self.async_run([self._webuser.get_info, self.get_data]))#get user info
 
-        asyncio.run(self.async_run([self.get_data]))
+        #asyncio.run(self.async_run([self.get_data]))
         
         #asyncio.run(self.async_run([self.close]))#close session
 
