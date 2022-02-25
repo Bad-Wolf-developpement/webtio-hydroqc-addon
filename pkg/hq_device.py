@@ -47,15 +47,17 @@ class hq_Device(Device):
         self._webuser = WebUser(config['username'], config['password'],False, log_level=log_level,  http_log_level=log_level)
         #self.name = 'Hydro Quebec Winter Credit Event 3'#not sure where it's used
 
-        asyncio.run(self.async_run([self.init_session]))#initialising web session
+        #asyncio.run(self.async_run([self.init_session]))#initialising web session
         asyncio.run(self.async_run([self._webuser.get_info]))#get user info
         
         print(self._webuser.customers[0])
-        asyncio.run(self.async_run([self.close]))#close session
+        #asyncio.run(self.async_run([self.close]))#close session
 
     async def async_run(self, functions):
+        await self.init_session()
         for function in functions:
             await function()
+        await self.close()
 
     async def init_session(self):
         """
