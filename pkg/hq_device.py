@@ -85,8 +85,8 @@ class hq_Device(Device):
         account = customer.get_account(self.config['account'])
         contract = account.get_contract(self.config['contract'])
         
-        print(await contract.get_period_info())
-        
+        print(await contract.get_periods_info())
+
     async def close(self):
         await self._webuser.close_session()
     
