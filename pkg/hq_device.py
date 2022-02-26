@@ -34,6 +34,7 @@ class hq_Device(Device):
         #-fix error : Failed to get property ActiveEvent: getProperty: device: hydroqc-maison not found.
 
         #TODO:
+        # -on init, read data from device if 
         # -update feature to compare datas and new_datas and update if necessary
         # -update bool feature to compare current time with option time and activate or deactive bool
         # -long loop feature to update date from HQ few time a day
@@ -55,11 +56,19 @@ class hq_Device(Device):
 
         self.init_data()#get initial data
         self.init_propertys()#initialize property
+        self.load_property_value()
         
     def init_data(self):
         asyncio.run(self.async_run([self._webuser.get_info, self.get_data]))
         #TODO: Before initializing data, checking if property already have date if yes do nothing
         self.new_datas = self.datas
+
+    def load_property_value(self):
+        """
+        loading property from device and populate self.datas with it
+        """
+        for property in self.properties:
+            print(property)
 
     def init_propertys(self):
         """intialize device property"""
