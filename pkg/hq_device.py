@@ -57,51 +57,59 @@ class hq_Device(Device):
         self.init_data()#get initial data
         self.init_propertys()#initialize property
         self.load_property_value()
+        print(self.datas)
         
     def init_data(self):
+        """
+        get initial data from hq server
+        """
         asyncio.run(self.async_run([self._webuser.get_info, self.get_data]))
-        #TODO: Before initializing data, checking if property already have date if yes do nothing
-        self.new_datas = self.datas
 
     def load_property_value(self):
         """
         loading property from device and populate self.datas with it
         """
         for name in self.properties:
-            property = self.properties[name]
-            print("{0}: {1}".format(name, property.get_value()))
+            if name is 'LastSync':
+                self.datas.lastSync = self.properties[name]
+            elif name is 'creditEarned':
+                self.datas.credit = self.properties[name]
+            elif name is 'LastSync':
+                self.datss = self.properties[name]
 
     def init_propertys(self):
-        """intialize device property"""
+        """
+        intialize device property
+        """
         #active event property
         activeEvent = hq_bool_ro_property(self, 'Active Event')
         self.properties['ActiveEvent'] = activeEvent
-        activeEvent.set_RO_Value('ActiveEvent', False)
+        #activeEvent.set_RO_Value('ActiveEvent', False)
 
         #pre-heat property
         preHeatEvent = hq_bool_ro_property(self, 'Pre-Heat Event')
         self.properties['PreHeatEvent'] = preHeatEvent
-        preHeatEvent.set_RO_Value('PreHeatEvent', False)
+        #preHeatEvent.set_RO_Value('PreHeatEvent', False)
 
         #post-heat property
         postHeatEvent = hq_bool_ro_property(self, 'Post-Heat Event')
         self.properties['PostHeatEvent'] = postHeatEvent
-        postHeatEvent.set_RO_Value('PostHeatEvent', False)
+        #postHeatEvent.set_RO_Value('PostHeatEvent', False)
 
         #next event property
         nextEvent = hq_datetime_ro_property(self, 'Next Event')
         self.properties['NextEvent'] = nextEvent
-        nextEvent.set_RO_Value('NextEvent', self.datas.nextEvent)
+        #nextEvent.set_RO_Value('NextEvent', self.datas.nextEvent)
 
         #last sync property
         lastSync = hq_datetime_ro_property(self, 'Last Sync')
         self.properties['LastSync'] = lastSync
-        lastSync.set_RO_Value('LastSync', self.datas.lastSync)
+        #lastSync.set_RO_Value('LastSync', self.datas.lastSync)
 
         #credit total property
         credit = hq_float_ro_property(self, 'Credit Earned')
         self.properties['creditEarned'] = credit
-        credit.set_RO_Value('creditEarned', self.datas.credit)
+        #credit.set_RO_Value('creditEarned', self.datas.credit)
 
     async def async_run(self, functions):
         await self.init_session()
