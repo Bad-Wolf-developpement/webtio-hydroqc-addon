@@ -57,8 +57,9 @@ class hq_Device(Device):
         self.init_data()#get initial data
         self.init_propertys()#initialize property
         self.load_property_value()
-        print(self.datas)
-        
+        for data in self.datas:
+            print(data)
+            
     def init_data(self):
         """
         get initial data from hq server
