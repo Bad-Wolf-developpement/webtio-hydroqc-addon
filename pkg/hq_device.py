@@ -54,13 +54,14 @@ class hq_Device(Device):
         self._webuser = WebUser(config['username'], config['password'],False, log_level=None,  http_log_level=None)
         self.name = _id
 
-        self.init_data()#get initial data
+        self.pull_data()#get initial data
         self.init_propertys()#initialize property
         self.load_property_value()
-        for data in self.datas:
-            print(data)
-            
-    def init_data(self):
+        print(self.datas.lastSync)
+        print(self.datas.nextEvent)
+        print(self.datas.credit)
+
+    def pull_data(self):
         """
         get initial data from hq server
         """
