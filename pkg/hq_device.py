@@ -67,8 +67,9 @@ class hq_Device(Device):
         """
         loading property from device and populate self.datas with it
         """
-        for property in self.properties:
-            print("{0}: {1}".format(property,property.get_value()))
+        for name in self.properties:
+            property = self.properties[name]
+            print("{0}: {1}".format(name, property.get_value()))
 
     def init_propertys(self):
         """intialize device property"""
