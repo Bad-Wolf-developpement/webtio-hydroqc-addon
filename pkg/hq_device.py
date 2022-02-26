@@ -73,11 +73,11 @@ class hq_Device(Device):
         """
         for name in self.properties:
             if name is 'LastSync':
-                self.datas.lastSync = self.properties[name]
+                self.datas.lastSync = self.properties[name].get_value()
             elif name is 'creditEarned':
-                self.datas.credit = self.properties[name]
+                self.datas.credit = self.properties[name].get_value()
             elif name is 'LastSync':
-                self.datss = self.properties[name]
+                self.datss = self.properties[name].get_value()
 
     def init_propertys(self):
         """
