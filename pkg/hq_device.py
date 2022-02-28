@@ -59,7 +59,7 @@ class hq_Device(Device):
         self.update_hq_datas()
         self.update_calculated_property()
 
-        self.get_property('ActiveEvent').get_value()
+        print(self.properties)
         
 
     def pull_data(self):
