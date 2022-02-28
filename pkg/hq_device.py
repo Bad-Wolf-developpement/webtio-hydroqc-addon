@@ -82,9 +82,16 @@ class hq_Device(Device):
             for property in self.properties:
                 print("checking property: {0}".format(property))
                 if self.get_property(property) == 'LastSync':
+                    if self.adapter.verbose:
+                        print("setting value for: {0}".format(property))
                     self.get_property(property).set_RO_Value(property, self.datas.lastSync)
                 elif self.get_property(property) == 'NextEvent':
+                    if self.adapter.verbose:
+                        print("setting value for: {0}".format(property))
                     self.get_property(property).set_RO_Value(property, self.datas.nextEvent)
+                elif self.get_property(property == 'CreditEarned'):
+                    if self.adapter.verbose:
+                        print("setting value for: {0}".format(property))
                     self.get_property(property).set_RO_Value(property, self.datas.credit)
 
     def update_calculated_property(self):
