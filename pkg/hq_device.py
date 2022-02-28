@@ -57,7 +57,7 @@ class hq_Device(Device):
         self.pull_data()#get initial data
         self.init_propertys()#initialize property
         self.update_hq_datas()
-        self.update_calculated_property()
+        #self.update_calculated_property()
 
         
 
@@ -71,7 +71,7 @@ class hq_Device(Device):
         """
         update datas if changed
         """
-
+        self.pull_data()
         if self.data_changed():
             self.datas = self.new_datas
             for property in self.properties:
