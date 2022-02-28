@@ -71,6 +71,8 @@ class hq_Device(Device):
         """
         update datas if changed
         """
+        if self.adapter.verbose:
+            print("updating hq datas")
         self.pull_data()
         if self.data_changed():
             self.datas = self.new_datas
