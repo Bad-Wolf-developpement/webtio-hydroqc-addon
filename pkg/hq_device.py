@@ -54,7 +54,7 @@ class hq_Device(Device):
         self.name = _id
         self.dbConfig = self.adapter.config
 
-        self.pull_data()#get initial data
+        #self.pull_data()#get initial data
         self.init_propertys()#initialize property
         self.update_hq_datas()
         #self.update_calculated_property()
@@ -169,7 +169,7 @@ class hq_Device(Device):
         await self.init_session()
         for function in functions:
             await function()
-        await self.close()
+        #await self.close()
 
     async def init_session(self):
         """
