@@ -60,7 +60,7 @@ class hq_bool_ro_property(hqProperty):
         """
         now = datetime.now()
 
-        if now is None:
+        if now is None or startDate is None or endDate is None:
             return False
         elif now > startDate and now < endDate:
             return True
