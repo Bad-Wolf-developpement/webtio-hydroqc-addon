@@ -37,6 +37,7 @@ class hq_Device(Device):
         #TODO:
         # -long loop feature to update date from HQ few time a day
         # -small loop feature to check time few time a min to for bool activation
+        # -BE SURE THAT VALUE OF EVENT IS SET TO FALSE AND NOT NONE
         
         #setting the log level
         if self.adapter.verbose:
@@ -57,6 +58,8 @@ class hq_Device(Device):
         self.init_propertys()#initialize property
         self.update_hq_datas()
         self.update_calculated_property()
+
+        self.get_property('ActiveEvent').get_value()
         
 
     def pull_data(self):
@@ -77,7 +80,6 @@ class hq_Device(Device):
                     self.get_property(property).set_RO_Value(property, self.datas.lastSync)
                 elif self.get_property(property) == 'NextEvent':
                     self.get_property(property).set_RO_Value(property, self.datas.nextEvent)
-                elif self.get_property(property) == 'creditEarned':
                     self.get_property(property).set_RO_Value(property, self.datas.credit)
 
     def update_calculated_property(self):
