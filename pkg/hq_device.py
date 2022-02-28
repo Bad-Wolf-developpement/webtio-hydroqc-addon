@@ -123,7 +123,7 @@ class hq_Device(Device):
         return -- bool
         """
 
-        if self.datas.lastSync and self.new_datas.lastSync and (self.datas.lastSync < self.new_datas.lastSync):
+        if not self.datas.lastSync is None and not self.new_datas.lastSync is None and (self.datas.lastSync < self.new_datas.lastSync):
             #if have a previous last sync and new sync and new sync is newer
             return True
         
