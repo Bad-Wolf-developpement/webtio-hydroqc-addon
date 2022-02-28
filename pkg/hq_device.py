@@ -75,8 +75,8 @@ class hq_Device(Device):
         self.pull_data()
         if self.adapter.verbose:
             print("updating hq datas")
-            print("Old Datas: {0}".format(self.datas))
-            print("New Datas: {0}".format(self.new_datas))
+            print("Old Datas: {0}".format(self.datas.lastSync))
+            print("New Datas: {0}".format(self.new_datas.lastSync))
         if self.data_changed():
             self.datas = self.new_datas
             for property in self.properties:
