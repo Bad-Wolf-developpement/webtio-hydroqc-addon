@@ -1,6 +1,5 @@
 """Property for device Hydro Quebec event for Webthings"""
 
-from turtle import st
 from gateway_addon import Property
 from datetime import datetime
 
