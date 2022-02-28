@@ -81,11 +81,10 @@ class hq_Device(Device):
             self.datas = self.new_datas
             for property in self.properties:
                 print("checking property: {0}".format(property))
-                print(type(property))
                 if property == 'LastSync':
                     if self.adapter.verbose:
                         print("setting value for: {0}".format(property))
-                    self.get_property(property).set_RO_Value(property, self.datas.lastSync)
+                    self.get_property(property).set_RO_Value(property, self.datas.lastSync)#THIS COMMAND DIDN'T WORK MUST LOOK OUT WHO TO GET PROPERTY AS THING AND CALL METHODS
                 elif property == 'NextEvent':
                     if self.adapter.verbose:
                         print("setting value for: {0}".format(property))
@@ -135,6 +134,7 @@ class hq_Device(Device):
         
         return -- bool
         """
+        #TODO: DEBBUGING THIS SECTION, IT SHOW FALSE ALWAYS, TEMPORARY PUT BOTH ON TRUE
 
         if not self.datas.lastSync is None and not self.new_datas.lastSync is None and (self.datas.lastSync < self.new_datas.lastSync):
             #if have a previous last sync and new sync and new sync is newer
