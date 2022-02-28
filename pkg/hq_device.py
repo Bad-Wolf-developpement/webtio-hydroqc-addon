@@ -51,6 +51,7 @@ class hq_Device(Device):
         self.title = _id#This appear in the text bar when adding the device and is the default name of the device
         self._webuser = WebUser(config['username'], config['password'],False, log_level=log_level,  http_log_level=log_level)
         self.name = _id
+        self.dbConfig = self.adapter.config
 
         self.pull_data()#get initial data
         self.init_propertys()#initialize property
@@ -91,11 +92,11 @@ class hq_Device(Device):
             endEvent = self.datas.nextEvent + timedelta(hours=4)
 
         #set pre-heat starttime
-        preHeatStart = self.datas.nextEvent - timedelta(minutes=self.config['preHeatDelay'])
+        preHeatStart = self.datas.nextEvent - timedelta(minutes=self.dbConfig['preHeatDelay'])
 
         #set post-heat end time
 
-        postHeatEnd = self.datas.nextEvent + timedelta(minutes=self.config['postHeatDelay'])
+        postHeatEnd = self.datas.nextEvent + timedelta(minutes=self.dbConfig['postHeatDelay'])
 
         for property in self.properties:
             if self.get_property(property) == 'ActiveEvent':
