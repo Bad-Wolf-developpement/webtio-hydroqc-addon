@@ -72,6 +72,8 @@ class hq_Device(Device):
         """
         update datas if changed
         """
+        if self.adapter.verobse:
+            print("Before pull: {0}",format(self.datas.lastSync))
         self.pull_data()
         if self.adapter.verbose:
             print("updating hq datas")
