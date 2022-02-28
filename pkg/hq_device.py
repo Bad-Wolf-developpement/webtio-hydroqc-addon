@@ -89,7 +89,7 @@ class hq_Device(Device):
                     if self.adapter.verbose:
                         print("setting value for: {0}".format(property))
                     self.find_property(property).set_RO_Value(property, self.datas.nextEvent)
-                elif property == 'CreditEarned':
+                elif property == 'creditEarned':
                     if self.adapter.verbose:
                         print("setting value for: {0}".format(property))
                     self.find_property(property).set_RO_Value(property, self.datas.credit)
