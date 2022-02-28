@@ -1,5 +1,6 @@
 """Property for device Hydro Quebec event for Webthings"""
 
+from turtle import st
 from gateway_addon import Property
 from datetime import datetime
 
@@ -35,9 +36,9 @@ class hqProperty(Property):
         prop.set_cached_value_and_notify(value)
 
 class hq_bool_ro_property(hqProperty):
-   """Boolean Property Read Only"""
+    """Boolean Property Read Only"""
 
-   def __init__(self, device, name):
+    def __init__(self, device, name):
        """
        Initialize the objects
 
@@ -46,8 +47,26 @@ class hq_bool_ro_property(hqProperty):
        self.description={'@type': 'BooleanProperty', 'title': name, 'type': 'boolean', 'readOnly' : True,}#description of the property
        super().__init__(device, name)
 
-   def set_RO_Value(self, propName, value: bool):
+    def set_RO_Value(self, propName, value: bool):
         super().set_RO_Value(propName, value)
+
+    def is_active(self, startDate, endDate):
+        """
+        test if the event is currently active
+
+        startDate -- start date and time of the event
+        endDate -- end date and time of the event
+
+        return -- bool
+        """
+        now = datetime.now()
+
+        if now is None:
+            return False
+        elif now > startDate and now < endDate:
+            return True
+        else:
+            return False
 
 class hq_float_ro_property(hqProperty):
     """int property, read only"""

@@ -2,12 +2,13 @@
 from distutils.debug import DEBUG
 import functools
 from tempfile import TemporaryFile
+from time import time
 from gateway_addon import Device
 from hydroqc.webuser import WebUser
 import hydroqc.error as HQerror
 from pkg.hq_data_class import hq_Datas
 import asyncio
-from datetime import datetime
+from datetime import datetime, timedelta
 from pkg.hq_property import *
 
 #TODO: work with loop asyncio
@@ -34,9 +35,6 @@ class hq_Device(Device):
         #-fix error : Failed to get property ActiveEvent: getProperty: device: hydroqc-maison not found.
 
         #TODO:
-        # -on init, read data from device if 
-        # -update feature to compare datas and new_datas and update if necessary
-        # -update bool feature to compare current time with option time and activate or deactive bool
         # -long loop feature to update date from HQ few time a day
         # -small loop feature to check time few time a min to for bool activation
         
@@ -51,7 +49,7 @@ class hq_Device(Device):
         self._type.append('BinarySensor')
         self.description = 'Hydro Quebec Winter Credit Event 1'#not sure where it'S used
         self.title = _id#This appear in the text bar when adding the device and is the default name of the device
-        self._webuser = WebUser(config['username'], config['password'],False, log_level=None,  http_log_level=None)
+        self._webuser = WebUser(config['username'], config['password'],False, log_level=log_level,  http_log_level=log_level)
         self.name = _id
 
         self.pull_data()#get initial data
@@ -66,18 +64,63 @@ class hq_Device(Device):
         get initial data from hq server
         """
         asyncio.run(self.async_run([self._webuser.get_info, self.get_data]))
+    
+    def update_hq_datas(self):
+        """
+        update datas if changed
+        """
 
-    def load_property_value(self):
+        if self.data_changed():
+            self.datas = self.new_datas
+            for property in self.properties:
+                if self.get_property(property) == 'LastSync':
+                    self.get_property(property).set_RO_Value(property, self.datas.lastSync)
+                elif self.get_property(property) == 'NextEvent':
+                    self.get_property(property).set_RO_Value(property, self.datas.nextEvent)
+                elif self.get_property(property) == 'creditEarned':
+                    self.get_property(property).set_RO_Value(property, self.datas.credit)
+
+    def update_calculated_property(self):
         """
-        loading property from device and populate self.datas with it
+        update property that are calculated
         """
-        for name in self.properties:
-            if name is 'LastSync':
-                self.datas.lastSync = self.properties[name].get_value()
-            elif name is 'creditEarned':
-                self.datas.credit = self.properties[name].get_value()
-            elif name is 'LastSync':
-                self.datss = self.properties[name].get_value()
+        
+        #Set end of event
+        if self.datas.nextEvent.hour == 6:
+            endEvent = self.datas.nextEvent + timedelta(hours=3)
+        elif self.datas.nextEvent.hour == 20:
+            endEvent = self.datas.nextEvent + timedelta(hours=4)
+
+        #set pre-heat starttime
+        preHeatStart = self.datas.nextEvent - timedelta(minutes=self.config['preHeatDelay'])
+
+        #set post-heat end time
+
+        postHeatEnd = self.datas.nextEvent + timedelta(minutes=self.config['postHeatDelay'])
+
+        for property in self.properties:
+            if self.get_property(property) == 'ActiveEvent':
+                self.get_property(property).set_RO_Value(property, self.get_property(property).is_active(self.datas.nextEvent, endEvent))
+            elif self.get_property(property) == 'PreHeatEvent':
+                self.get_property(property).set_RO_Value(property, self.get_property(property).is_active(preHeatStart, self.datas.nextEvent))
+            elif self.get_property(property) == 'PostHeatEvent':
+                self.get_property(property).set_RO_VAlue(property, self.get_property(property).is_active(endEvent, postHeatEnd))
+
+
+    def data_changed(self):
+        """
+        test if HQ data have changed or not
+        
+        return -- bool
+        """
+
+        if self.datas.lastSync and self.new_datas.lastSync and (self.datas.lastSync < self.new_datas.lastSync):
+            #if have a previous last sync and new sync and new sync is newer
+            return True
+        
+        else:
+            return False
+
 
     def init_propertys(self):
         """
@@ -142,6 +185,8 @@ class hq_Device(Device):
         datas = hq_Datas
         if self._webuser._hydro_client._session:
             datas.lastSync = datetime.now()
+        else:
+            datas.lastSync = None
         await self._webuser.get_info()
         customer = self._webuser.get_customer(self.config['customer'])
         account = customer.get_account(self.config['account'])
