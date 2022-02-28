@@ -46,9 +46,6 @@ class hq_Device(Device):
             log_level = None
         self.config = config
         self.datas = hq_Datas
-        self.datas.lastSync = None
-        self.datas.nextEvent = None
-        self.datas.credit = 0
         self.new_datas = hq_Datas
         self._type.append('BinarySensor')
         self.description = 'Hydro Quebec Winter Credit Event 1'#not sure where it'S used
@@ -136,7 +133,7 @@ class hq_Device(Device):
             return True
         
         else:
-            return False
+            return True
 
 
     def init_propertys(self):
