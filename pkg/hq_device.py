@@ -82,15 +82,15 @@ class hq_Device(Device):
             for property in self.properties:
                 print("checking property: {0}".format(property))
                 print(type(property))
-                if self.get_property(property) == 'LastSync':
+                if property == 'LastSync':
                     if self.adapter.verbose:
                         print("setting value for: {0}".format(property))
                     self.get_property(property).set_RO_Value(property, self.datas.lastSync)
-                elif self.get_property(property) == 'NextEvent':
+                elif property == 'NextEvent':
                     if self.adapter.verbose:
                         print("setting value for: {0}".format(property))
                     self.get_property(property).set_RO_Value(property, self.datas.nextEvent)
-                elif self.get_property(property == 'CreditEarned'):
+                elif property == 'CreditEarned':
                     if self.adapter.verbose:
                         print("setting value for: {0}".format(property))
                     self.get_property(property).set_RO_Value(property, self.datas.credit)
@@ -141,7 +141,7 @@ class hq_Device(Device):
             return True
         
         else:
-            return True
+            return False
 
 
     def init_propertys(self):
