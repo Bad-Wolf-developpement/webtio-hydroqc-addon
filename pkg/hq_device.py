@@ -59,7 +59,7 @@ class hq_Device(Device):
         self.update_hq_datas()
         self.update_calculated_property()
 
-        print(self.properties)
+        print(self.get_property())
         
 
     def pull_data(self):
