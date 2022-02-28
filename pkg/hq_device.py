@@ -84,15 +84,15 @@ class hq_Device(Device):
                 if property == 'LastSync':
                     if self.adapter.verbose:
                         print("setting value for: {0}".format(property))
-                    self.get_property(property).set_RO_Value(property, self.datas.lastSync)#THIS COMMAND DIDN'T WORK MUST LOOK OUT WHO TO GET PROPERTY AS THING AND CALL METHODS
+                    self.find_property(property).set_RO_Value(property, self.datas.lastSync)#THIS COMMAND DIDN'T WORK MUST LOOK OUT WHO TO GET PROPERTY AS THING AND CALL METHODS
                 elif property == 'NextEvent':
                     if self.adapter.verbose:
                         print("setting value for: {0}".format(property))
-                    self.get_property(property).set_RO_Value(property, self.datas.nextEvent)
+                    self.find_property(property).set_RO_Value(property, self.datas.nextEvent)
                 elif property == 'CreditEarned':
                     if self.adapter.verbose:
                         print("setting value for: {0}".format(property))
-                    self.get_property(property).set_RO_Value(property, self.datas.credit)
+                    self.find_property(property).set_RO_Value(property, self.datas.credit)
 
     def update_calculated_property(self):
         """
@@ -120,12 +120,12 @@ class hq_Device(Device):
             postHeatEnd = self.datas.nextEvent + timedelta(minutes=self.dbConfig['postHeatDelay'])
 
         for property in self.properties:
-            if self.get_property(property) == 'ActiveEvent':
-                self.get_property(property).set_RO_Value(property, self.get_property(property).is_active(self.datas.nextEvent, endEvent))
-            elif self.get_property(property) == 'PreHeatEvent':
-                self.get_property(property).set_RO_Value(property, self.get_property(property).is_active(preHeatStart, self.datas.nextEvent))
-            elif self.get_property(property) == 'PostHeatEvent':
-                self.get_property(property).set_RO_VAlue(property, self.get_property(property).is_active(endEvent, postHeatEnd))
+            if property == 'ActiveEvent':
+                self.find_property(property).set_RO_Value(property, self.find_property(property).is_active(self.datas.nextEvent, endEvent))
+            elif property == 'PreHeatEvent':
+                self.find_property(property).set_RO_Value(property, self.find_property(property).is_active(preHeatStart, self.datas.nextEvent))
+            elif property == 'PostHeatEvent':
+                self.find_property(property).set_RO_Value(property, self.find_property(property).is_active(endEvent, postHeatEnd))
 
 
     def data_changed(self):
