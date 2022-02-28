@@ -59,7 +59,6 @@ class hq_Device(Device):
         self.update_hq_datas()
         self.update_calculated_property()
 
-        print(self.get_property('ActiveEvent'))
         
 
     def pull_data(self):
@@ -76,6 +75,7 @@ class hq_Device(Device):
         if self.data_changed():
             self.datas = self.new_datas
             for property in self.properties:
+                print("checking property: {0}".format(property))
                 if self.get_property(property) == 'LastSync':
                     self.get_property(property).set_RO_Value(property, self.datas.lastSync)
                 elif self.get_property(property) == 'NextEvent':
