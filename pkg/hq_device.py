@@ -55,7 +55,9 @@ class hq_Device(Device):
 
         self.pull_data()#get initial data
         self.init_propertys()#initialize property
+        self.update_hq_datas()
         self.update_calculated_property()
+        
 
     def pull_data(self):
         """
