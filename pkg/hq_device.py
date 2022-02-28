@@ -83,7 +83,9 @@ class hq_Device(Device):
         """
         
         #Set end of event
-        if self.datas.nextEvent.hour == 6:
+        if self.datas.nextEvent is None:
+            endEvent = None
+        elif self.datas.nextEvent.hour == 6:
             endEvent = self.datas.nextEvent + timedelta(hours=3)
         elif self.datas.nextEvent.hour == 20:
             endEvent = self.datas.nextEvent + timedelta(hours=4)
