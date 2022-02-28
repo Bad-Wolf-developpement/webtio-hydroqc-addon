@@ -141,7 +141,7 @@ class hq_Device(Device):
             return True
         
         else:
-            return False
+            return True
 
 
     def init_propertys(self):
