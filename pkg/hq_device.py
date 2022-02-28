@@ -94,11 +94,16 @@ class hq_Device(Device):
             endEvent = self.datas.nextEvent + timedelta(hours=4)
 
         #set pre-heat starttime
-        preHeatStart = self.datas.nextEvent - timedelta(minutes=self.dbConfig['preHeatDelay'])
+        if self.datas.nextEvent is None:
+            preHeatStart = None
+        else:
+            preHeatStart = self.datas.nextEvent - timedelta(minutes=self.dbConfig['preHeatDelay'])
 
         #set post-heat end time
-
-        postHeatEnd = self.datas.nextEvent + timedelta(minutes=self.dbConfig['postHeatDelay'])
+        if self.datas.nextEvent is None:
+            postHeatEnd = None
+        else:
+            postHeatEnd = self.datas.nextEvent + timedelta(minutes=self.dbConfig['postHeatDelay'])
 
         for property in self.properties:
             if self.get_property(property) == 'ActiveEvent':
