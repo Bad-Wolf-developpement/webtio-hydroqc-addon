@@ -1,6 +1,7 @@
 """ Data class for configuration data"""
 from dataclasses import dataclass
 from datetime import datetime
+from types import NoneType
 
 @dataclass
 class hq_Datas:
