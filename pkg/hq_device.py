@@ -58,7 +58,7 @@ class hq_Device(Device):
         self.init_propertys()#initialize property
         print(self.adapter.verbose)
         self.update_hq_datas()
-        #self.update_calculated_property()
+        self.update_calculated_property()
 
         
 
