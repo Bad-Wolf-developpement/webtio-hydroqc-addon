@@ -81,6 +81,7 @@ class hq_Device(Device):
             self.datas = self.new_datas
             for property in self.properties:
                 print("checking property: {0}".format(property))
+                print(type(property))
                 if self.get_property(property) == 'LastSync':
                     if self.adapter.verbose:
                         print("setting value for: {0}".format(property))
