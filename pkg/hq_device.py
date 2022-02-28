@@ -54,10 +54,7 @@ class hq_Device(Device):
 
         self.pull_data()#get initial data
         self.init_propertys()#initialize property
-        self.load_property_value()
-        print(self.datas.lastSync)
-        print(self.datas.nextEvent)
-        print(self.datas.credit)
+        self.update_calculated_property()
 
     def pull_data(self):
         """
