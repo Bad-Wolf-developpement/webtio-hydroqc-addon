@@ -37,7 +37,6 @@ class hq_Device(Device):
         #TODO:
         # -long loop feature to update date from HQ few time a day
         # -small loop feature to check time few time a min to for bool activation
-        # -BE SURE THAT VALUE OF EVENT IS SET TO FALSE AND NOT NONE
         
         #setting the log level
         if self.adapter.verbose:
@@ -54,13 +53,10 @@ class hq_Device(Device):
         self.name = _id
         self.dbConfig = self.adapter.config
 
-        #self.pull_data()#get initial data
         self.init_propertys()#initialize property
         print(self.adapter.verbose)
         self.update_hq_datas()
-        self.update_calculated_property()
-
-        
+        self.update_calculated_property()        
 
     def pull_data(self):
         """
@@ -84,7 +80,7 @@ class hq_Device(Device):
                 if property == 'LastSync':
                     if self.adapter.verbose:
                         print("setting value for: {0}".format(property))
-                    self.find_property(property).set_RO_Value(property, self.datas.lastSync)#THIS COMMAND DIDN'T WORK MUST LOOK OUT WHO TO GET PROPERTY AS THING AND CALL METHODS
+                    self.find_property(property).set_RO_Value(property, self.datas.lastSync)
                 elif property == 'NextEvent':
                     if self.adapter.verbose:
                         print("setting value for: {0}".format(property))
@@ -142,7 +138,6 @@ class hq_Device(Device):
         
         else:
             return True
-
 
     def init_propertys(self):
         """
