@@ -56,25 +56,26 @@ class hq_Device(Device):
 
         self.init_propertys()#initialize property
         print(self.adapter.verbose)
-        self.update_hq_datas()
-        self.update_calculated_property()
+        #self.update_hq_datas()
+       # self.update_calculated_property()
 
         #starting small loop
-        small_loop = threading.Thread(target=self.small_loop, args=(_POLL_INTERVAL,))
-        small_loop.daemon = True
-        small_loop.start()
+        #small_loop = threading.Thread(target=self.small_loop, args=(_POLL_INTERVAL,))
+        #small_loop.daemon = True
+        #small_loop.start()
 
         #starting big loop
         #big_loop = threading.Thread(target=self.big_loop, args=(int(self.dbConfig['sync_frequency'])))
         #big_loop.daemon = True
         #big_loop.start()
-        loop=asyncio.new_event_loop()
-        loop.create_task(self.big_loop(10))
-        loop.run_forever()
+        self.loop=asyncio.new_event_loop()
+        self.loop.create_task(self.big_loop(10))
+        self.loop.run_forever()
         #asyncio.run_  (self.big_loop(10))
 
+        asyncio.ensure_future(self.update_calculated_property(), loop=self.loop)
 
-    def small_loop(self, wait_time):
+    async def small_loop(self, wait_time):
         """
         small loop to update data every X time(for frequent update)
         """
@@ -98,7 +99,7 @@ class hq_Device(Device):
         """
         get initial data from hq server
         """
-        asyncio.ensure_future(self.async_run([self._webuser.get_info, self.get_data]))
+        asyncio.ensure_future(self.async_run([self._webuser.get_info, self.get_data]), loop=self.loop)
     
     def update_hq_datas(self):
         """
