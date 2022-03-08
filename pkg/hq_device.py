@@ -68,7 +68,10 @@ class hq_Device(Device):
         #big_loop = threading.Thread(target=self.big_loop, args=(int(self.dbConfig['sync_frequency'])))
         #big_loop.daemon = True
         #big_loop.start()
-        asyncio.run(self.big_loop(10))
+        loop=asyncio.get_event_loop()
+        loop.create_task(self.big_loop(10))
+        loop.run_forever()
+        #asyncio.run_  (self.big_loop(10))
 
 
     def small_loop(self, wait_time):
