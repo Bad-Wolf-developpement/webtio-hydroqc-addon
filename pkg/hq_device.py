@@ -60,12 +60,12 @@ class hq_Device(Device):
         self.update_calculated_property()
 
         #starting small loop
-        small_loop = threading.Thread(target=self.small_loop, args=(self, _POLL_INTERVAL,))
+        small_loop = threading.Thread(target=self.small_loop, args=(_POLL_INTERVAL,))
         small_loop.daemon = True
         small_loop.start()
 
         #starting big loop
-        big_loop = threading.Thread(target=self.big_loop, args=(self, self.dbConfig['sync_frequency']))
+        big_loop = threading.Thread(target=self.big_loop, args=(int(self.dbConfig['sync_frequency'])))
         big_loop.daemon = True
         big_loop.start()
 
