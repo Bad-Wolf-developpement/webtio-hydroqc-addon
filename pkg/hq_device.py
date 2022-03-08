@@ -85,18 +85,19 @@ class hq_Device(Device):
         """"
         big loop to update data every x time(for data who update few time a day only)
         """
-        
+        loop = asyncio.new_event_loop()
+
         while True:
             if self.adapter.verbose:
                 print("Updating Hq Datas")
             sleep(wait_time)
-            asyncio.set_event_loop(asyncio.new_event_loop())
             self.update_hq_datas()
 
     def pull_data(self):
         """
         get initial data from hq server
         """
+        asyncio.get_event_loop()
         asyncio.run(self.async_run([self._webuser.get_info, self.get_data]))
     
     def update_hq_datas(self):
