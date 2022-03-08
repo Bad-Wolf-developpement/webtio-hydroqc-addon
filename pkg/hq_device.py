@@ -65,10 +65,10 @@ class hq_Device(Device):
         small_loop.start()
 
         #starting big loop
-        big_loop = threading.Thread(target=self.big_loop, args=(int(self.dbConfig['sync_frequency'])))
-        big_loop.daemon = True
-        big_loop.start()
-
+        #big_loop = threading.Thread(target=self.big_loop, args=(int(self.dbConfig['sync_frequency'])))
+        #big_loop.daemon = True
+        #big_loop.start()
+        self.big_loop(10)
 
 
     def small_loop(self, wait_time):
@@ -85,11 +85,12 @@ class hq_Device(Device):
         """"
         big loop to update data every x time(for data who update few time a day only)
         """
-        asyncio.set_event_loop(asyncio.new_event_loop())
+        
         while True:
             if self.adapter.verbose:
                 print("Updating Hq Datas")
             sleep(wait_time)
+            asyncio.set_event_loop(asyncio.new_event_loop())
             self.update_hq_datas()
 
     def pull_data(self):
