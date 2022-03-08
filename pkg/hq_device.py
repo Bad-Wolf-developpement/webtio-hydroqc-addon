@@ -98,7 +98,7 @@ class hq_Device(Device):
         """
         get initial data from hq server
         """
-        asyncio.run(self.async_run([self._webuser.get_info, self.get_data]))
+        asyncio.ensure_future(self.async_run([self._webuser.get_info, self.get_data]))
     
     def update_hq_datas(self):
         """
