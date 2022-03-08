@@ -85,7 +85,7 @@ class hq_Device(Device):
         """"
         big loop to update data every x time(for data who update few time a day only)
         """
-        asyncio.new_event_loop()
+        asyncio.set_event_loop(asyncio.new_event_loop())
         while True:
             if self.adapter.verbose:
                 print("Updating Hq Datas")
