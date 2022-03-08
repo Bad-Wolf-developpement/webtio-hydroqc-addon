@@ -2,7 +2,7 @@
 from distutils.debug import DEBUG
 import functools
 from tempfile import TemporaryFile
-from time import time
+from time import time, sleep
 from gateway_addon import Device
 from hydroqc.webuser import WebUser
 import hydroqc.error as HQerror
@@ -10,10 +10,11 @@ from pkg.hq_data_class import hq_Datas
 import asyncio
 from datetime import datetime, timedelta
 from pkg.hq_property import *
+import threading
 
 #TODO: work with loop asyncio
 
-#_POLL_INTERVAL = 5 #interval to check if data changed
+_POLL_INTERVAL = 30 #interval to check if data changed
 print = functools.partial(print, flush=True)#allow direct print to log of gateway
 
 class hq_Device(Device):
@@ -56,7 +57,39 @@ class hq_Device(Device):
         self.init_propertys()#initialize property
         print(self.adapter.verbose)
         self.update_hq_datas()
-        self.update_calculated_property()        
+        self.update_calculated_property()
+
+        #starting small loop
+        small_loop = threading.Thread(target=self.small_loop, args=(self, _POLL_INTERVAL,))
+        small_loop.daemon = True
+        small_loop.start()
+
+        #starting big loop
+        big_loop = threading.Thread(target=self.big_loop, args=(self, self.dbConfig['sync_frequency']))
+        big_loop.daemon = True
+        big_loop.start()
+
+
+
+    def small_loop(self, wait_time):
+        """
+        small loop to update data every X time(for frequent update)
+        """
+        while True:
+            if self.adapter.verbose:
+                print("Updating Calculated property")
+            sleep(wait_time)
+            self.update_calculated_property()
+
+    def big_loop(self, wait_time):
+        """"
+        big loop to update data every x time(for data who update few time a day only)
+        """
+        while True:
+            if self.adapter.verbose:
+                print("Updating Hq Datas")
+            sleep(wait_time)
+            self.update_hq_datas()
 
     def pull_data(self):
         """
