@@ -94,11 +94,12 @@ class hq_Adapter(Adapter):
         while True:
             print("Small Loop")
             print(self.get_devices())
-            if not self.get_devices() is None:
-                pass
-            for device in self.get_devices():
-                device[1].update_calculated_property()
-                print(device[1].as_dict())
+            devices = self.get_devices
+            # if not self.get_devices():
+            #     pass
+            for device in devices:
+                devices[device].update_calculated_property()
+                print(devices[device].as_dict())
             time.sleep(30)#TODO: update with var instead
             
 
