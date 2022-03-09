@@ -47,7 +47,6 @@ class hq_bool_ro_property(hqProperty):
        super().__init__(device, name)
 
     def set_RO_Value(self, propName, value: bool):
-        print("update on {0} to {1}".format(propName, value))
         super().set_RO_Value(propName, value)
 
     def is_active(self, startDate, endDate):
@@ -62,13 +61,10 @@ class hq_bool_ro_property(hqProperty):
         now = datetime.now()
 
         if now is None or startDate is None or endDate is None:
-            print("bool False")
             return False
         elif now > startDate and now < endDate:
-            print("bool true")
             return True
         else:
-            print("bool false")
             return False
 
 class hq_float_ro_property(hqProperty):
@@ -100,7 +96,6 @@ class hq_datetime_ro_property(hqProperty):
 
         value -- value of the property, must be datetime
         """
-        print("setting property")
         #if datetime is none enter an empty date and time
         if value is None:
             value = "00/00/0000\n00:00:00"
