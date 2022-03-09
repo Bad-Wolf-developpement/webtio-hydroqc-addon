@@ -142,7 +142,7 @@ class hq_Device(Device):
         #active event property
         activeEvent = hq_bool_ro_property(self, 'Active Event')
         self.properties['ActiveEvent'] = activeEvent
-        #activeEvent.set_RO_Value('ActiveEvent', False)
+        activeEvent.set_RO_Value('ActiveEvent', False)
 
         #pre-heat property
         preHeatEvent = hq_bool_ro_property(self, 'Pre-Heat Event')
