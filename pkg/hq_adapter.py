@@ -36,7 +36,7 @@ class hq_Adapter(Adapter):
 
         self.pairing=False
         self.start_pairing(_TIMEOUT)
-        asyncio.run(self.async_main())
+        self.async_main()
 
     def start_pairing(self, timeout):
         """Start pairing process"""
@@ -74,20 +74,20 @@ class hq_Adapter(Adapter):
 
         return configs
 
-    async def async_main(self):
+    def async_main(self):
         """main async loop"""
         #small_loop = asyncio.create_task(self.small_loop())
         #big_loop = asyncio.create_task(self.big_loop())
 
-        small_loop = asyncio.new_event_loop()
-        t = Thread(target=self.start_loop, args=(small_loop,))
-        t.start
+        # small_loop = asyncio.new_event_loop()
+        # t = Thread(target=self.start_loop, args=(small_loop,))
+        # t.start
 
         big_loop = asyncio.new_event_loop()
         t = Thread(target=self.start_loop, args=(big_loop,))
         t.start
 
-        asyncio.run_coroutine_threadsafe(self.small_loop(), small_loop)
+        #asyncio.run_coroutine_threadsafe(self.small_loop(), small_loop)
         asyncio.run_coroutine_threadsafe(self.big_loop(), big_loop)
 
     async def small_loop(self):
