@@ -5,6 +5,7 @@ import functools
 from gateway_addon import Adapter, Database
 import time
 import asyncio
+from threading import Thread
 
 from pkg.hq_device import hq_Device
 
@@ -78,8 +79,11 @@ class hq_Adapter(Adapter):
         #small_loop = asyncio.create_task(self.small_loop())
         #big_loop = asyncio.create_task(self.big_loop())
 
-        asyncio.run_coroutine_threadsafe(self.small_loop(), asyncio.get_event_loop())
-        asyncio.run_coroutine_threadsafe(self.big_loop(), asyncio.get_event_loop())
+        new_loop = asyncio.new_event_loop()
+        t = Thread(target=self.start_loop, args=(new_loop,))
+        t.start
+        asyncio.run_coroutine_threadsafe(self.small_loop(), new_loop)
+        asyncio.run_coroutine_threadsafe(self.big_loop(), new_loop)
 
     async def small_loop(self):
         """
@@ -92,6 +96,10 @@ class hq_Adapter(Adapter):
                 device = self.get_device(device)
                 device.update_calculated_property()
             time.sleep(30)#TODO: update with var instead
+
+    def start_loop(self, loop):
+        asyncio.set_event_loop(loop)
+        loop.run_forever()
     
     async def big_loop(self):
         """
