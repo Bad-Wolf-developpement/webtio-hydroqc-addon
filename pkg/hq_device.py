@@ -110,7 +110,7 @@ class hq_Device(Device):
             postHeatEnd = None
         else:
             postHeatEnd = self.datas.nextEvent + timedelta(minutes=self.dbConfig['postHeatDelay'])
-
+        print(self.properties)
         for property in self.properties:
             if property == 'ActiveEvent':
                 self.find_property(property).set_RO_Value(property, self.find_property(property).is_active(self.datas.nextEvent, endEvent))
@@ -142,7 +142,7 @@ class hq_Device(Device):
         #active event property
         activeEvent = hq_bool_ro_property(self, 'Active Event')
         self.properties['ActiveEvent'] = activeEvent
-        activeEvent.set_RO_Value('ActiveEvent', False)
+        #activeEvent.set_RO_Value('ActiveEvent', False)
 
         #pre-heat property
         preHeatEvent = hq_bool_ro_property(self, 'Pre-Heat Event')
