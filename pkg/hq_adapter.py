@@ -102,8 +102,8 @@ class hq_Adapter(Adapter):
                 pass
             for device in self.get_devices():
                 device = self.get_device(device)
-                device.init_session()
-                device.get_data()
+                await device.init_session()
+                await device.get_data()
                 device.update_hq_datas()
                 device.close()
             time.sleep(10)
