@@ -96,8 +96,9 @@ class hq_datetime_ro_property(hqProperty):
 
         value -- value of the property, must be datetime
         """
+        print("setting property")
         #if datetime is none enter an empty date and time
-        if value is None or value is "00/00/0000\n00:00:00":
+        if value is None:
             value = "00/00/0000\n00:00:00"
         else:
             value = value.strftime("%d/%m/%Y\n %H:%M:%S")#TODO:Verify if isoformat could replace strftime
