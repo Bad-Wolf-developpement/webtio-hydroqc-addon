@@ -85,6 +85,7 @@ class hq_Adapter(Adapter):
         """
         """
         while True:
+            print("Small Loop")
             if not self.get_devices():
                 pass
             for device in self.get_devices():
@@ -96,6 +97,7 @@ class hq_Adapter(Adapter):
         """
         """
         while True:
+            print("Big Loop")
             if not self.get_devices():
                 pass
             for device in self.get_devices():
