@@ -65,7 +65,7 @@ class hq_bool_ro_property(hqProperty):
         elif now > startDate and now < endDate:
             return True
         else:
-            return True
+            return False
 
 class hq_float_ro_property(hqProperty):
     """int property, read only"""
