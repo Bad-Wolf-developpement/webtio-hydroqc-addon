@@ -58,46 +58,7 @@ class hq_Device(Device):
         
         #self.update_hq_datas()
         #self.update_calculated_property()
-
-        #starting small loop
-        #small_loop = threading.Thread(target=self.small_loop, args=(_POLL_INTERVAL,))
-        #small_loop.daemon = True
-        #small_loop.start()
-
-        #TODO: this loop didn'T work due to the asyncio
-        #starting big loop
-        #big_loop = threading.Thread(target=self.big_loop, args=(int(self.dbConfig['sync_frequency'])))
-        #big_loop.daemon = True
-        #big_loop.start()
-        
-
-    
-    # def small_loop(self, wait_time):
-    #     """
-    #     small loop to update data every X time(for frequent update)
-    #     """
-    #     while True:
-    #         if self.adapter.verbose:
-    #             print("Updating Calculated property")
-    #         sleep(wait_time)
-    #         self.update_calculated_property()
-
-    # def big_loop(self, wait_time):
-    #     """"
-    #     big loop to update data every x time(for data who update few time a day only)
-    #     """
-    #     while True:
-    #         if self.adapter.verbose:
-    #             print("Updating Hq Datas")
-    #         sleep(wait_time)
-    #         self.update_hq_datas()
-
-    # def pull_data(self):
-    #     """
-    #     get initial data from hq server
-    #     """
-    #     asyncio.run(self.async_run([self._webuser.get_info, self.get_data]))
-    
+            
     def update_hq_datas(self):
         """
         update datas if changed
