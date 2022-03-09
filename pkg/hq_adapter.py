@@ -83,21 +83,22 @@ class hq_Adapter(Adapter):
 
         big_loop = asyncio.new_event_loop()
         t = Thread(target=self.start_loop, args=(big_loop,))
-        t.start()
+        #t.start()
 
         asyncio.run_coroutine_threadsafe(self.small_loop(), small_loop)
-        asyncio.run_coroutine_threadsafe(self.big_loop(), big_loop)
+       # asyncio.run_coroutine_threadsafe(self.big_loop(), big_loop)
 
     async def small_loop(self):
         """
         """
         while True:
             print("Small Loop")
+            print(self.get_devices())
             if not self.get_devices():
                 pass
             for device in self.get_devices():
                 self.get_device(device).update_calculated_property()
-            print(device.as_dict())
+                print(device.as_dict())
             time.sleep(30)#TODO: update with var instead
             
 
