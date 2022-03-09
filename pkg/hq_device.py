@@ -101,8 +101,8 @@ class hq_Device(Device):
     def update_hq_datas(self):
         """
         update datas if changed
-        """
-        self.pull_data()
+        """       
+         
         if self.adapter.verbose:
             print("updating hq datas")
             print("Old Datas: {0}".format(self.datas.lastSync))
