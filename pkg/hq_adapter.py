@@ -97,7 +97,8 @@ class hq_Adapter(Adapter):
             # if not self.get_devices():
             #     pass
             for device in self.get_devices():
-                print(device)
+                updatedDevice = self.get_device(device)
+                print(updatedDevice)
                 #devices[device].update_calculated_property()
             time.sleep(30)#TODO: update with var instead
             
