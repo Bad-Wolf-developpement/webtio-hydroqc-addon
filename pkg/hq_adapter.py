@@ -78,8 +78,8 @@ class hq_Adapter(Adapter):
         #small_loop = asyncio.create_task(self.small_loop())
         #big_loop = asyncio.create_task(self.big_loop())
 
-        asyncio.run_coroutine_threadsafe(self.small_loop())
-        asyncio.run_coroutine_threadsafe(self.big_loop())
+        asyncio.run_coroutine_threadsafe(self.small_loop(), asyncio.get_event_loop())
+        asyncio.run_coroutine_threadsafe(self.big_loop(), asyncio.get_event_loop())
 
     async def small_loop(self):
         """
