@@ -36,7 +36,8 @@ class hq_Adapter(Adapter):
 
         self.pairing=False
         self.start_pairing(_TIMEOUT)
-        self.async_main()
+        print(self.get_device('hydroqc-maison').get_property('ActiveEvent'))
+        #self.async_main()
 
     def start_pairing(self, timeout):
         """Start pairing process"""
