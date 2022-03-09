@@ -71,7 +71,6 @@ class hq_Device(Device):
         if self.data_changed():
             self.datas = self.new_datas
             for property in self.properties:
-                print("checking property: {0}".format(property))
                 if property == 'LastSync':
                     if self.adapter.verbose:
                         value = self.new_datas.lastSync
@@ -143,7 +142,7 @@ class hq_Device(Device):
         #active event property
         activeEvent = hq_bool_ro_property(self, 'Active Event')
         self.properties['ActiveEvent'] = activeEvent
-        #activeEvent.set_RO_Value('ActiveEvent', False)
+        activeEvent.set_RO_Value('ActiveEvent', False)
 
         #pre-heat property
         preHeatEvent = hq_bool_ro_property(self, 'Pre-Heat Event')
