@@ -76,18 +76,16 @@ class hq_Adapter(Adapter):
 
     def async_main(self):
         """main async loop"""
-        #small_loop = asyncio.create_task(self.small_loop())
-        #big_loop = asyncio.create_task(self.big_loop())
 
-        # small_loop = asyncio.new_event_loop()
-        # t = Thread(target=self.start_loop, args=(small_loop,))
-        # t.start
-        print("starting multiple loop")
+        small_loop = asyncio.new_event_loop()
+        t = Thread(target=self.start_loop, args=(small_loop,))
+        t.start
+
         big_loop = asyncio.new_event_loop()
         t = Thread(target=self.start_loop, args=(big_loop,))
         t.start()
 
-        #asyncio.run_coroutine_threadsafe(self.small_loop(), small_loop)
+        asyncio.run_coroutine_threadsafe(self.small_loop(), small_loop)
         asyncio.run_coroutine_threadsafe(self.big_loop(), big_loop)
 
     async def small_loop(self):
@@ -120,4 +118,4 @@ class hq_Adapter(Adapter):
                 await device.get_data()
                 device.update_hq_datas()
                 device.close()
-            time.sleep(10)
+            time.sleep(30)#TODO USE VAR instead
