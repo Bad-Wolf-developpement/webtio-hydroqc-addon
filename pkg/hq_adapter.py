@@ -96,8 +96,7 @@ class hq_Adapter(Adapter):
             if not self.get_devices():
                 pass
             for device in self.get_devices():
-                device = self.get_device(device)
-                device.update_calculated_property()
+                self.get_device(device).update_calculated_property()
             time.sleep(30)#TODO: update with var instead
 
     def start_loop(self, loop):

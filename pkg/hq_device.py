@@ -92,7 +92,7 @@ class hq_Device(Device):
         """
         update property that are calculated
         """
-        
+        print("start update to bool property")
         #Set end of event
         if self.datas.nextEvent is None:
             endEvent = None
@@ -114,11 +114,15 @@ class hq_Device(Device):
             postHeatEnd = self.datas.nextEvent + timedelta(minutes=self.dbConfig['postHeatDelay'])
 
         for property in self.properties:
+            print("Browsing property")
             if property == 'ActiveEvent':
+                print("updating ActiveEvent")
                 self.find_property(property).set_RO_Value(property, self.find_property(property).is_active(self.datas.nextEvent, endEvent))
             elif property == 'PreHeatEvent':
                 self.find_property(property).set_RO_Value(property, self.find_property(property).is_active(preHeatStart, self.datas.nextEvent))
+                print("updating pre heatEvent")
             elif property == 'PostHeatEvent':
+                print("updating post heat Event")
                 self.find_property(property).set_RO_Value(property, self.find_property(property).is_active(endEvent, postHeatEnd))
 
 
