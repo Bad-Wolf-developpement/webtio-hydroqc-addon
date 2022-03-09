@@ -88,6 +88,7 @@ class hq_Adapter(Adapter):
             if not self.get_devices():
                 pass
             for device in self.get_devices():
+                device = self.get_device(device)
                 device.update_calculated_property()
             time.sleep(30)#TODO: update with var instead
     
@@ -98,6 +99,7 @@ class hq_Adapter(Adapter):
             if not self.get_devices():
                 pass
             for device in self.get_devices():
+                device = self.get_device(device)
                 device.init_session()
                 device.get_data()
                 device.update_hq_datas()
