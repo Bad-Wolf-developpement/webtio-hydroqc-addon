@@ -82,7 +82,7 @@ class hq_Adapter(Adapter):
         # small_loop = asyncio.new_event_loop()
         # t = Thread(target=self.start_loop, args=(small_loop,))
         # t.start
-
+        print("starting multiple loop")
         big_loop = asyncio.new_event_loop()
         t = Thread(target=self.start_loop, args=(big_loop,))
         t.start
@@ -103,6 +103,7 @@ class hq_Adapter(Adapter):
             time.sleep(30)#TODO: update with var instead
 
     def start_loop(self, loop):
+        print("start loop")
         asyncio.set_event_loop(loop)
         loop.run_forever()
     
