@@ -1,5 +1,6 @@
 """adapter for webthings gateway"""
 
+from cgitb import small
 import functools
 from gateway_addon import Adapter, Database
 import time
@@ -18,7 +19,7 @@ class hq_Adapter(Adapter):
     Adapter for the HQ program
     """
 
-    def __init__(self, verbose):
+    def __init__(self, verbose=False):
         """Initialize the object"""
         self.name = self.__class__.__name__
         self.verbose = verbose
@@ -34,6 +35,7 @@ class hq_Adapter(Adapter):
 
         self.pairing=False
         self.start_pairing(_TIMEOUT)
+        asyncio.run(self.async_main())
 
     def start_pairing(self, timeout):
         """Start pairing process"""
@@ -45,7 +47,6 @@ class hq_Adapter(Adapter):
         for contract in self.config['contracts']:
             device = hq_Device(self, "hydroqc-{0}".format(contract['name']), contract)
             self.handle_device_added(device)
-
         print("Start Pairing")#DEBUG
 
         time.sleep(timeout)
@@ -72,6 +73,33 @@ class hq_Adapter(Adapter):
 
         return configs
 
-    #TODO:
-    #handle_device_saved TO BUILD
-    #remove_thing
+    async def async_main(self):
+        """main async loop"""
+        small_loop = asyncio.create_task(self.small_loop())
+        big_loop = asyncio.create_task(self.big_loop())
+
+        await small_loop
+        await big_loop
+
+    async def small_loop(self):
+        """
+        """
+        while True:
+            if not self.get_devices():
+                pass
+            for device in self.get_devices():
+                device.update_calculated_property()
+            time.sleep(30)#TODO: update with var instead
+    
+    async def big_loop(self):
+        """
+        """
+        while True:
+            if not self.get_devices():
+                pass
+            for device in self.get_devices():
+                device.init_session()
+                device.get_data()
+                device.update_hq_datas()
+                device.close()
+            time.sleep(10)
