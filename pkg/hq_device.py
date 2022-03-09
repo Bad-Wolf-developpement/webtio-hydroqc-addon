@@ -112,6 +112,7 @@ class hq_Device(Device):
             postHeatEnd = self.datas.nextEvent + timedelta(minutes=self.dbConfig['postHeatDelay'])
         print(self.properties)
         for property in self.properties:
+            print(property)
             print(self.get_property(property))
             if property == 'ActiveEvent':
                 self.find_property(property).set_RO_Value(property, self.find_property(property).is_active(self.datas.nextEvent, endEvent))

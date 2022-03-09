@@ -93,9 +93,8 @@ class hq_Adapter(Adapter):
         """
         while True:
             print("Small Loop")
-            print(self.get_devices())
-            # if not self.get_devices():
-            #     pass
+            if not self.get_devices():
+                pass
             for device in self.get_devices():
                 updatedDevice = self.get_device(device)
                 updatedDevice.update_calculated_property()
