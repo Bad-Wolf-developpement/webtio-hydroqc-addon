@@ -43,9 +43,9 @@ class hq_Device(Device):
             log_level = None
         self.config = config
         self.datas = hq_Datas
-        self.datas.lastSync = "00/00/0000\n00:00:00"#TODO: use a check to see if exist before"
-        self.datas.nextEvent = "00/00/0000\n00:00:00"
-        self.datas.credit = 0
+        self.datas.lastSync = None#TODO: use a check to see if exist before"
+        self.datas.nextEvent = None
+        self.datas.credit = None
         self.new_datas = hq_Datas
         self._type.append('BinarySensor')
         self.description = 'Hydro Quebec Winter Credit Event 1'#not sure where it'S used
