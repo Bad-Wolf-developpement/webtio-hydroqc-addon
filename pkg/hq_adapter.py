@@ -36,10 +36,10 @@ class hq_Adapter(Adapter):
 
         self.pairing=False
         self.start_pairing(_TIMEOUT)
-        print(self.get_device('hydroqc-maison').find_property('ActiveEvent').set_cached_value_and_notify(True))
+        #print(self.get_device('hydroqc-maison').find_property('ActiveEvent').set_cached_value_and_notify(True))
         time.sleep(5)
-        self.get_device('hydroqc-maison').notify_property_changed(self.get_device('hydroqc-maison').find_property('ActiveEvent'))
-        print("notified")
+        #self.get_device('hydroqc-maison').notify_property_changed(self.get_device('hydroqc-maison').find_property('ActiveEvent'))
+        #print("notified")
         #self.async_main()
 
     def start_pairing(self, timeout):

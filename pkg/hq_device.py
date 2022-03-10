@@ -30,7 +30,6 @@ class hq_Device(Device):
         #TODO:
         #-fix error: 2022-02-24 18:47:22.972 ERROR  : Error getting thing description for thing with id hydroqc-garage: Error: Unable to find thing with id: hydroqc-garage
         #at /home/node/webthings/gateway/build/webpack:/src/models/things.js:268:1 when we delete the device
-        #-fix error : Failed to get property ActiveEvent: getProperty: device: hydroqc-maison not found.
 
         #TODO:
         # -long loop feature to update date from HQ few time a day
@@ -57,7 +56,7 @@ class hq_Device(Device):
         self.init_propertys()#initialize property
         
         #self.update_hq_datas()
-        #self.update_calculated_property()
+        self.update_calculated_property()
             
     def update_hq_datas(self):
         """
