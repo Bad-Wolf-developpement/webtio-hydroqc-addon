@@ -36,7 +36,7 @@ class hq_Adapter(Adapter):
 
         self.pairing=False
         self.start_pairing(_TIMEOUT)
-        #self.async_main()
+        self.async_main()
 
     def start_pairing(self, timeout):
         """Start pairing process"""
@@ -97,9 +97,8 @@ class hq_Adapter(Adapter):
                 pass
             for device in self.get_devices():
                 updatedDevice = self.get_device(device)
-                updatedDevice.test("small")
-            time.sleep(10)#TODO: update with var instead
-            
+                updatedDevice.update_calculated_property()
+            asyncio.sleep(10)#TODO: update with var instead            
 
     def start_loop(self, loop):
         print("start loop")
