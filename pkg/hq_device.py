@@ -8,6 +8,8 @@ import hydroqc.error as HQerror
 from pkg.hq_data_class import hq_Datas
 from datetime import datetime, timedelta
 from pkg.hq_property import *
+from threading import Thread
+import asyncio
 
 #TODO: work with loop asyncio
 
@@ -56,7 +58,22 @@ class hq_Device(Device):
         self.init_propertys()#initialize property
         
         #self.update_hq_datas()
-        self.update_calculated_property()
+        #self.update_calculated_property()
+        self.async_main()
+
+    def async_main(self):
+        """main async loop"""
+
+        small_loop = asyncio.new_event_loop()
+        t = Thread(target=self.start_loop, args=(small_loop,))
+        t.start()
+
+        big_loop = asyncio.new_event_loop()
+        t = Thread(target=self.start_loop, args=(big_loop,))
+        #t.start()
+
+        asyncio.run_coroutine_threadsafe(self.adapter.small_loop(), small_loop)
+       # asyncio.run_coroutine_threadsafe(self.big_loop(), big_loop)
             
     def update_hq_datas(self):
         """
