@@ -60,7 +60,7 @@ class hq_Device(Device):
         #self.update_hq_datas()
         #self.update_calculated_property()
         #self.async_main()
-        t = Thread(target=self.small_loop)
+        t = Thread(target=self.poll)
         t.daemon=True
         t.start()
         
@@ -82,7 +82,7 @@ class hq_Device(Device):
     #     #asyncio.run_coroutine_threadsafe(self.small_loop(), small_loop)
     #    # asyncio.run_coroutine_threadsafe(self.big_loop(), big_loop)
 
-    def small_loop(self):
+    def poll(self):
         """
         """
         i = 0
