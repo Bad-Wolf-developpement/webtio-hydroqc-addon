@@ -33,6 +33,7 @@ class hqProperty(Property):
 
         prop = self.device.find_property(propName)
         prop.set_cached_value_and_notify(value)
+        
 
 class hq_bool_ro_property(hqProperty):
     """Boolean Property Read Only"""
@@ -66,6 +67,9 @@ class hq_bool_ro_property(hqProperty):
             return True
         else:
             return False
+    
+    def update(self, newValue):
+        self.set_RO_Value(self.name, newValue)
 
 class hq_float_ro_property(hqProperty):
     """int property, read only"""

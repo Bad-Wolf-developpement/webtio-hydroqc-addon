@@ -145,12 +145,11 @@ class hq_Device(Device):
 
         for property in self.properties:
             if property == 'ActiveEvent':
-                self.find_property(property).set_RO_Value(property, self.find_property(property).is_active(self.datas.nextEvent, endEvent))
-                self.notify_property_changed(self.find_property(property))
-            elif property == 'PreHeatEvent':
-                self.find_property(property).set_RO_Value(property, self.find_property(property).is_active(preHeatStart, self.datas.nextEvent))
-            elif property == 'PostHeatEvent':
-                self.find_property(property).set_RO_Value(property, self.find_property(property).is_active(endEvent, postHeatEnd))
+                self.find_property(property).update(self.find_property(property).is_active(self.datas.nextEvent, endEvent))
+            # elif property == 'PreHeatEvent':
+            #     self.find_property(property).set_RO_Value(property, self.find_property(property).is_active(preHeatStart, self.datas.nextEvent))
+            # elif property == 'PostHeatEvent':
+            #     self.find_property(property).set_RO_Value(property, self.find_property(property).is_active(endEvent, postHeatEnd))
 
     def data_changed(self):
         """
