@@ -62,7 +62,7 @@ class hq_Device(Device):
         #self.async_main()
         t = Thread(target=self.poll)
         t.daemon=True
-        t.start()
+        #t.start()
         
         #self.small_loop()#NOT WORKING, BLOCKING
         #print("from dev")
