@@ -56,6 +56,9 @@ class hq_Device(Device):
         self.init_propertys()#initialize property
         
         #self.update_hq_datas()
+        #self.update_calculated_property()
+
+    def test(self):
         self.update_calculated_property()
             
     def update_hq_datas(self):
