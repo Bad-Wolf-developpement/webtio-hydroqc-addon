@@ -39,6 +39,9 @@ class hqProperty(Property):
         self.set_cached_value(newValue)
         self.device.notify_property_changed(self)
         print("property vlaue {}".format(self.value))
+        print("prop as dict {}".format(self.as_dict()))
+        print("dev id : {}".format(self.device.id))
+        print("adapt id {}".format(self.device.adapter.id))
 
         
 
