@@ -60,6 +60,7 @@ class hq_Device(Device):
 
     def test(self):
         self.update_calculated_property()
+        self.update_hq_datas()
             
     def update_hq_datas(self):
         """
