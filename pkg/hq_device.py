@@ -67,6 +67,7 @@ class hq_Device(Device):
         #self.small_loop()#NOT WORKING, BLOCKING
         #print("from dev")
         self.find_property('ActiveEvent').update(False)#WORKING
+        print("from dev: {}".format(self.adapter.manager_proxy.plugin_id))
 
     # def async_main(self):
     #     """main async loop"""
