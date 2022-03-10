@@ -65,7 +65,7 @@ class hq_Device(Device):
         """main async loop"""
 
         small_loop = asyncio.new_event_loop()
-        t = Thread(target=self.start_loop, args=(small_loop,))
+        t = Thread(target=self.adapter.start_loop, args=(small_loop,))
         t.start()
 
         big_loop = asyncio.new_event_loop()
