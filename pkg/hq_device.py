@@ -60,7 +60,9 @@ class hq_Device(Device):
         #self.update_hq_datas()
         #self.update_calculated_property()
         #self.async_main()
-        self.small_loop()
+        t = Thread(target=self.small_loop)
+        t.daemon=True
+        t.start()
 
     # def async_main(self):
     #     """main async loop"""
