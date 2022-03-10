@@ -97,6 +97,7 @@ class hq_Device(Device):
         """
         update property that are calculated
         """
+        print("update calculated")
         #Set end of event
         if self.datas.nextEvent is None:
             endEvent = None
