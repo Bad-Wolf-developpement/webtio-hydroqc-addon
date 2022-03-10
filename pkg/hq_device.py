@@ -72,8 +72,16 @@ class hq_Device(Device):
         t = Thread(target=self.start_loop, args=(big_loop,))
         #t.start()
 
-        asyncio.run_coroutine_threadsafe(self.adapter.small_loop(), small_loop)
+        asyncio.run_coroutine_threadsafe(self.small_loop(), small_loop)
        # asyncio.run_coroutine_threadsafe(self.big_loop(), big_loop)
+
+    async def small_loop(self):
+        """
+        """
+        while True:
+            print("Small Loop")
+            self.update_calculated_property()
+            time.sleep(10)#TODO: update with var instead 
 
     def start_loop(self, loop):
         print("start loop")
