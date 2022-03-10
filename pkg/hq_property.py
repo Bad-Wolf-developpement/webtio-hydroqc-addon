@@ -38,7 +38,7 @@ class hqProperty(Property):
         print("newValue {}".format(newValue))
         self.set_cached_value(newValue)
         self.device.notify_property_changed(self)
-        print("property vlaue {}".format(self.value)
+        print("property vlaue {}".format(self.value))
 
         
 
