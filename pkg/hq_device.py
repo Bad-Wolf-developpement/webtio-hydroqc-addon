@@ -54,11 +54,9 @@ class hq_Device(Device):
         self.dbConfig = self.adapter.config
 
         self.init_propertys()#initialize property
-
-        print("from device{0}".format(self))
         
         #self.update_hq_datas()
-        #self.update_calculated_property()
+        self.update_calculated_property()
             
     def update_hq_datas(self):
         """
