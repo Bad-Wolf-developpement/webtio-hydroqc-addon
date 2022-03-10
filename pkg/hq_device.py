@@ -65,7 +65,8 @@ class hq_Device(Device):
         t.start()
         
         #self.small_loop()#NOT WORKING, BLOCKING
-        #self.find_property('ActiveEvent').update(True)#WORKING
+        print("from dev")
+        self.find_property('ActiveEvent').update(True)#WORKING
 
     # def async_main(self):
     #     """main async loop"""
