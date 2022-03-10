@@ -2,6 +2,7 @@
 
 from gateway_addon import Property
 from datetime import datetime
+from gateway_addon.constants import MessageType
 
 
 class hqProperty(Property):
@@ -37,13 +38,13 @@ class hqProperty(Property):
     def update(self, newValue):
         print("newValue {}".format(newValue))
         self.set_cached_value(newValue)
-        self.device.notify_property_changed(self)
-        print("property vlaue {}".format(self.value))
-        print("prop as dict {}".format(self.as_dict()))
-        print("dev id : {}".format(self.device.id))
-        print("adapt id {}".format(self.device.adapter.id))
-
-        
+        #self.device.notify_property_changed(self)
+        self.device.adapter.manager_proxy.send(MessageType.DEVICE_PROPERTY_CHANGED_NOTIFICATION, {
+            'adapterId': self.device.adapter.id,
+            'deviceId': self.device.id,
+            'property': self.as_dict(),
+        })
+                
 
 class hq_bool_ro_property(hqProperty):
     """Boolean Property Read Only"""

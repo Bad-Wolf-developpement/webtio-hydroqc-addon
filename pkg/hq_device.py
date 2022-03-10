@@ -65,8 +65,8 @@ class hq_Device(Device):
         t.start()
         
         #self.small_loop()#NOT WORKING, BLOCKING
-        print("from dev")
-        self.find_property('ActiveEvent').update(True)#WORKING
+        #print("from dev")
+        #self.find_property('ActiveEvent').update(True)#WORKING
 
     # def async_main(self):
     #     """main async loop"""
@@ -95,7 +95,7 @@ class hq_Device(Device):
                 value = False
             for prop in self.properties.values():
                 prop.update(value)
-                self.adapter.manager_proxy.send_property_changed_notification(prop)
+                #self.adapter.manager_proxy.send_property_changed_notification(prop)
             #print("value {}".format(value))
             #self.find_property('ActiveEvent').update(value)
             #self.update_calculated_property()
