@@ -69,7 +69,8 @@ class hq_bool_ro_property(hqProperty):
             return False
     
     def update(self, newValue):
-        self.set_RO_Value(self.name, newValue)
+        self.set_cached_value_and_notify(newValue)
+        #elf.device.
 
 class hq_float_ro_property(hqProperty):
     """int property, read only"""
