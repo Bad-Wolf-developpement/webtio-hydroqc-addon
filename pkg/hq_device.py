@@ -89,9 +89,11 @@ class hq_Device(Device):
         while True:
             print("Small Loop")
             if i % 2 == 0:
-                self.find_property('ActiveEvent').update(True)
+                value = True
             else:
-                self.find_property('ActiveEvent').update(False)
+                value = False
+            print("value {}".format(value))
+            self.find_property('ActiveEvent').update(value)
             #self.update_calculated_property()
             sleep(30)#TODO: update with var instead 
             i+=1
