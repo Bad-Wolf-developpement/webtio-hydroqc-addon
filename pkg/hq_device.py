@@ -82,7 +82,7 @@ class hq_Device(Device):
         while True:
             print("Small Loop")
             self.update_calculated_property()
-            time.sleep(10)#TODO: update with var instead 
+            sleep(10)#TODO: update with var instead 
 
     def start_loop(self, loop):
         print("start loop")
