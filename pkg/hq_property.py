@@ -69,6 +69,7 @@ class hq_bool_ro_property(hqProperty):
             return False
     
     def update(self, newValue):
+        print("newValue {}".format(newValue))
         self.set_cached_value(newValue)
         self.device.notify_property_changed(self)
 
