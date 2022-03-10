@@ -57,13 +57,6 @@ class hq_Device(Device):
         
         #self.update_hq_datas()
         #self.update_calculated_property()
-
-    def test(self, func):
-        if func == "small":
-            print("Small")
-            self.update_calculated_property()
-        elif func == "big":
-            self.update_hq_datas()
             
     def update_hq_datas(self):
         """
@@ -126,7 +119,6 @@ class hq_Device(Device):
                 self.find_property(property).set_RO_Value(property, self.find_property(property).is_active(preHeatStart, self.datas.nextEvent))
             elif property == 'PostHeatEvent':
                 self.find_property(property).set_RO_Value(property, self.find_property(property).is_active(endEvent, postHeatEnd))
-
 
     def data_changed(self):
         """
