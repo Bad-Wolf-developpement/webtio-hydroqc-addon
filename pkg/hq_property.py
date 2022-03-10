@@ -37,14 +37,9 @@ class hqProperty(Property):
 
     def update(self, newValue):
         print("newValue {}".format(newValue))
-        print("from ^prop: {}".format(self.device.adapter.manager_proxy.plugin_id))
+  
         self.set_cached_value(newValue)
-        #self.device.notify_property_changed(self)
-        self.device.adapter.manager_proxy.send(MessageType.DEVICE_PROPERTY_CHANGED_NOTIFICATION, {
-            'adapterId': self.device.adapter.id,
-            'deviceId': self.device.id,
-            'property': self.as_dict(),
-        })
+        self.device.notify_property_changed(self)
                 
 
 class hq_bool_ro_property(hqProperty):
