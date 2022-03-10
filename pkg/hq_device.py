@@ -93,9 +93,9 @@ class hq_Device(Device):
             else:
                 value = False
             for prop in self.properties.values():
-                print(prop)
-            print("value {}".format(value))
-            self.find_property('ActiveEvent').update(value)
+                prop.update(value)
+            #print("value {}".format(value))
+            #self.find_property('ActiveEvent').update(value)
             #self.update_calculated_property()
             sleep(30)#TODO: update with var instead 
             i+=1
