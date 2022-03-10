@@ -58,9 +58,11 @@ class hq_Device(Device):
         #self.update_hq_datas()
         #self.update_calculated_property()
 
-    def test(self):
-        self.update_calculated_property()
-        self.update_hq_datas()
+    def test(self, func):
+        if func == "small":
+            self.update_calculated_property()
+        elif func == "big":
+            self.update_hq_datas()
             
     def update_hq_datas(self):
         """

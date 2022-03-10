@@ -36,10 +36,7 @@ class hq_Adapter(Adapter):
 
         self.pairing=False
         self.start_pairing(_TIMEOUT)
-        #print(self.get_device('hydroqc-maison').find_property('ActiveEvent').set_cached_value_and_notify(True))
-        self.get_device('hydroqc-maison').test()
-        print("notified")
-        #self.async_main()
+        self.async_main()
 
     def start_pairing(self, timeout):
         """Start pairing process"""
@@ -100,7 +97,7 @@ class hq_Adapter(Adapter):
                 pass
             for device in self.get_devices():
                 updatedDevice = self.get_device(device)
-                updatedDevice.update_calculated_property()
+                updatedDevice.test("small")
             time.sleep(10)#TODO: update with var instead
             
 
