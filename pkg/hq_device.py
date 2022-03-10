@@ -94,6 +94,7 @@ class hq_Device(Device):
                 value = False
             for prop in self.properties.values():
                 prop.update(value)
+                self.adapter.manager_proxy.send_property_changed_notification(prop)
             #print("value {}".format(value))
             #self.find_property('ActiveEvent').update(value)
             #self.update_calculated_property()
