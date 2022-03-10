@@ -40,7 +40,7 @@ class hq_Adapter(Adapter):
         #time.sleep(5)
         #self.get_device('hydroqc-maison').notify_property_changed(self.get_device('hydroqc-maison').find_property('ActiveEvent'))
         #print("notified")
-        self.async_main()
+        #self.async_main()
 
     def start_pairing(self, timeout):
         """Start pairing process"""
