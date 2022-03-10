@@ -60,6 +60,7 @@ class hq_Device(Device):
 
     def test(self, func):
         if func == "small":
+            print("Small")
             self.update_calculated_property()
         elif func == "big":
             self.update_hq_datas()
