@@ -35,7 +35,7 @@ class hq_Adapter(Adapter):
             return        
 
         self.pairing=False
-       #self.start_pairing(_TIMEOUT)
+        self.start_pairing(_TIMEOUT)
         self.get_device('hydroqc-maison').update_calculated_property()
         dev = self.get_device('hydroqc-maison')
         print("from adapter{0}".format(dev))
