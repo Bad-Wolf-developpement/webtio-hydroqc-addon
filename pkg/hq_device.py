@@ -62,7 +62,8 @@ class hq_Device(Device):
         #self.async_main()
         t = Thread(target=self.small_loop)
         t.daemon=True
-        t.start()
+        #t.start()
+        self.find_property('ActiveEvent').update(True)
 
     # def async_main(self):
     #     """main async loop"""
