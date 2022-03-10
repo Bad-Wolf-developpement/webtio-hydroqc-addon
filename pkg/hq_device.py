@@ -59,8 +59,8 @@ class hq_Device(Device):
         
         #self.update_hq_datas()
         #self.update_calculated_property()
-        self.async_main()
-        #self.small_loop()
+        #self.async_main()
+        self.small_loop()
 
     def async_main(self):
         """main async loop"""
