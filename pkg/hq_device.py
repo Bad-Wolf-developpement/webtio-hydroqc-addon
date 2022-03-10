@@ -67,6 +67,7 @@ class hq_Device(Device):
 
         small_loop = asyncio.new_event_loop()
         t = Thread(target=self.small_loop)
+        t.daemon=True
         t.start()
 
         big_loop = asyncio.new_event_loop()
