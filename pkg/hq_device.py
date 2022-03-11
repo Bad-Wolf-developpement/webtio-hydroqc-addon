@@ -64,7 +64,8 @@ class hq_Device(Device):
             print("updating hq datas")
             print("Old Datas: {0}".format(self.datas.lastSync))
             print("New Datas: {0}".format(self.new_datas.lastSync))
-        if self.data_changed():
+        #if self.data_changed():
+        if True:
             self.datas = self.new_datas
             for property in self.properties:
                 if property == 'LastSync':
@@ -202,7 +203,6 @@ class hq_Device(Device):
         contract = account.get_contract(self.config['contract'])
         wc = contract.winter_credit
         await wc.refresh_data()
-        print("poulet")
         datas.credit = float(wc.raw_data['montantEffaceProjete'])
         datas.nextEvent = wc.next_critical_peak
         self.new_datas = datas
