@@ -39,7 +39,7 @@ class hq_Device(Device):
         if self.adapter.verbose:
             log_level = "DEBUG"
         else:
-            log_level = "NOTSET"
+            log_level = "CRITICAL"
         self.config = config
         self.datas = hq_Datas
         self.datas.lastSync = None#TODO: use a check to see if exist before"
