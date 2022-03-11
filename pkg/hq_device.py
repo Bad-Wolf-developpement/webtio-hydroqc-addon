@@ -117,10 +117,10 @@ class hq_Device(Device):
             #if have a previous last sync and new sync and new sync is newer
             print("True")
             return True
-        elif self.datas.lastSync is None and not self.new_datas.lastSync is None:
-            #If we don'T have old data but we have new     
-            print("True")
-            return True
+        # elif self.datas.lastSync is None and not self.new_datas.lastSync is None:
+        #     #If we don'T have old data but we have new     
+        #     print("True")
+        #     return True
         else:
             print("False")
             return False
