@@ -113,14 +113,15 @@ class hq_Device(Device):
         """
         #TODO: DEBBUGING THIS SECTION, IT SHOW FALSE ALWAYS, TEMPORARY PUT BOTH ON TRUE
         print("testing if data change")
-        if (not self.datas.lastSync is None or not self.new_datas.lastSync is None) and (self.datas.lastSync < self.new_datas.lastSync):
+        if self.datas.lastSync is None and not self.new_datas.lastSync is None:
+            #If we don'T have old data but we have new     
+            print("True")
+            return True
+
+        elif (not self.datas.lastSync is None or not self.new_datas.lastSync is None) and (self.datas.lastSync < self.new_datas.lastSync):
             #if have a previous last sync and new sync and new sync is newer
             print("True")
             return True
-        # elif self.datas.lastSync is None and not self.new_datas.lastSync is None:
-        #     #If we don'T have old data but we have new     
-        #     print("True")
-        #     return True
         else:
             print("False")
             return False
