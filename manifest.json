@@ -3,8 +3,8 @@
     "id": "webtio-hydroqc-addon",
     "name": "Hydro Quebec Winter Credit program",
     "short_name": "webtio-hydroqc-addon",
-    "version" : "0.0",
-    "description": "Port of the hydro2mqtt software to be able to create ruiles for Hydro-Quebec Winter credit program",
+    "version" : "0.1",
+    "description": "Hydro-Quebec winter credit program adapter",
     "homepage_url": "https://github.com/Bad-Wolf-developpement/webtio-hydroqc-addon",
     "license": "MIT",
     "author": "Arist0v",
@@ -18,7 +18,7 @@
         "default":{
             "preHeatDelay": 30,
             "postHeatDelay": 30,
-            "sync_frequency": 600,
+            "sync_frequency": 14400,
             "contracts": []
         },
         "schema":{
