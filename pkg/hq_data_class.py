@@ -9,3 +9,4 @@ class hq_Datas:
     nextEvent: datetime
     credit: float
     #eventTable#TODO: create a table to store multiple next event and not just one
+    
