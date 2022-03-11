@@ -31,9 +31,9 @@ class hq_Device(Device):
             log_level = "WARNING"
         self.config = config
         self.datas = hq_Datas()
-        self.datas.lastSync = None#TODO: can we move this in an init for data_Class
-        self.datas.nextEvent = None
-        self.datas.credit = None
+        #self.datas.lastSync = None#TODO: can we move this in an init for data_Class
+        #self.datas.nextEvent = None
+        #self.datas.credit = None
         self.new_datas = hq_Datas()
         self._type.append('BinarySensor')
         self.description = 'Hydro Quebec Winter Credit Event 1'#not sure where it'S used in gui
@@ -55,7 +55,7 @@ class hq_Device(Device):
             print("New Datas: {0}".format(self.new_datas.lastSync))
         if self.data_changed():
             #TODO: don't call set_RO if value is same
-            #self.datas = self.new_datas
+            self.datas = self.new_datas
             for property in self.properties:
                 if property == 'LastSync':
                     value = self.new_datas.lastSync

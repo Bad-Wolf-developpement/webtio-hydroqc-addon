@@ -10,3 +10,8 @@ class hq_Datas:
     credit: float
     #eventTable#TODO: create a table to store multiple next event and not just one
     
+    def __init__(self):
+        self.lastSync = None
+        self.nextEvent = None
+        self.credit = None
+        
