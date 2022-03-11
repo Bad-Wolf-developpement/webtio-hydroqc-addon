@@ -30,11 +30,11 @@ class hq_Device(Device):
         else:
             log_level = "WARNING"
         self.config = config
-        self.datas = hq_Datas
+        self.datas = hq_Datas()
         self.datas.lastSync = None#TODO: can we move this in an init for data_Class
         self.datas.nextEvent = None
         self.datas.credit = None
-        self.new_datas = hq_Datas
+        self.new_datas = hq_Datas()
         self._type.append('BinarySensor')
         self.description = 'Hydro Quebec Winter Credit Event 1'#not sure where it'S used in gui
         self.title = _id#This appear in the text bar when adding the device and is the default name of the device
