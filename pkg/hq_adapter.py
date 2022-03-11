@@ -36,7 +36,7 @@ class hq_Adapter(Adapter):
 
         self.pairing=False
         self.start_pairing(_TIMEOUT)
-        #self.async_main()
+        self.async_main()
 
     def start_pairing(self, timeout):
         """Start pairing process"""
