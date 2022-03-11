@@ -114,12 +114,13 @@ class hq_Device(Device):
         """
         #TODO: DEBBUGING THIS SECTION, IT SHOW FALSE ALWAYS, TEMPORARY PUT BOTH ON TRUE
 
-        if not self.datas.lastSync is None and not self.new_datas.lastSync is None and (self.datas.lastSync < self.new_datas.lastSync):
+        if (not self.datas.lastSync is None or not self.new_datas.lastSync is None) and (self.datas.lastSync < self.new_datas.lastSync):
             #if have a previous last sync and new sync and new sync is newer
-            return True
-        
+            print("True")
+            return True        
         else:
-            return True
+            print("False")
+            return False
 
     def init_properties(self):
         """
