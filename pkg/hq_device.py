@@ -111,18 +111,11 @@ class hq_Device(Device):
         return -- bool
         """
         #TODO: DEBBUGING THIS SECTION, IT SHOW FALSE ALWAYS, TEMPORARY PUT BOTH ON TRUE
-        #if self.adapter.verbose:
-        if True:
-            print("Old last Sync : {0}".format(self.datas.lastSync))
-            print("New last Sync : {0}".format(self.new_datas.lastSync))
 
-            print("Old ID: {0}".format(id(self.datas)))
-            print("New ID: {0}".format(id(self.new_datas)))
         if (not self.datas.lastSync is None or not self.new_datas.lastSync is None) and (self.datas.lastSync < self.new_datas.lastSync):
             #if have a previous last sync and new sync and new sync is newer
             print("True")
             return True
-
         elif self.datas.lastSync is None and not self.new_datas.lastSync is None:
             print("True")
             return True#If we don'T have old data but we have new     
