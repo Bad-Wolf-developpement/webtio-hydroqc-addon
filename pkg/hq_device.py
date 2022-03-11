@@ -41,7 +41,7 @@ class hq_Device(Device):
 
         self.init_properties()#initialize properties
             
-    async def update_hq_datas(self):
+    def update_hq_datas(self):
         """
         update datas if changed
         """       
@@ -111,7 +111,7 @@ class hq_Device(Device):
         return -- bool
         """
         #TODO: DEBBUGING THIS SECTION, IT SHOW FALSE ALWAYS, TEMPORARY PUT BOTH ON TRUE
-
+        print("testing if data change")
         if (not self.datas.lastSync is None or not self.new_datas.lastSync is None) and (self.datas.lastSync < self.new_datas.lastSync):
             #if have a previous last sync and new sync and new sync is newer
             print("True")
