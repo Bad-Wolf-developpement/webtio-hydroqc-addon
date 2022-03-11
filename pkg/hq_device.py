@@ -21,9 +21,7 @@ class hq_Device(Device):
         _id -- ID of this device
         config -- contract settings
         """
-
         Device.__init__(self, adapter, _id,)
-        
         #setting the log level
         if self.adapter.verbose:
             log_level = "DEBUG"
@@ -38,15 +36,13 @@ class hq_Device(Device):
         self._webuser = WebUser(config['username'], config['password'],False, log_level=log_level,  http_log_level=log_level)
         self.name = _id
         self.dbConfig = self.adapter.config
-
         self.init_properties()#initialize properties
         self.data_changed()
             
     def update_hq_datas(self):
         """
         update datas if changed
-        """       
-         
+        """         
         if self.adapter.verbose:
             print("updating hq datas")
             print("Old Datas: {0}".format(self.datas.lastSync))
@@ -98,7 +94,6 @@ class hq_Device(Device):
             postHeatEnd = None
         else:
             postHeatEnd = self.datas.nextEvent + timedelta(minutes=self.dbConfig['postHeatDelay'])
-
         for property in self.properties:
             if property == 'ActiveEvent':
                 self.find_property(property).set_RO_Value(property,self.find_property(property).is_active(self.datas.nextEvent, endEvent))
