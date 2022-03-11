@@ -1,6 +1,5 @@
 """adapter for webthings gateway"""
 
-from cgitb import small
 import functools
 from gateway_addon import Adapter, Database
 import time
@@ -9,8 +8,6 @@ from threading import Thread
 
 from pkg.hq_device import hq_Device
 
-#root_folder = os.path.abspath(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-#sys.path.append(root_folder)#get access to import from parent folder
 print = functools.partial(print, flush=True)#allow direct print to log of gateway
 
 _TIMEOUT = 3 
@@ -30,7 +27,8 @@ class hq_Adapter(Adapter):
         super().__init__(_id, package_name, verbose)
 
         self.config = self.load_db_config(_id)#load config from DB
-        print(type(self.config['sync_frequency']))
+        if self.verbose:
+            print("Config : {0}".format(self.config))
 
         if not self.config:
             print("Can't load config from Database")
@@ -103,7 +101,7 @@ class hq_Adapter(Adapter):
             for device in self.get_devices():
                 updatedDevice = self.get_device(device)
                 updatedDevice.update_calculated_property()
-            time.sleep(_POLL)
+            time.sleep(30)
 
     def start_loop(self, loop):
         asyncio.set_event_loop(loop)
