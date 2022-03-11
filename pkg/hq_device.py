@@ -31,9 +31,6 @@ class hq_Device(Device):
             log_level = "WARNING"
         self.config = config
         self.datas = hq_Datas()
-        #self.datas.lastSync = None#TODO: can we move this in an init for data_Class
-        #self.datas.nextEvent = None
-        #self.datas.credit = None
         self.new_datas = hq_Datas()
         self._type.append('BinarySensor')
         self.description = 'Hydro Quebec Winter Credit Event 1'#not sure where it'S used in gui
@@ -127,6 +124,7 @@ class hq_Device(Device):
             return True
 
         elif self.datas.lastSync is None and not self.new_datas.lastSync is None:
+            print("True")
             return True#If we don'T have old data but we have new     
         else:
             print("False")
