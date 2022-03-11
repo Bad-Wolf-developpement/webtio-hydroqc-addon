@@ -22,7 +22,7 @@ find . -type f \! -name SHA256SUMS -exec shasum --algorithm 256 {} \; >> SHA256S
 cd -
 
 # Make the tarball
-TARFILE="tplink-adapter-${version}.tgz"
+TARFILE="webtio-hydroqc-addon-${version}.tgz"
 tar czf ${TARFILE} package
 
 shasum --algorithm 256 ${TARFILE} > ${TARFILE}.sha256sum
