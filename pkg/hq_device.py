@@ -9,11 +9,9 @@ from pkg.hq_data_class import hq_Datas
 from datetime import datetime, timedelta
 from pkg.hq_property import *
 from threading import Thread
-import asyncio
 
 #TODO: work with loop asyncio
 
-_POLL_INTERVAL = 30 #interval to check if data changed
 print = functools.partial(print, flush=True)#allow direct print to log of gateway
 
 class hq_Device(Device):
@@ -204,6 +202,7 @@ class hq_Device(Device):
         contract = account.get_contract(self.config['contract'])
         wc = contract.winter_credit
         await wc.refresh_data()
+        print("poulet")
         datas.credit = float(wc.raw_data['montantEffaceProjete'])
         datas.nextEvent = wc.next_critical_peak
         self.new_datas = datas
