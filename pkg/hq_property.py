@@ -36,7 +36,7 @@ class hqProperty(Property):
         prop.set_cached_value_and_notify(value)
 
     def update(self, newValue):
-        print("newValue {}".format(newValue))
+        print("prop {}".format(self.as_dict()))
   
         self.set_cached_value(newValue)
         self.device.notify_property_changed(self)
