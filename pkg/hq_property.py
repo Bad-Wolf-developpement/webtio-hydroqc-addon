@@ -31,6 +31,7 @@ class hqProperty(Property):
         propName -- property to update
         value -- value of the property
         """
+        print("prop {}".format(self.as_dict()))
 
         prop = self.device.find_property(propName)
         prop.set_cached_value_and_notify(value)

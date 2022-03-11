@@ -58,7 +58,7 @@ class hq_Device(Device):
         self.init_propertys()#initialize property
         
         #self.update_hq_datas()
-        #self.update_calculated_property()
+        self.update_calculated_property()
         #self.async_main()
         t = Thread(target=self.poll)
         t.daemon=True
@@ -135,38 +135,38 @@ class hq_Device(Device):
     #                     print("setting value for: {0} to {1}".format(property, value))
     #                 self.find_property(property).set_RO_Value(property, value)
 
-    # def update_calculated_property(self):
-    #     """
-    #     update property that are calculated
-    #     """
-    #     print("update calculated")
-    #     #Set end of event
-    #     if self.datas.nextEvent is None:
-    #         endEvent = None
-    #     elif self.datas.nextEvent.hour == 6:
-    #         endEvent = self.datas.nextEvent + timedelta(hours=3)
-    #     elif self.datas.nextEvent.hour == 20:
-    #         endEvent = self.datas.nextEvent + timedelta(hours=4)
+    def update_calculated_property(self):
+        """
+        update property that are calculated
+        """
+        print("update calculated")
+        #Set end of event
+        if self.datas.nextEvent is None:
+            endEvent = None
+        elif self.datas.nextEvent.hour == 6:
+            endEvent = self.datas.nextEvent + timedelta(hours=3)
+        elif self.datas.nextEvent.hour == 20:
+            endEvent = self.datas.nextEvent + timedelta(hours=4)
 
-    #     #set pre-heat starttime
-    #     if self.datas.nextEvent is None:
-    #         preHeatStart = None
-    #     else:
-    #         preHeatStart = self.datas.nextEvent - timedelta(minutes=self.dbConfig['preHeatDelay'])
+        #set pre-heat starttime
+        if self.datas.nextEvent is None:
+            preHeatStart = None
+        else:
+            preHeatStart = self.datas.nextEvent - timedelta(minutes=self.dbConfig['preHeatDelay'])
 
-    #     #set post-heat end time
-    #     if self.datas.nextEvent is None:
-    #         postHeatEnd = None
-    #     else:
-    #         postHeatEnd = self.datas.nextEvent + timedelta(minutes=self.dbConfig['postHeatDelay'])
+        #set post-heat end time
+        if self.datas.nextEvent is None:
+            postHeatEnd = None
+        else:
+            postHeatEnd = self.datas.nextEvent + timedelta(minutes=self.dbConfig['postHeatDelay'])
 
-    #     for property in self.properties:
-    #         if property == 'ActiveEvent':
-    #             self.find_property(property).update(self.find_property(property).is_active(self.datas.nextEvent, endEvent))
-    #         # elif property == 'PreHeatEvent':
-    #         #     self.find_property(property).set_RO_Value(property, self.find_property(property).is_active(preHeatStart, self.datas.nextEvent))
-    #         # elif property == 'PostHeatEvent':
-    #         #     self.find_property(property).set_RO_Value(property, self.find_property(property).is_active(endEvent, postHeatEnd))
+        for property in self.properties:
+            if property == 'ActiveEvent':
+                self.find_property(property).update(self.find_property(property).is_active(self.datas.nextEvent, endEvent))
+            # elif property == 'PreHeatEvent':
+            #     self.find_property(property).set_RO_Value(property, self.find_property(property).is_active(preHeatStart, self.datas.nextEvent))
+            # elif property == 'PostHeatEvent':
+            #     self.find_property(property).set_RO_Value(property, self.find_property(property).is_active(endEvent, postHeatEnd))
 
     def data_changed(self):
         """
