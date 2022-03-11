@@ -8,8 +8,6 @@ from pkg.hq_data_class import hq_Datas
 from datetime import datetime, timedelta
 from pkg.hq_property import *
 
-#TODO: work with loop asyncio
-
 print = functools.partial(print, flush=True)#allow direct print to log of gateway
 
 class hq_Device(Device):
@@ -25,9 +23,6 @@ class hq_Device(Device):
         """
 
         Device.__init__(self, adapter, _id,)
-        #TODO:
-        #-fix error: 2022-02-24 18:47:22.972 ERROR  : Error getting thing description for thing with id hydroqc-garage: Error: Unable to find thing with id: hydroqc-garage
-        #at /home/node/webthings/gateway/build/webpack:/src/models/things.js:268:1 when we delete the device
         
         #setting the log level
         if self.adapter.verbose:
@@ -41,13 +36,13 @@ class hq_Device(Device):
         self.datas.credit = None
         self.new_datas = hq_Datas
         self._type.append('BinarySensor')
-        self.description = 'Hydro Quebec Winter Credit Event 1'#not sure where it'S used
+        self.description = 'Hydro Quebec Winter Credit Event 1'#not sure where it'S used in gui
         self.title = _id#This appear in the text bar when adding the device and is the default name of the device
         self._webuser = WebUser(config['username'], config['password'],False, log_level=log_level,  http_log_level=log_level)
         self.name = _id
         self.dbConfig = self.adapter.config
 
-        self.init_propertys()#initialize property
+        self.init_properties()#initialize properties
             
     def update_hq_datas(self):
         """
@@ -91,7 +86,7 @@ class hq_Device(Device):
         elif self.datas.nextEvent.hour == 20:
             endEvent = self.datas.nextEvent + timedelta(hours=4)
 
-        #set pre-heat starttime
+        #set pre-heat start time
         if self.datas.nextEvent is None:
             preHeatStart = None
         else:
@@ -126,45 +121,39 @@ class hq_Device(Device):
         else:
             return True
 
-    def init_propertys(self):
+    def init_properties(self):
         """
-        intialize device property
+        intialize device properties
         """
         #active event property
         aeID = 'ActiveEvent'
         activeEvent = hq_bool_ro_property(self, aeID, 'Active Event')
         self.properties[aeID] = activeEvent
-        #activeEvent.set_RO_Value('ActiveEvent', False)
 
         #pre-heat property
         prheID = 'PreHeatEvent'
         preHeatEvent = hq_bool_ro_property(self, prheID, 'Pre-Heat Event')
         self.properties[prheID] = preHeatEvent
-        #preHeatEvent.set_RO_Value('PreHeatEvent', False)
 
         #post-heat property
         poeID = 'PostHeatEvent'
         postHeatEvent = hq_bool_ro_property(self, poeID, 'Post-Heat Event')
         self.properties[poeID] = postHeatEvent
-        #postHeatEvent.set_RO_Value('PostHeatEvent', False)
 
         #next event property
         neID = 'NextEvent'
         nextEvent = hq_datetime_ro_property(self, neID, 'Next Event')
         self.properties[neID] = nextEvent
-        #nextEvent.set_RO_Value('NextEvent', self.datas.nextEvent)
 
         #last sync property
         lsID = 'LastSync'
         lastSync = hq_datetime_ro_property(self, lsID, 'Last Sync')
         self.properties[lsID] = lastSync
-        #lastSync.set_RO_Value('LastSync', self.datas.lastSync)
 
         #credit total property
         cID = 'creditEarned'
         credit = hq_float_ro_property(self, cID, 'Credit Earned')
         self.properties[cID] = credit
-        #credit.set_RO_Value('creditEarned', self.datas.credit)
 
     async def init_session(self):
         """
@@ -183,9 +172,6 @@ class hq_Device(Device):
                 #if refresh didn'T work, try to login
                 print("Refreshing session failed, try to login")
                 self._webuser.login()
-        
-    async def get_user_info(self):
-        await self._webuser.get_info()
 
     async def get_data(self):
         datas = hq_Datas
