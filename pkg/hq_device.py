@@ -41,7 +41,7 @@ class hq_Device(Device):
 
         self.init_properties()#initialize properties
             
-    def update_hq_datas(self):
+    async def update_hq_datas(self):
         """
         update datas if changed
         """       
