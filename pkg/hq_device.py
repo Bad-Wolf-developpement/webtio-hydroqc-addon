@@ -54,6 +54,7 @@ class hq_Device(Device):
             print("Old Datas: {0}".format(self.datas.lastSync))
             print("New Datas: {0}".format(self.new_datas.lastSync))
         if self.data_changed():
+            #TODO: don't call set_RO if value is same
             self.datas = self.new_datas
             for property in self.properties:
                 if property == 'LastSync':
@@ -113,11 +114,15 @@ class hq_Device(Device):
         return -- bool
         """
         #TODO: DEBBUGING THIS SECTION, IT SHOW FALSE ALWAYS, TEMPORARY PUT BOTH ON TRUE
-
+        #if self.adapter.verbose:
+        if True:
+            print("Old last Sync : {0}".format(self.datas.lastSync))
+            print("New last Sync : {0}".format(self.new_datas.lastSync))
         if (not self.datas.lastSync is None or not self.new_datas.lastSync is None) and (self.datas.lastSync < self.new_datas.lastSync):
             #if have a previous last sync and new sync and new sync is newer
             print("True")
             return True
+
         elif self.datas.lastSync is None and not self.new_datas.lastSync is None:
             return True#If we don'T have old data but we have new     
         else:
