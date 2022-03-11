@@ -30,10 +30,6 @@ class hq_Device(Device):
         #TODO:
         #-fix error: 2022-02-24 18:47:22.972 ERROR  : Error getting thing description for thing with id hydroqc-garage: Error: Unable to find thing with id: hydroqc-garage
         #at /home/node/webthings/gateway/build/webpack:/src/models/things.js:268:1 when we delete the device
-
-        #TODO:
-        # -long loop feature to update date from HQ few time a day
-        # -small loop feature to check time few time a min to for bool activation
         
         #setting the log level
         if self.adapter.verbose:
