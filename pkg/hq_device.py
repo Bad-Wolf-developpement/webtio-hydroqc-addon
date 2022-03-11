@@ -182,20 +182,20 @@ class hq_Device(Device):
                 self._webuser.login()
 
     async def get_data(self):
-        datas = hq_Datas
+        tempDatas = hq_Datas
         if self._webuser._hydro_client._session:
-            datas.lastSync = datetime.now()
+            tempDatas.lastSync = datetime.now()
         else:
-            datas.lastSync = None
+            tempDatas.lastSync = None
         await self._webuser.get_info()
         customer = self._webuser.get_customer(self.config['customer'])
         account = customer.get_account(self.config['account'])
         contract = account.get_contract(self.config['contract'])
         wc = contract.winter_credit
         await wc.refresh_data()
-        datas.credit = float(wc.raw_data['montantEffaceProjete'])
-        datas.nextEvent = wc.next_critical_peak
-        self.new_datas = datas
+        tempDatas.credit = float(wc.raw_data['montantEffaceProjete'])
+        tempDatas.nextEvent = wc.next_critical_peak
+        self.new_datas = tempDatas
         
     async def close(self):
         await self._webuser.close_session()
