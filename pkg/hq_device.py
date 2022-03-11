@@ -40,6 +40,7 @@ class hq_Device(Device):
         self.dbConfig = self.adapter.config
 
         self.init_properties()#initialize properties
+        self.data_changed()
             
     def update_hq_datas(self):
         """
