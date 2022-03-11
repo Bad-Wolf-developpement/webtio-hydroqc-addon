@@ -101,7 +101,7 @@ class hq_Adapter(Adapter):
             for device in self.get_devices():
                 updatedDevice = self.get_device(device)
                 updatedDevice.update_calculated_property()
-            time.sleep(30)
+            time.sleep(_POLL)
 
     def start_loop(self, loop):
         asyncio.set_event_loop(loop)
@@ -121,4 +121,5 @@ class hq_Adapter(Adapter):
                 await device.get_data()
                 device.update_hq_datas()
                 device.close()
-            time.sleep(self.config['sync_frequency'])
+            time.sleep(60)
+            #time.sleep(self.config['sync_frequency'])
