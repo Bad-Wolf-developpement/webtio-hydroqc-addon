@@ -64,23 +64,22 @@ class hq_Device(Device):
             print("updating hq datas")
             print("Old Datas: {0}".format(self.datas.lastSync))
             print("New Datas: {0}".format(self.new_datas.lastSync))
-        #if self.data_changed():
-        if True:
+        if self.data_changed():
             self.datas = self.new_datas
             for property in self.properties:
                 if property == 'LastSync':
+                    value = self.new_datas.lastSync
                     if self.adapter.verbose:
-                        value = self.new_datas.lastSync
                         print("setting value for: {0} to {1}".format(property, value))
                     self.find_property(property).set_RO_Value(property, value)
                 elif property == 'NextEvent':
+                    value = self.new_datas.nextEvent
                     if self.adapter.verbose:
-                        value = self.new_datas.nextEvent
                         print("setting value for: {0} to {1}".format(property, value))
                     self.find_property(property).set_RO_Value(property, value)
                 elif property == 'creditEarned':
+                    value = self.new_datas.credit
                     if self.adapter.verbose:
-                        value = self.new_datas.credit
                         print("setting value for: {0} to {1}".format(property, value))
                     self.find_property(property).set_RO_Value(property, value)
 
