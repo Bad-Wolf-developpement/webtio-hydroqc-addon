@@ -100,22 +100,4 @@ class hq_datetime_ro_property(hqProperty):
         else:
             value = value.strftime("%d/%m/%Y\n %H:%M:%S")#TODO:Verify if isoformat could replace strftime
         super().set_RO_Value(propName, value)
-
-# #Those class will be disabled since property will only be keep in add-on settings page for now
-# class hq_minute_rw_property(hqProperty):
-#     """"""Number property, read and write""""""
-
-#     def __init__(self, device, name):
-#         """"""
-#         Initialize the object
         
-#         name -- name of the property
-#         """"""
-
-#         self.description={'@type':'LevelProperty' ,'title': name, 'type': 'number','minimum': 0,}#description of the property
-#         super().__init__(device)
-
-#     def set_RO_Value(self, device, propName, value: int):
-#         super().set_RO_Value(device, propName, value)
-    
-

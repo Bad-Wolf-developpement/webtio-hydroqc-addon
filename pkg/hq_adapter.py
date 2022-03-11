@@ -125,3 +125,4 @@ class hq_Adapter(Adapter):
                 device.update_hq_datas()
                 device.close()
             time.sleep(self.config['sync_frequency'])
+            
