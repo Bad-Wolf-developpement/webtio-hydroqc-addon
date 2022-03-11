@@ -31,7 +31,7 @@ class hq_Device(Device):
             log_level = "WARNING"
         self.config = config
         self.datas = hq_Datas
-        self.datas.lastSync = None
+        self.datas.lastSync = None#TODO: can we move this in an init for data_Class
         self.datas.nextEvent = None
         self.datas.credit = None
         self.new_datas = hq_Datas
@@ -118,6 +118,9 @@ class hq_Device(Device):
         if True:
             print("Old last Sync : {0}".format(self.datas.lastSync))
             print("New last Sync : {0}".format(self.new_datas.lastSync))
+
+            print("Old ID: {0}".format(id(self.datas)))
+            print("New ID: {0}".format(id(self.new_datas)))
         if (not self.datas.lastSync is None or not self.new_datas.lastSync is None) and (self.datas.lastSync < self.new_datas.lastSync):
             #if have a previous last sync and new sync and new sync is newer
             print("True")
