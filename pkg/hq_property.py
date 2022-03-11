@@ -9,7 +9,7 @@ class hqProperty(Property):
     """Property type for HQdata"""
     description = None
     
-    def __init__(self, device, id, name):
+    def __init__(self, device, id):
         """
         Initialize the object
         
@@ -46,14 +46,14 @@ class hqProperty(Property):
 class hq_bool_ro_property(hqProperty):
     """Boolean Property Read Only"""
 
-    def __init__(self, device, name):
+    def __init__(self, device, id, name):
        """
        Initialize the objects
 
        name -- name of the property
        """
        self.description={'@type': 'BooleanProperty', 'title': name, 'type': 'boolean', 'readOnly' : True,}#description of the property
-       super().__init__(device, name)
+       super().__init__(device, id, name)
 
     def set_RO_Value(self, propName, value: bool):
         super().set_RO_Value(propName, value)
@@ -79,10 +79,10 @@ class hq_bool_ro_property(hqProperty):
 class hq_float_ro_property(hqProperty):
     """int property, read only"""
 
-    def __init__(self, device, name):
+    def __init__(self, device, id, name):
         
         self.description={'title': name, 'type': 'number', 'unit' : "$", 'readOnly' : True,}
-        super().__init__(device, name)
+        super().__init__(device, id, name)
 
     def set_RO_Value(self, propName, value: float):
         super().set_RO_Value(propName, value)
@@ -90,14 +90,14 @@ class hq_float_ro_property(hqProperty):
 class hq_datetime_ro_property(hqProperty):
     """datetime Property Read Only"""
 
-    def __init__(self, device, name):
+    def __init__(self, device, id, name):
         """
         Initialize the object
 
         name -- name of the property
         """
         self.description={'title': name, 'type': 'string', 'readOnly' : True,}#description of the property
-        super().__init__(device, name)    
+        super().__init__(device, id, name)    
     
     def set_RO_Value(self, propName, value: datetime):
         """
