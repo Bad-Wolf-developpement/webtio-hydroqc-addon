@@ -30,6 +30,7 @@ class hq_Adapter(Adapter):
         super().__init__(_id, package_name, verbose)
 
         self.config = self.load_db_config(_id)#load config from DB
+        print(self.config['sync_frequency'])
 
         if not self.config:
             print("Can't load config from Database")
@@ -77,6 +78,8 @@ class hq_Adapter(Adapter):
 
     def async_main(self):
         """main async loop"""
+        if self.verbose:
+            print("Starting Loops")
 
         small_loop = asyncio.new_event_loop()
         t = Thread(target=self.start_loop, args=(small_loop,))
@@ -93,7 +96,8 @@ class hq_Adapter(Adapter):
         """
         """
         while True:
-            print("Small Loop")
+            if self.verbose:
+                print("Small Loop")
             if not self.get_devices():
                 pass
             for device in self.get_devices():
@@ -102,7 +106,6 @@ class hq_Adapter(Adapter):
             time.sleep(_POLL)
 
     def start_loop(self, loop):
-        print("start loop")
         asyncio.set_event_loop(loop)
         loop.run_forever()
     
@@ -110,7 +113,8 @@ class hq_Adapter(Adapter):
         """
         """
         while True:
-            print("Big Loop")
+            if self.verbose:
+                print("Big Loop")
             if not self.get_devices():
                 pass
             for device in self.get_devices():
