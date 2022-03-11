@@ -57,21 +57,7 @@ class hq_Adapter(Adapter):
 
     def cancel_pairing(self):
         """Cancel the pairing process"""
-        self.pairing = False
-
-    def remove_thing(self, device_id):
-        """
-        Unpair a device with the adapter.
-        device_id -- ID of device to unpair
-        """
-        device = self.get_device(device_id)
-        if device:
-            if self.verbose:
-                print('Adapter:', self.name, 'id', self.id,
-                      'remove_thing(' + device.id + ')')
-
-            self.handle_device_removed(device)
-           
+        self.pairing = False           
 
     def load_db_config(self, package_name):
         """
