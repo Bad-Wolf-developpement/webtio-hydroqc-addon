@@ -211,10 +211,4 @@ class hq_Device(Device):
         
     async def close(self):
         await self._webuser.close_session()
-    
-
-
-        
-        
-
-       
+               
