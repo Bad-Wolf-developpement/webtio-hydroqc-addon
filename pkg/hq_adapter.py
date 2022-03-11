@@ -49,7 +49,7 @@ class hq_Adapter(Adapter):
             device = hq_Device(self, "hydroqc-{0}".format(contract['name']), contract)
             self.handle_device_added(device)
         if self.verbose:
-            print("Start Pairing")#DEBUG
+            print("Start Pairing")
 
         time.sleep(timeout)
 
@@ -79,7 +79,6 @@ class hq_Adapter(Adapter):
         if self.verbose:
             print("Starting Loops")
 
-        small_loop = asyncio.new_event_loop()
         t = Thread(target=self.small_loop)
         t.start()
 
@@ -87,11 +86,11 @@ class hq_Adapter(Adapter):
         t = Thread(target=self.start_loop, args=(big_loop,))
         t.start()
 
-        #asyncio.run_coroutine_threadsafe(self.small_loop(), small_loop)
         asyncio.run_coroutine_threadsafe(self.big_loop(), big_loop)
 
     def small_loop(self):
         """
+        Looping to update data needed frequently
         """
         while True:
             if self.verbose:
@@ -104,11 +103,15 @@ class hq_Adapter(Adapter):
             time.sleep(_POLL)
 
     def start_loop(self, loop):
+        """
+        start an async loop
+        """
         asyncio.set_event_loop(loop)
         loop.run_forever()
     
     async def big_loop(self):
         """
+        loop to update HQ data, 3 to 4 time a day is enough
         """
         while True:
             if self.verbose:

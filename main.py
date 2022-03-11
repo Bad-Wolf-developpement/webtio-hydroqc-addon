@@ -1,5 +1,6 @@
 """Hydro-Quebec winter power saving event"""
 
+import functools
 from os import path
 import signal
 import sys
@@ -14,7 +15,7 @@ from pkg import hq_adapter
 _DEBUG = False
 _ADAPTER = None
 
-#print = functools.partial(print, flush=True)#TODO: figure out this
+print = functools.partial(print, flush=True)
 
 
 def cleanup(signum, frame):
