@@ -13,7 +13,8 @@ from pkg.hq_device import hq_Device
 #sys.path.append(root_folder)#get access to import from parent folder
 print = functools.partial(print, flush=True)#allow direct print to log of gateway
 
-_TIMEOUT = 3   
+_TIMEOUT = 3 
+_POLL = 30  
 
 class hq_Adapter(Adapter):
     """
@@ -98,7 +99,7 @@ class hq_Adapter(Adapter):
             for device in self.get_devices():
                 updatedDevice = self.get_device(device)
                 updatedDevice.update_calculated_property()
-            time.sleep(10)#TODO: update with var instead            
+            time.sleep(_POLL)
 
     def start_loop(self, loop):
         print("start loop")
@@ -118,4 +119,4 @@ class hq_Adapter(Adapter):
                 await device.get_data()
                 device.update_hq_datas()
                 device.close()
-            time.sleep(30)#TODO USE VAR instead
+            time.sleep(self.config['sync_frequency'])
