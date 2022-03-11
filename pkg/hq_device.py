@@ -52,24 +52,26 @@ class hq_Device(Device):
             print("Old Datas: {0}".format(self.datas.lastSync))
             print("New Datas: {0}".format(self.new_datas.lastSync))
         if self.data_changed():
-            #TODO: don't call set_RO if value is same
             self.datas = self.new_datas
             for property in self.properties:
                 if property == 'LastSync':
                     value = self.new_datas.lastSync
                     if self.adapter.verbose:
                         print("setting value for: {0} to {1}".format(property, value))
-                    self.find_property(property).set_RO_Value(property, value)
+                    if not self.datas.lastSync == self.new_datas.lastSync:
+                        self.find_property(property).set_RO_Value(property, value)
                 elif property == 'NextEvent':
                     value = self.new_datas.nextEvent
                     if self.adapter.verbose:
                         print("setting value for: {0} to {1}".format(property, value))
-                    self.find_property(property).set_RO_Value(property, value)
+                    if not self.datas.nextEvent == self.new_datas.nextEvent:
+                        self.find_property(property).set_RO_Value(property, value)
                 elif property == 'creditEarned':
                     value = self.new_datas.credit
                     if self.adapter.verbose:
                         print("setting value for: {0} to {1}".format(property, value))
-                    self.find_property(property).set_RO_Value(property, value)
+                    if not self.datas.credit == self.new_datas.credit:
+                        self.find_property(property).set_RO_Value(property, value)
 
     def update_calculated_property(self):
         """
@@ -111,19 +113,15 @@ class hq_Device(Device):
         
         return -- bool
         """
-        #TODO: DEBBUGING THIS SECTION, IT SHOW FALSE ALWAYS, TEMPORARY PUT BOTH ON TRUE
-        print("testing if data change")
+        if self.adapter.verbose:
+            print("testing if data change")
         if self.datas.lastSync is None and not self.new_datas.lastSync is None:
             #If we don'T have old data but we have new     
-            print("True")
             return True
-
         elif (not self.datas.lastSync is None or not self.new_datas.lastSync is None) and (self.datas.lastSync < self.new_datas.lastSync):
             #if have a previous last sync and new sync and new sync is newer
-            print("True")
             return True
         else:
-            print("False")
             return False
 
     def init_properties(self):
