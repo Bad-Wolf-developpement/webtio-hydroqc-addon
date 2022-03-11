@@ -30,7 +30,7 @@ class hq_Adapter(Adapter):
         super().__init__(_id, package_name, verbose)
 
         self.config = self.load_db_config(_id)#load config from DB
-        print(self.config['sync_frequency'])
+        print(type(self.config['sync_frequency']))
 
         if not self.config:
             print("Can't load config from Database")
