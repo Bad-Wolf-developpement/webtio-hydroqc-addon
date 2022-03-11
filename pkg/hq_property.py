@@ -9,7 +9,7 @@ class hqProperty(Property):
     """Property type for HQdata"""
     description = None
     
-    def __init__(self, device, name):
+    def __init__(self, device, id, name):
         """
         Initialize the object
         
@@ -20,7 +20,7 @@ class hqProperty(Property):
         if self.description is None:
             raise NotImplementedError('Sublcasses must define description')
 
-        super().__init__(device, name, self.description)
+        super().__init__(device, id, self.description)
         
 
     def set_RO_Value(self, propName, value):

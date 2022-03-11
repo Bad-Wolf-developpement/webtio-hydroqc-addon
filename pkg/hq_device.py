@@ -188,33 +188,39 @@ class hq_Device(Device):
         intialize device property
         """
         #active event property
-        activeEvent = hq_bool_ro_property(self, 'Active Event')
-        self.properties['ActiveEvent'] = activeEvent
+        aeID = 'ActiveEvent'
+        activeEvent = hq_bool_ro_property(self, aeID, 'Active Event')
+        self.properties[aeID] = activeEvent
         #activeEvent.set_RO_Value('ActiveEvent', False)
 
         #pre-heat property
-        preHeatEvent = hq_bool_ro_property(self, 'Pre-Heat Event')
-        self.properties['PreHeatEvent'] = preHeatEvent
+        prheID = 'PreHeatEvent'
+        preHeatEvent = hq_bool_ro_property(self, prheID, 'Pre-Heat Event')
+        self.properties[prheID] = preHeatEvent
         #preHeatEvent.set_RO_Value('PreHeatEvent', False)
 
         #post-heat property
-        postHeatEvent = hq_bool_ro_property(self, 'Post-Heat Event')
-        self.properties['PostHeatEvent'] = postHeatEvent
+        poeID = 'PostHeatEvent'
+        postHeatEvent = hq_bool_ro_property(self, poeID, 'Post-Heat Event')
+        self.properties[poeID] = postHeatEvent
         #postHeatEvent.set_RO_Value('PostHeatEvent', False)
 
         #next event property
-        nextEvent = hq_datetime_ro_property(self, 'Next Event')
-        self.properties['NextEvent'] = nextEvent
+        neID = 'NextEvent'
+        nextEvent = hq_datetime_ro_property(self, neID, 'Next Event')
+        self.properties[neID] = nextEvent
         #nextEvent.set_RO_Value('NextEvent', self.datas.nextEvent)
 
         #last sync property
-        lastSync = hq_datetime_ro_property(self, 'Last Sync')
-        self.properties['LastSync'] = lastSync
+        lsID = 'LastSync'
+        lastSync = hq_datetime_ro_property(self, lsID, 'Last Sync')
+        self.properties[lsID] = lastSync
         #lastSync.set_RO_Value('LastSync', self.datas.lastSync)
 
         #credit total property
-        credit = hq_float_ro_property(self, 'Credit Earned')
-        self.properties['creditEarned'] = credit
+        cID = 'creditEarned'
+        credit = hq_float_ro_property(self, cID, 'Credit Earned')
+        self.properties[cID] = credit
         #credit.set_RO_Value('creditEarned', self.datas.credit)
 
     # async def async_run(self, functions):
