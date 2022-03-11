@@ -48,7 +48,8 @@ class hq_Adapter(Adapter):
         for contract in self.config['contracts']:
             device = hq_Device(self, "hydroqc-{0}".format(contract['name']), contract)
             self.handle_device_added(device)
-        print("Start Pairing")#DEBUG
+        if self.verbose:
+            print("Start Pairing")#DEBUG
 
         time.sleep(timeout)
 

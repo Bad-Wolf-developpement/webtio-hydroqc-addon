@@ -87,7 +87,8 @@ class hq_Device(Device):
         """
         update property that are calculated
         """
-        print("update calculated")
+        if self.adapter.verbose:
+            print("update calculated")
         #Set end of event
         if self.datas.nextEvent is None:
             endEvent = None
@@ -176,12 +177,14 @@ class hq_Device(Device):
         initialize hq websession
         """
         if self._webuser.session_expired:
-            print("Login")
+            if self.adapter.verbose:
+                print("Login")
             await self._webuser.login()
         else:
             try:
                 await self._webuser.refresh_session()
-                print("Refreshing session")
+                if self.adapter.verbose:
+                    print("Refreshing session")
             except HQerror.HydroQcHTTPError:
                 #if refresh didn'T work, try to login
                 print("Refreshing session failed, try to login")
