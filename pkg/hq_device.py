@@ -1,14 +1,12 @@
 """Device for hqWinterCreditAdapter"""
-from distutils.debug import DEBUG
+
 import functools
-from time import time, sleep
 from gateway_addon import Device
 from hydroqc.webuser import WebUser
 import hydroqc.error as HQerror
 from pkg.hq_data_class import hq_Datas
 from datetime import datetime, timedelta
 from pkg.hq_property import *
-from threading import Thread
 
 #TODO: work with loop asyncio
 
