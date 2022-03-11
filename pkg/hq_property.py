@@ -2,8 +2,6 @@
 
 from gateway_addon import Property
 from datetime import datetime
-from gateway_addon.constants import MessageType
-
 
 class hqProperty(Property):
     """Property type for HQdata"""
@@ -31,17 +29,8 @@ class hqProperty(Property):
         propName -- property to update
         value -- value of the property
         """
-        print("prop {}".format(self.as_dict()))
-
         prop = self.device.find_property(propName)
         prop.set_cached_value_and_notify(value)
-
-    def update(self, newValue):
-        print("prop {}".format(self.as_dict()))
-  
-        self.set_cached_value(newValue)
-        self.device.notify_property_changed(self)
-                
 
 class hq_bool_ro_property(hqProperty):
     """Boolean Property Read Only"""

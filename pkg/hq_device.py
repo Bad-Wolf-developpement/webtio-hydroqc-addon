@@ -56,84 +56,34 @@ class hq_Device(Device):
         self.dbConfig = self.adapter.config
 
         self.init_propertys()#initialize property
-        
-        #self.update_hq_datas()
-        self.update_calculated_property()
-        #self.async_main()
-        t = Thread(target=self.poll)
-        t.daemon=True
-        t.start()
-        
-        #self.small_loop()#NOT WORKING, BLOCKING
-        #print("from dev")
-        #self.find_property('ActiveEvent').update(False)#WORKING
-
-    # def async_main(self):
-    #     """main async loop"""
-
-    #     small_loop = asyncio.new_event_loop()
-    #     t = Thread(target=self.small_loop)
-    #     t.daemon=True
-    #     t.start()
-
-    #     big_loop = asyncio.new_event_loop()
-    #     t = Thread(target=self.start_loop, args=(big_loop,))
-    #     #t.start()
-
-    #     #asyncio.run_coroutine_threadsafe(self.small_loop(), small_loop)
-    #    # asyncio.run_coroutine_threadsafe(self.big_loop(), big_loop)
-
-    def poll(self):
-        """
-        """
-        i = 0
-        while True:
-            print("Small Loop")
-            if i % 2 == 0:
-                value = True
-            else:
-                value = False
-            for prop in self.properties.values():
-                prop.update(value)
-                #self.adapter.manager_proxy.send_property_changed_notification(prop)
-            #print("value {}".format(value))
-            #self.find_property('ActiveEvent').update(value)
-            #self.update_calculated_property()
-            sleep(30)#TODO: update with var instead 
-            i+=1
-
-    # def start_loop(self, loop):
-    #     print("start loop")
-    #     asyncio.set_event_loop(loop)
-    #     loop.run_forever()
             
-    # def update_hq_datas(self):
-    #     """
-    #     update datas if changed
-    #     """       
+    def update_hq_datas(self):
+        """
+        update datas if changed
+        """       
          
-    #     if self.adapter.verbose:
-    #         print("updating hq datas")
-    #         print("Old Datas: {0}".format(self.datas.lastSync))
-    #         print("New Datas: {0}".format(self.new_datas.lastSync))
-    #     if self.data_changed():
-    #         self.datas = self.new_datas
-    #         for property in self.properties:
-    #             if property == 'LastSync':
-    #                 if self.adapter.verbose:
-    #                     value = self.new_datas.lastSync
-    #                     print("setting value for: {0} to {1}".format(property, value))
-    #                 self.find_property(property).set_RO_Value(property, value)
-    #             elif property == 'NextEvent':
-    #                 if self.adapter.verbose:
-    #                     value = self.new_datas.nextEvent
-    #                     print("setting value for: {0} to {1}".format(property, value))
-    #                 self.find_property(property).set_RO_Value(property, value)
-    #             elif property == 'creditEarned':
-    #                 if self.adapter.verbose:
-    #                     value = self.new_datas.credit
-    #                     print("setting value for: {0} to {1}".format(property, value))
-    #                 self.find_property(property).set_RO_Value(property, value)
+        if self.adapter.verbose:
+            print("updating hq datas")
+            print("Old Datas: {0}".format(self.datas.lastSync))
+            print("New Datas: {0}".format(self.new_datas.lastSync))
+        if self.data_changed():
+            self.datas = self.new_datas
+            for property in self.properties:
+                if property == 'LastSync':
+                    if self.adapter.verbose:
+                        value = self.new_datas.lastSync
+                        print("setting value for: {0} to {1}".format(property, value))
+                    self.find_property(property).set_RO_Value(property, value)
+                elif property == 'NextEvent':
+                    if self.adapter.verbose:
+                        value = self.new_datas.nextEvent
+                        print("setting value for: {0} to {1}".format(property, value))
+                    self.find_property(property).set_RO_Value(property, value)
+                elif property == 'creditEarned':
+                    if self.adapter.verbose:
+                        value = self.new_datas.credit
+                        print("setting value for: {0} to {1}".format(property, value))
+                    self.find_property(property).set_RO_Value(property, value)
 
     def update_calculated_property(self):
         """
@@ -163,10 +113,10 @@ class hq_Device(Device):
         for property in self.properties:
             if property == 'ActiveEvent':
                 self.find_property(property).update(self.find_property(property).is_active(self.datas.nextEvent, endEvent))
-            # elif property == 'PreHeatEvent':
-            #     self.find_property(property).set_RO_Value(property, self.find_property(property).is_active(preHeatStart, self.datas.nextEvent))
-            # elif property == 'PostHeatEvent':
-            #     self.find_property(property).set_RO_Value(property, self.find_property(property).is_active(endEvent, postHeatEnd))
+            elif property == 'PreHeatEvent':
+                self.find_property(property).set_RO_Value(property, self.find_property(property).is_active(preHeatStart, self.datas.nextEvent))
+            elif property == 'PostHeatEvent':
+                self.find_property(property).set_RO_Value(property, self.find_property(property).is_active(endEvent, postHeatEnd))
 
     def data_changed(self):
         """
@@ -222,12 +172,6 @@ class hq_Device(Device):
         credit = hq_float_ro_property(self, cID, 'Credit Earned')
         self.properties[cID] = credit
         #credit.set_RO_Value('creditEarned', self.datas.credit)
-
-    # async def async_run(self, functions):
-    #     await self.init_session()
-    #     for function in functions:
-    #         await function()
-    #     #await self.close()
 
     async def init_session(self):
         """

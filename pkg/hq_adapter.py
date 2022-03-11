@@ -86,7 +86,7 @@ class hq_Adapter(Adapter):
         #t.start()
 
         asyncio.run_coroutine_threadsafe(self.small_loop(), small_loop)
-       # asyncio.run_coroutine_threadsafe(self.big_loop(), big_loop)
+        asyncio.run_coroutine_threadsafe(self.big_loop(), big_loop)
 
     async def small_loop(self):
         """
