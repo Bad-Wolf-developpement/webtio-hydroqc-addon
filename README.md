@@ -33,4 +33,4 @@ The addon provide the following information:
 
 This addon is not produce or related to the Hydro Quebec employee.
 
-Credit: Thank you to the hydroqc api developper (a community work still not related to Hydro Quebec) Source: 'hydro2mqtt <https://gitlab.com/hydroqc/hydroqc/>'
+Credit: Thank you to the hydroqc api developper (a community work still not related to Hydro Quebec) Source: <https://gitlab.com/hydroqc/hydroqc/>
