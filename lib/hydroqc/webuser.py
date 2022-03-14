@@ -26,7 +26,7 @@ class WebUser:
 
     async def login(self):
         """Login to Hydroquebec website."""
-        await self._hydro_client.login()
+        return await self._hydro_client.login()
 
     async def get_info(self):
         """Fetch data about this webuser.

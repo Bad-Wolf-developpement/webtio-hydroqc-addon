@@ -198,7 +198,7 @@ class HydroClient:
                 )
             except HydroQcHTTPError:
                 self._logger.critical("Unable to connect. Check your credentials")
-                return
+                return False
             json_res = await res.json()
 
             if "tokenId" not in json_res:
@@ -206,7 +206,7 @@ class HydroClient:
                     "Unable to authenticate."
                     "You can retry and/or check your credentials."
                 )
-                return
+                return False
 
         # Get oauth2 token
         await self._get_oauth2_token()
