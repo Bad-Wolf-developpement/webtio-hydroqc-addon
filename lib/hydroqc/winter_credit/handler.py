@@ -84,9 +84,10 @@ class WinterCreditHandler:
         )
         self._logger.debug("Data fetched from HydroQuebec...")
         # Ensure that peaks are sorted by date
-        self._raw_data["periodesEffacementsHivers"][0]["periodesEffacementHiver"].sort(
-            key=lambda x: (x["dateEffacement"], x["heureDebut"])
-        )
+        if self._raw_data["periodesEffacementsHivers"]:
+            self._raw_data["periodesEffacementsHivers"][0]["periodesEffacementHiver"].sort(
+                key=lambda x: (x["dateEffacement"], x["heureDebut"])
+            )
 
     @property
     def raw_data(self):

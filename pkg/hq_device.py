@@ -6,7 +6,7 @@ from hydroqc.webuser import WebUser
 import hydroqc.error as HQerror
 from pkg.hq_data_class import hq_Datas
 from datetime import datetime, timedelta
-from pkg.hq_property import *
+from pkg.hq_property import hq_bool_ro_property, hq_datetime_ro_property, hq_float_ro_property
 
 print = functools.partial(print, flush=True)#allow direct print to log of gateway
 
@@ -54,20 +54,17 @@ class hq_Device(Device):
                     value = self.new_datas.lastSync
                     if self.adapter.verbose:
                         print("setting value for: {0} to {1}".format(property, value))
-                    if not self.datas.lastSync == self.new_datas.lastSync:
-                        self.find_property(property).set_RO_Value(property, value)
+                    self.find_property(property).set_RO_Value(property, value)
                 elif property == 'NextEvent':
                     value = self.new_datas.nextEvent
                     if self.adapter.verbose:
                         print("setting value for: {0} to {1}".format(property, value))
-                    if not self.datas.nextEvent == self.new_datas.nextEvent:
-                        self.find_property(property).set_RO_Value(property, value)
+                    self.find_property(property).set_RO_Value(property, value)
                 elif property == 'creditEarned':
                     value = self.new_datas.credit
                     if self.adapter.verbose:
                         print("setting value for: {0} to {1}".format(property, value))
-                    if not self.datas.credit == self.new_datas.credit:
-                        self.find_property(property).set_RO_Value(property, value)
+                    self.find_property(property).set_RO_Value(property, value)
 
     def update_calculated_property(self):
         """

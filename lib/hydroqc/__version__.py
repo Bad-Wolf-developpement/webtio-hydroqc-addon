@@ -1,3 +1,3 @@
 """Module defining the version."""
 
-VERSION = "v0.3.1"
+VERSION = "v0.4.1"

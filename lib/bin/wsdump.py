@@ -1,4 +1,4 @@
-#!c:\users\mverret\programmation\webtio-hydroqc-addon\venv\scripts\python.exe
+#!C:\Users\mverret\Programmation\webtio-hydroqc-addon\venv\Scripts\python.exe
 
 import argparse
 import code
