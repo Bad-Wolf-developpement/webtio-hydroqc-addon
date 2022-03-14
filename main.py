@@ -1,21 +1,20 @@
 """Hydro-Quebec winter power saving event"""
 
 import functools
-from os import path
 import signal
 import sys
 import time
-
-sys.path.append(path.join(path.dirname(path.abspath(__file__)), 'lib'))#adding lib folder to path
+from pathlib import Path
 
 from pkg import hq_adapter
-
-
 
 _DEBUG = False
 _ADAPTER = None
 
-print = functools.partial(print, flush=True)
+LIB_PATH = Path(__file__).absolute().parent / "lib"
+
+# adding lib folder to path
+sys.path.append(f"{LIB_PATH}")
 
 
 def cleanup(signum, frame):
@@ -26,7 +25,7 @@ def cleanup(signum, frame):
     sys.exit(0)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     signal.signal(signal.SIGINT, cleanup)
     signal.signal(signal.SIGTERM, cleanup)
     _ADAPTER = hq_adapter.hq_Adapter(verbose=_DEBUG)
@@ -35,4 +34,3 @@ if __name__ == '__main__':
     # down.
     while _ADAPTER.proxy_running():
         time.sleep(2)
-        
