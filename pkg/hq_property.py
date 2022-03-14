@@ -1,82 +1,93 @@
 """Property for device Hydro Quebec event for Webthings"""
 
-from gateway_addon import Property
 from datetime import datetime
 
-class hqProperty(Property):
+from gateway_addon import Property
+
+
+class HQProperty(Property):
     """Property type for HQdata"""
-    description = None
-    
-    def __init__(self, device, id):
+    def __init__(self, device, id, description=None):
         """
         Initialize the object
-        
+
         device -- the device this property belongs to
         """
-        
-        #Force to provide description in child class
-        if self.description is None:
-            raise NotImplementedError('Sublcasses must define description')
 
-        super().__init__(device, id, self.description)
-        
+        # Force to provide description in child class
+        if description is None:
+            raise NotImplementedError("Subclasses must define description")
 
-    def set_RO_Value(self, propName, value):
+        super().__init__(device, id, description)
+
+    def set_ro_value(self, prop_name, value):
         """
         Set a read-only value
-        
+
         device -- device who own the property
-        propName -- property to update
+        prop_name -- property to update
         value -- value of the property
         """
-        prop = self.device.find_property(propName)
+        prop = self.device.find_property(prop_name)
         prop.set_cached_value_and_notify(value)
 
-class hq_bool_ro_property(hqProperty):
+
+class HQBoolRoProperty(HQProperty):
     """Boolean Property Read Only"""
 
     def __init__(self, device, id, name):
-       """
-       Initialize the objects
+        """
+        Initialize the objects
 
-       name -- name of the property
-       """
-       self.description={'@type': 'BooleanProperty', 'title': name, 'type': 'boolean', 'readOnly' : True,}#description of the property
-       super().__init__(device, id)
+        name -- name of the property
+        """
+        super().__init__(device, id, {
+            "@type": "BooleanProperty",
+            "title": name,
+            "type": "boolean",
+            "readOnly": True,
+        })
 
-    def set_RO_Value(self, propName, value: bool):
-        super().set_RO_Value(propName, value)
+    def set_ro_value(self, prop_name, value: bool):
+        super().set_ro_value(prop_name, value)
 
-    def is_active(self, startDate, endDate):
+    def is_active(self, start_date, end_date):
         """
         test if the event is currently active
 
-        startDate -- start date and time of the event
-        endDate -- end date and time of the event
+        start_date -- start date and time of the event
+        end_date -- end date and time of the event
 
         return -- bool
         """
         now = datetime.now()
 
-        if now is None or startDate is None or endDate is None:
+        if None in (now, start_date, end_date):
             return False
-        elif now > startDate and now < endDate:
+
+        if start_date < now < end_date:
             return True
-        else:
-            return False
-    
-class hq_float_ro_property(hqProperty):
+
+        return False
+
+
+class HQFloatRoProperty(HQProperty):
     """int property, read only"""
 
     def __init__(self, device, id, name):
-        
-        self.description={'title': name, 'type': 'number', 'unit' : "$", 'readOnly' : True,}
-        super().__init__(device, id)
 
-    def set_RO_Value(self, propName, value: float):
-        super().set_RO_Value(propName, value)
+        super().__init__(device, id, {
+            "title": name,
+            "type": "number",
+            "unit": "$",
+            "readOnly": True,
+        })
 
-class hq_datetime_ro_property(hqProperty):
+    def set_ro_value(self, prop_name, value: float):
+        super().set_ro_value(prop_name, value)
+
+
+class HQDatetimeRoProperty(HQProperty):
     """datetime Property Read Only"""
 
     def __init__(self, device, id, name):
@@ -85,19 +96,21 @@ class hq_datetime_ro_property(hqProperty):
 
         name -- name of the property
         """
-        self.description={'title': name, 'type': 'string', 'readOnly' : True,}#description of the property
-        super().__init__(device, id)    
-    
-    def set_RO_Value(self, propName, value: datetime):
+        super().__init__(device, id, {
+            "title": name,
+            "type": "string",
+            "readOnly": True,
+        })
+
+    def set_ro_value(self, prop_name, value: datetime):
         """
-        modifying the set_RO_Value for datetime object
+        modifying the set_ro_value for datetime object
 
         value -- value of the property, must be datetime
         """
-        #if datetime is none enter an empty date and time
+        # if datetime is none enter an empty date and time
         if value is None:
-            value = "00/00/0000\n00:00:00"
+            datetime_representation = "0000-00-00\n00:00:00"
         else:
-            value = value.strftime("%d/%m/%Y\n %H:%M:%S")#TODO:Verify if isoformat could replace strftime
-        super().set_RO_Value(propName, value)
-        
+            datetime_representation = value.isoformat(sep="\n", timespec="seconds")
+        super().set_ro_value(prop_name, value)
