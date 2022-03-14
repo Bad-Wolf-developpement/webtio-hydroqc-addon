@@ -4,7 +4,6 @@ webtio-hydroqc-addon
 [![GitHub](https://img.shields.io/github/forks/Bad-Wolf-developpement/webtio-hydroqc-addon.svg?style=social&label=Fork&maxAge=2592000)](https://img.shields.io/github/forks/Bad-Wolf-developpement/webtio-hydroqc-addon.svg?style=social&label=Fork&maxAge=2592000)
 ![GitHub](https://img.shields.io/github/license/Bad-Wolf-Developpement/webtio-hydroqc-addon?style=social)
 ![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/Bad-Wolf-developpement/webtio-hydroqc-addon?style=social)
-![GitHub issues](https://img.shields.io/github/issues-raw/Bad-Wolf-Developpement/webtio-hydroqc-addon?style=social)
 
 This is addon create a thing for the hydro-quebec winter credit: https://www.hydroquebec.com/residential/customer-space/rates/dynamic-pricing.html.
 
