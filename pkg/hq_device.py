@@ -182,6 +182,9 @@ class hq_Device(Device):
             await self._webuser.get_info()
         except HQerror.HydroQcHTTPError:
             return
+        except RuntimeError:
+            await self.init_session()
+            self._webuser.get_info()
         customer = self._webuser.get_customer(self.config['customer'])
         account = customer.get_account(self.config['account'])
         contract = account.get_contract(self.config['contract'])
