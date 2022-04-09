@@ -78,7 +78,7 @@ class hq_Adapter(Adapter):
         """main async loop"""
         if self.verbose:
             print("Starting Loops")
-
+        """
         t = Thread(target=self.small_loop)
         t.start()
 
@@ -87,7 +87,9 @@ class hq_Adapter(Adapter):
         t.start()
 
         asyncio.run_coroutine_threadsafe(self.big_loop(), big_loop)
-
+        """#Commented for debug
+        
+        asyncio.run(self.big_loop())
     def small_loop(self):
         """
         Looping to update data needed frequently
