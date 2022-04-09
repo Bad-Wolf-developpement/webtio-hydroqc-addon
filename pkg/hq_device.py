@@ -180,7 +180,7 @@ class hq_Device(Device):
             tempDatas.lastSync = None
         try:
             await self._webuser.get_info()
-        except HQerror.HydroQcHTTPError(f"Error Fetching {url} - {raw_res.status}"):
+        except HQerror.HydroQcHTTPError:
             return
         customer = self._webuser.get_customer(self.config['customer'])
         account = customer.get_account(self.config['account'])
