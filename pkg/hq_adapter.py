@@ -88,7 +88,7 @@ class hq_Adapter(Adapter):
 
         asyncio.run_coroutine_threadsafe(self.big_loop(), big_loop)
         """#Commented for debug
-        
+        self.config['sync_frequency'] = 10
         asyncio.run(self.big_loop())
     def small_loop(self):
         """
