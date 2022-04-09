@@ -167,7 +167,7 @@ class hq_Device(Device):
                 #if refresh didn'T work, try to login
                 print("Refreshing session failed, try to login")
                 self._webuser.login()
-            except RuntimeError("Session is closed"):
+            except RuntimeError:
                 #if refresh didn'T work, try to login
                 print("Refreshing session failed, try to login")
                 self._webuser.login()
