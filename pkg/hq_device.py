@@ -167,6 +167,10 @@ class hq_Device(Device):
                 #if refresh didn'T work, try to login
                 print("Refreshing session failed, try to login")
                 self._webuser.login()
+            except RuntimeError("Session is closed"):
+                #if refresh didn'T work, try to login
+                print("Refreshing session failed, try to login")
+                self._webuser.login()
 
     async def get_data(self):
         tempDatas = hq_Datas
