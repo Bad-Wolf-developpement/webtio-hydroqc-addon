@@ -50,9 +50,10 @@ class hq_Device(Device):
             print("Old Datas: {0}".format(self.datas.lastSync))
             print("New Datas: {0}".format(self.new_datas.lastSync))
         if self.data_changed():
-            for element in self.datas.__dict__:
-                print(element)
-                #self.datas.element = self.new_datas.elements
+            self.datas.lastSync = self.new_datas.lastSync
+            self.datas.nextEvent = self.new_datas.nextEvent
+            self.datas.credit = self.new_datas.credit
+            #TODO make hq_Datas iterable
             for property in self.properties:
                 if property == 'LastSync':
                     value = self.new_datas.lastSync
