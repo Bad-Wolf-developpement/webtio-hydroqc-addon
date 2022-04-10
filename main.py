@@ -12,7 +12,7 @@ from pkg import hq_adapter
 
 
 
-_DEBUG = False
+_DEBUG = True
 _ADAPTER = None
 
 print = functools.partial(print, flush=True)
