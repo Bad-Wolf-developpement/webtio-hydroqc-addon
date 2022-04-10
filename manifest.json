@@ -1,9 +1,9 @@
 {
-    "manifest_version": 1,
+    "manifest_version": 2,
     "id": "webtio-hydroqc-addon",
     "name": "Hydro Quebec Winter Credit program",
     "short_name": "hydroqcAddon",
-    "version" : "0.1.1",
+    "version" : "0.1.2",
     "description": "Hydro-Quebec winter credit program adapter",
     "homepage_url": "https://github.com/Bad-Wolf-developpement/webtio-hydroqc-addon",
     "license": "MIT",

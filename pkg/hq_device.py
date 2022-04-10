@@ -45,10 +45,15 @@ class hq_Device(Device):
         """         
         if self.adapter.verbose:
             print("updating hq datas")
+
+            print(id(self.datas), id(self.new_datas))
             print("Old Datas: {0}".format(self.datas.lastSync))
             print("New Datas: {0}".format(self.new_datas.lastSync))
         if self.data_changed():
-            self.datas = self.new_datas
+            self.datas.lastSync = self.new_datas.lastSync
+            self.datas.nextEvent = self.new_datas.nextEvent
+            self.datas.credit = self.new_datas.credit
+            #TODO make hq_Datas iterable
             for property in self.properties:
                 if property == 'LastSync':
                     value = self.new_datas.lastSync
@@ -107,10 +112,13 @@ class hq_Device(Device):
         """
         if self.adapter.verbose:
             print("testing if data change")
+            print("data: {0}, new_data: {1}".format(self.datas.lastSync,\
+                 self.new_datas.lastSync))
         if self.datas.lastSync is None and not self.new_datas.lastSync is None:
             #If we don'T have old data but we have new     
             return True
-        elif (not self.datas.lastSync is None or not self.new_datas.lastSync is None) and (self.datas.lastSync < self.new_datas.lastSync):
+        elif (not self.datas.lastSync is None or not self.new_datas.lastSync is None)\
+             and (self.datas.lastSync < self.new_datas.lastSync):
             #if have a previous last sync and new sync and new sync is newer
             return True
         else:
@@ -166,12 +174,18 @@ class hq_Device(Device):
             except HQerror.HydroQcHTTPError:
                 #if refresh didn'T work, try to login
                 print("Refreshing session failed, try to login")
-                self._webuser.login()
+                await self._webuser.login()
 
     async def get_data(self):
         tempDatas = hq_Datas
+        if self.adapter.verbose:
+            print("Session :{0}".format(self._webuser._hydro_client._session))
         if self._webuser._hydro_client._session:
+            
             tempDatas.lastSync = datetime.now()
+            if self.adapter.verbose:
+                print("session true")
+                print(tempDatas.lastSync)
         else:
             tempDatas.lastSync = None
         await self._webuser.get_info()
