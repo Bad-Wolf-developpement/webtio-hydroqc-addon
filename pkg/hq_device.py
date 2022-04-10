@@ -187,7 +187,7 @@ class hq_Device(Device):
             print(e)
             await self.init_session()
             await self._webuser.get_info()
-        customer = await self._webuser.get_customer(self.config['customer'])
+        customer = self._webuser.get_customer(self.config['customer'])
         account = customer.get_account(self.config['account'])
         contract = account.get_contract(self.config['contract'])
         wc = contract.winter_credit
