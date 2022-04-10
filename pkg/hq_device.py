@@ -170,7 +170,7 @@ class hq_Device(Device):
             except RuntimeError as e:
                 #if refresh didn'T work, try to login
                 print("Refreshing session failed, try to login")
-                print(e)
+                #print(e)
                 self._webuser.login()
 
     async def get_data(self):
@@ -184,7 +184,7 @@ class hq_Device(Device):
         except HQerror.HydroQcHTTPError:
             return
         except RuntimeError as e:
-            print(e)
+            #print(e)
             await self.init_session()
             await self._webuser.get_info()
         customer = self._webuser.get_customer(self.config['customer'])
