@@ -107,10 +107,13 @@ class hq_Device(Device):
         """
         if self.adapter.verbose:
             print("testing if data change")
+            print("data: {0}, new_data: {1}".format(self.datas.lastSync,\
+                 self.new_datas.lastSync))
         if self.datas.lastSync is None and not self.new_datas.lastSync is None:
             #If we don'T have old data but we have new     
             return True
-        elif (not self.datas.lastSync is None or not self.new_datas.lastSync is None) and (self.datas.lastSync < self.new_datas.lastSync):
+        elif (not self.datas.lastSync is None or not self.new_datas.lastSync is None)\
+             and (self.datas.lastSync < self.new_datas.lastSync):
             #if have a previous last sync and new sync and new sync is newer
             return True
         else:
