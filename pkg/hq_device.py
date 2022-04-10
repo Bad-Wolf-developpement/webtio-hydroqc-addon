@@ -49,7 +49,7 @@ class hq_Device(Device):
             print("Old Datas: {0}".format(self.datas.lastSync))
             print("New Datas: {0}".format(self.new_datas.lastSync))
         if self.data_changed():
-            for element, attrValue in self.datas__dict__.iteritems():
+            for element, attrValue in self.datas.__dict__.iteritems():
                 print(element)
                 self.datas.element = self.new_datas.elements
             for property in self.properties:
