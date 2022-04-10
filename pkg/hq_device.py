@@ -170,6 +170,8 @@ class hq_Device(Device):
 
     async def get_data(self):
         tempDatas = hq_Datas
+        if self.adapter.verbose:
+            print("Session :{0}".format(self._webuser._hydro_client._session))
         if self._webuser._hydro_client._session:
             tempDatas.lastSync = datetime.now()
         else:
