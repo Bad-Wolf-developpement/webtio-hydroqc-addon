@@ -45,11 +45,12 @@ class hq_Device(Device):
         """         
         if self.adapter.verbose:
             print("updating hq datas")
+
             print(id(self.datas), id(self.new_datas))
             print("Old Datas: {0}".format(self.datas.lastSync))
             print("New Datas: {0}".format(self.new_datas.lastSync))
         if self.data_changed():
-            for element, attrValue in self.datas.__dict__.iteritems():
+            for element in self.datas.__dict__:
                 print(element)
                 self.datas.element = self.new_datas.elements
             for property in self.properties:
