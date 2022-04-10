@@ -50,6 +50,7 @@ class hq_Device(Device):
             print("New Datas: {0}".format(self.new_datas.lastSync))
         if self.data_changed():
             self.datas = self.new_datas
+            self.new_datas = hq_Datas()
             for property in self.properties:
                 if property == 'LastSync':
                     value = self.new_datas.lastSync
