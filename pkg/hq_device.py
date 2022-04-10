@@ -173,9 +173,11 @@ class hq_Device(Device):
         if self.adapter.verbose:
             print("Session :{0}".format(self._webuser._hydro_client._session))
         if self._webuser._hydro_client._session:
+            
+            tempDatas.lastSync = datetime.now()
             if self.adapter.verbose:
                 print("session true")
-            tempDatas.lastSync = datetime.now()
+                print(tempDatas.lasSync)
         else:
             tempDatas.lastSync = None
         await self._webuser.get_info()
