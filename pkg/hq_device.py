@@ -177,7 +177,7 @@ class hq_Device(Device):
             tempDatas.lastSync = datetime.now()
             if self.adapter.verbose:
                 print("session true")
-                print(tempDatas.lasSync)
+                print(tempDatas.lastSync)
         else:
             tempDatas.lastSync = None
         await self._webuser.get_info()
