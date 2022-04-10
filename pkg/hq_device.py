@@ -52,7 +52,7 @@ class hq_Device(Device):
         if self.data_changed():
             for element in self.datas.__dict__:
                 print(element)
-                self.datas.element = self.new_datas.elements
+                #self.datas.element = self.new_datas.elements
             for property in self.properties:
                 if property == 'LastSync':
                     value = self.new_datas.lastSync
