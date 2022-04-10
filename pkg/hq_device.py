@@ -186,8 +186,8 @@ class hq_Device(Device):
         except RuntimeError as e:
             print(e)
             await self.init_session()
-            self._webuser.get_info()
-        customer = self._webuser.get_customer(self.config['customer'])
+            await self._webuser.get_info()
+        customer = await self._webuser.get_customer(self.config['customer'])
         account = customer.get_account(self.config['account'])
         contract = account.get_contract(self.config['contract'])
         wc = contract.winter_credit
@@ -197,7 +197,7 @@ class hq_Device(Device):
             return
         except RuntimeError:
             await self.init_session()
-            self._webuser.get_info()
+            await self._webuser.get_info()
         tempDatas.credit = float(wc.raw_data['montantEffaceProjete'])
         tempDatas.nextEvent = wc.next_critical_peak
         self.new_datas = tempDatas
