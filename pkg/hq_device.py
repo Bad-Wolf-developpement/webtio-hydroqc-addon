@@ -160,7 +160,7 @@ class hq_Device(Device):
             await self._webuser.login()
         else:
             try:
-                await self._webuser.refresh_session()
+                await self._webuser.login()
                 if self.adapter.verbose:
                     print("Refreshing session")
             except HQerror.HydroQcHTTPError:
