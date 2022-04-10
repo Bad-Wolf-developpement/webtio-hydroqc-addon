@@ -167,11 +167,6 @@ class hq_Device(Device):
                 #if refresh didn'T work, try to login
                 print("Refreshing session failed, try to login")
                 await self._webuser.login()
-            except RuntimeError:
-                #if refresh didn'T work, try to login
-                print("Refreshing session failed, try to login")
-                #print(e)
-                await self._webuser.login()
 
     async def get_data(self):
         tempDatas = hq_Datas
@@ -183,21 +178,11 @@ class hq_Device(Device):
             await self._webuser.get_info()
         except HQerror.HydroQcHTTPError:
             return
-        except RuntimeError:
-            #print(e)
-            await self.init_session()
-            await self._webuser.get_info()
         customer = self._webuser.get_customer(self.config['customer'])
         account = customer.get_account(self.config['account'])
         contract = account.get_contract(self.config['contract'])
         wc = contract.winter_credit
-        try:
-            await wc.refresh_data()
-        except HQerror.HydroQcHTTPError:
-            return
-        except RuntimeError:
-            await self.init_session()
-            await self._webuser.get_info()
+        await wc.refresh_data()
         tempDatas.credit = float(wc.raw_data['montantEffaceProjete'])
         tempDatas.nextEvent = wc.next_critical_peak
         self.new_datas = tempDatas
