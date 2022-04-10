@@ -49,8 +49,8 @@ class hq_Device(Device):
             print("Old Datas: {0}".format(self.datas.lastSync))
             print("New Datas: {0}".format(self.new_datas.lastSync))
         if self.data_changed():
-            self.datas = self.new_datas
-            self.new_datas = hq_Datas()
+            for element in self.datas:
+                self.datas.element = self.new_datas.elements
             for property in self.properties:
                 if property == 'LastSync':
                     value = self.new_datas.lastSync
