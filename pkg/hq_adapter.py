@@ -125,6 +125,6 @@ class hq_Adapter(Adapter):
                 await device.init_session()
                 await device.get_data()
                 device.update_hq_datas()
-                await device.close()
+                #await device.close()
             time.sleep(self.config['sync_frequency'])
             
