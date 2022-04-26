@@ -1,0 +1,104 @@
+{
+    "manifest_version": 1,
+    "id": "webtio-hydroqc-addon",
+    "name": "Hydro Quebec Winter Credit program",
+    "short_name": "hydroqcAddon",
+    "version" : "0.1.2",
+    "description": "Hydro-Quebec winter credit program adapter",
+    "homepage_url": "https://github.com/Bad-Wolf-developpement/webtio-hydroqc-addon",
+    "license": "MIT",
+    "author": "Arist0v",
+    "gateway_specific_settings": {
+        "webthings":{
+            "exec": "python3 {path}/main.py",
+            "primary_type": "adapter"
+        }
+    },
+    "options":{
+        "default":{
+            "preHeatDelay": 30,
+            "postHeatDelay": 30,
+            "sync_frequency": 14400,
+            "contracts": []
+        },
+        "schema":{
+            "type": "object",
+            "required":[
+                "contracts"
+            ],
+        
+            "properties":{
+
+                "preHeatDelay":{
+                    "type": "number",
+                    "title": "Pre Heat session delay",
+                    "description": "Delay in minute for the pre heat, 0 to disable"
+                },
+
+                "postHeatDelay":{
+                    "type":"number",
+                    "title":"Post Heat session delay",
+                    "description":"Delay in minute for the post heat, 0 to disable"
+                },
+
+                "sync_frequency": {
+                    "type": "number",
+                    "title": "Sync Frequency",
+                    "description": "Frequency to fetch data from Hydro Quebec website"
+                },
+
+                "contracts":{
+                    "type": "array",
+                    "title": "List of contract to monitor",
+                    "items":{
+                        "type": "object",
+                        "title": "contract",
+                        "required": [
+                            "name",
+                            "username",
+                            "password",
+                            "customer",
+                            "account",
+                            "contract"
+                        ],
+                        "properties":{
+                    
+                            "name":{
+                                "type":"string",
+                                "title": "Name",
+                                "description": "Friendly name for the site"
+                            },
+                            "username":{
+                                "type" : "string",
+                                "title": "Username",
+                                "description": "Hydro Quebec profile username(usually e-mail address)"
+                            },
+
+                            "password":{
+                                "type" : "string",
+                                "title": "Password",
+                                "description": "Hydro Quebec profile password"
+                            },
+                            "customer":{
+                                "type": "string",
+                                "title": "Customer number",
+                                "description": "Hydro Quebec Customer Number (10 digits)"
+                            },
+                            "account":{
+                                "type": "string",
+                                "title": "Account number",
+                                "description": "Hydro Quebec Account Number"
+                            },
+                            "contract":{
+                                "type": "string",
+                                "title": "Contract number",
+                                "description": "Hydro Quebec Contract Number(10 digits)"
+                            }
+                        }
+                    }
+                }
+                
+            }
+        }
+    }
+}
