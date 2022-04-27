@@ -29,7 +29,7 @@ def cleanup(signum, frame):
 if __name__ == '__main__':
     signal.signal(signal.SIGINT, cleanup)
     signal.signal(signal.SIGTERM, cleanup)
-    _ADAPTER = hq_adapter.hq_Adapter(verbose=_DEBUG)
+    _ADAPTER = hq_adapter.hq_Adapter()
 
     # Wait until the proxy stops running, indicating that the gateway shut us
     # down.
