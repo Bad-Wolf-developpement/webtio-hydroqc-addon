@@ -23,11 +23,11 @@ class hq_Adapter(Adapter):
         self.name = self.__class__.__name__
         
         _id = 'webtio-hydroqc-addon'
-        package_name = _id
-        super().__init__(_id, package_name, verbose)
+        package_name = _id        
 
         self.config = self.load_db_config(_id)#load config from DB
         self.verbose = self.config["debug_mode"]
+        super().__init__(_id, package_name, self.verbose)
 
         if not self.config:
             print("Can't load config from Database")
