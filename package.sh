@@ -6,6 +6,8 @@ rm -rf *.tgz package SHA256SUMS lib
 mkdir lib package
 # Pull down Python dependencies
 pip3 install -r requirements.txt -t lib --prefix ""
+#Fix hydroqc compatibility to 3.7
+python patch_hydroqc.py
 # Put package together
 cp -r lib pkg LICENSE manifest.json *.py README.md package/
 find package -type f -name '*.pyc' -delete
