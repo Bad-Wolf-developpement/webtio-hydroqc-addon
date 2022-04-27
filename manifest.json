@@ -46,13 +46,11 @@
                     "title": "Sync Frequency",
                     "description": "Frequency to fetch data from Hydro Quebec website"
                 },
-
                 "debug_mode":{
                     "type": "boolean",
                     "title": "Debug Mode",
                     "description": "Enable Debug Mode"
                 },
-
                 "contracts":{
                     "type": "array",
                     "title": "List of contract to monitor",

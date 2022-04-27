@@ -17,7 +17,7 @@ class hq_Adapter(Adapter):
     """
     Adapter for the HQ program
     """
-
+    
     def __init__(self):
         """Initialize the object"""
         self.name = self.__class__.__name__
