@@ -1,8 +1,7 @@
 """Device for hqWinterCreditAdapter"""
-
+from __future__ import annotations
 import functools
 from gateway_addon import Device
-from __future__ import annotations
 from hydroqc.webuser import WebUser
 import hydroqc.error as HQerror
 from pkg.hq_data_class import hq_Datas
