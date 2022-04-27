@@ -2,6 +2,7 @@
 
 import functools
 from gateway_addon import Device
+from __future__ import annotations
 from hydroqc.webuser import WebUser
 import hydroqc.error as HQerror
 from pkg.hq_data_class import hq_Datas
@@ -33,7 +34,7 @@ class hq_Device(Device):
         self._type.append('BinarySensor')
         self.description = 'Hydro Quebec Winter Credit Event 1'#not sure where it'S used in gui
         self.title = _id#This appear in the text bar when adding the device and is the default name of the device
-        self._webuser = WebUser(config['username'], config['password'],False, log_level=log_level,  http_log_level=log_level)
+        self._webuser = WebUser(config['username'] as str, config['password'] as str ,False, log_level=log_level,  http_log_level=log_level)
         self.name = _id
         self.dbConfig = self.adapter.config
         self.init_properties()#initialize properties
