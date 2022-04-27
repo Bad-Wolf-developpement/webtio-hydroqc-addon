@@ -1,5 +1,5 @@
 {
-    "manifest_version": 2,
+    "manifest_version": 1,
     "id": "webtio-hydroqc-addon",
     "name": "Hydro Quebec Winter Credit program",
     "short_name": "hydroqcAddon",
