@@ -132,6 +132,7 @@ dmypy.json
 *.code-workspace
 .vscode/
 
-#tar release
-*.tar
-*.tar.*
+
+#tgz release and sha
+*.tgz
+*.tgz.*

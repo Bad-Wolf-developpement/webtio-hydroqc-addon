@@ -17,18 +17,17 @@ class hq_Adapter(Adapter):
     """
     Adapter for the HQ program
     """
-
-    def __init__(self, verbose=False):
+    
+    def __init__(self):
         """Initialize the object"""
         self.name = self.__class__.__name__
-        self.verbose = verbose
+        
         _id = 'webtio-hydroqc-addon'
-        package_name = _id
-        super().__init__(_id, package_name, verbose)
+        package_name = _id        
 
         self.config = self.load_db_config(_id)#load config from DB
-        if self.verbose:
-            print("Config : {0}".format(self.config))
+        self.verbose = self.config["debug_mode"]
+        super().__init__(_id, package_name, self.verbose)
 
         if not self.config:
             print("Can't load config from Database")
